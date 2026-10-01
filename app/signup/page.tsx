@@ -1,11 +1,12 @@
 import SigninForm from "@/Components/ui/signinForm";
 import SingupForm from "@/Components/ui/signupForm";
+import ThemeToggle from "@/Components/ui/ThemeToggle";
 import { Moon, Sun } from "lucide-react";
 
 const Page = () => {
   return (
     <>
-      <main className="min-h-screen flex items-center justify-center px-4 py-8">
+      <main className="min-h-screen flex items-center justify-center px-4 py-8 text-white">
         <section
           className="
           w-full
@@ -30,10 +31,7 @@ const Page = () => {
               </h2>
             </div>
             <div>
-              <button className="p-2 rounded-full cursor-pointer bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
-                <Sun className="h-5 w-5 dark:hidden" />
-                <Moon className="hidden h-5 w-5 dark:block" />
-              </button>
+              <ThemeToggle />
             </div>
           </div>
           <SingupForm />

@@ -11,7 +11,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${roboto.className} h-full antialiased`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${roboto.className} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <body className="min-h-full flex flex-col bg-color-background text-color-foreground">
         <ThemeProvider>{children}</ThemeProvider>
       </body>

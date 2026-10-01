@@ -1,7 +1,13 @@
+"use client";
+import { signupState, signupValidation } from "@/lib/validations/auth";
+import { useActionState } from "react";
+
 const SingupForm = () => {
+  const initialState: signupState = { errors: {}, message: null };
+  const [state, formAction] = useActionState(signupValidation, initialState);
   return (
     <>
-      <form action="/" className="w-[70%] flex flex-col gap-8">
+      <form action={formAction} className="w-[70%] flex flex-col gap-8">
         <div className="flex flex-col gap-2">
           <label htmlFor="name">Name</label>
 
@@ -24,6 +30,11 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
+          <div id="input-name" aria-live="polite" aria-atomic="true">
+            {state?.errors?.name && (
+              <p className="text-red-500">{state.errors.name}</p>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -48,6 +59,11 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
+          <div id="input-username" aria-live="polite" aria-atomic="true">
+            {state?.errors?.username && (
+              <p className="text-red-500">{state.errors.username}</p>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -72,6 +88,11 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
+          <div id="input-email" aria-live="polite" aria-atomic="true">
+            {state?.errors?.email && (
+              <p className="text-red-500">{state.errors.email}</p>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -96,6 +117,11 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
+          <div id="input-password" aria-live="polite" aria-atomic="true">
+            {state?.errors?.password && (
+              <p className="text-red-500">{state.errors.password}</p>
+            )}
+          </div>
         </div>
 
         <button
