@@ -19,15 +19,15 @@ export type signupState = {
 };
 
 const signinSchema = z.object({
-  email: z.string().email("Please enter a valid email address."),
-  password: z.string().min(8, "Password must be at least 8 characters long."),
+  email: z.string("Please enter your email address.").email("Please enter a valid email address."),
+  password: z.string("Please enter your password.").min(8, "Password must be at least 8 characters long."),
 });
 
 export async function SigninValidation(
   prevState: signinState,
   FormData: FormData,
 ): Promise<signinState> {
-  const validated = signinSchema.safeParse({
+  const validated = signinSchema.safeParse({    
     email: FormData.get("email"),
     password: FormData.get("password"),
   });
@@ -46,10 +46,10 @@ export async function SigninValidation(
 }
 
 const signupSchema = z.object({
-  name: z.string().min(3, "Name must be at least 8 characters long."),
-  username: z.string().min(3, "username must be at least 8 characters long."),
-  email: z.string().email("Please enter a valid email address."),
-  password: z.string().min(5, "Password must be at least 8 characters long."),
+  name: z.string("Please enter your name.").min(3, "Name must be at least 3 characters long."),
+  username: z.string("Please enter a username.").min(3, "username must be at least 3 characters long."),
+  email: z.string("Please enter your email address.").email("Please enter a valid email address."),
+  password: z.string("Please enter your password.").min(8, "Password must be at least 8 characters long."),
 });
 
 export async function signupValidation(
@@ -66,7 +66,7 @@ export async function signupValidation(
   if (!validated.success) {
     return {
       errors: validated.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Signin in DEVLOG.",
+      message: "Missing Fields. Failed to Signup DEVLOG.",
     };
   }
 

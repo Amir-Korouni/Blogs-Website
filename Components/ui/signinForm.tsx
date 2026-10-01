@@ -66,8 +66,12 @@ const SigninForm = () => {
               <p className="text-red-500">{state.errors.password}</p>
             )}
           </div>
+          <div>
+            {state.errors?.email && state.errors.password && (
+              <p className="text-red-500">{state.message}</p>
+            )}
+          </div>
         </div>
-
         <button
           aria-label="submit button"
           type="submit"
