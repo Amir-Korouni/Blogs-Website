@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     "Explore DEVLOG categories and discover articles about frontend, backend, AI engineering, DevOps, databases, and modern technologies.",
 };
 
-const Categories = () => {
+const Page = () => {
   return (
     <>
       <section>
@@ -16,4 +16,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default Page;

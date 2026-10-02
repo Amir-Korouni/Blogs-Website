@@ -1,7 +1,8 @@
-import SigninForm from "@/Components/ui/signinForm";
-import ThemeToggle from "@/Components/ui/ThemeToggle";
+import SigninForm from "@/components/ui/signinForm";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import Link from "next/link";
 import { Metadata } from "next";
+import { signInUp } from "@/config/navigation";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -77,8 +78,11 @@ const Page = () => {
         <div className="text-center text-sm sm:text-base">
           <p>Don't have an account?</p>
 
-          <Link href="/signup" className="text-blue-500 hover:underline">
-            Sign up
+          <Link
+            href={signInUp.Signup.href}
+            className="text-blue-500 hover:underline"
+          >
+            {signInUp.Signup.name}
           </Link>
         </div>
       </section>

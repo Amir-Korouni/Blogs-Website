@@ -2,8 +2,8 @@
 
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
-// import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
@@ -17,13 +17,15 @@ const ThemeToggle = () => {
     return null;
   }
   return (
-    <button
-    //   variant="outline"
-    //   size="icon"
+    <Button
+      variant="ghost"
+      size="lg"
+      aria-label="Theme Switcher"
+      className="rounded"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "dark" ? <Sun /> : <Moon />}
-    </button>
+    </Button>
   );
 };
 

@@ -1,6 +1,6 @@
-import SigninForm from "@/Components/ui/signinForm";
-import SingupForm from "@/Components/ui/signupForm";
-import ThemeToggle from "@/Components/ui/ThemeToggle";
+import SigninForm from "@/components/ui/signinForm";
+import SingupForm from "@/components/ui/signupForm";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

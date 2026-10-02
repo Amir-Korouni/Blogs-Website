@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { roboto } from "@/font/font";
-import { ThemeProvider } from "next-themes";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -65,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${roboto.className} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-color-background text-color-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground)]">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
