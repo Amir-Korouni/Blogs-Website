@@ -1,7 +1,13 @@
 import SigninForm from "@/Components/ui/signinForm";
 import SingupForm from "@/Components/ui/signupForm";
 import ThemeToggle from "@/Components/ui/ThemeToggle";
-import { Moon, Sun } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sign up",
+  description:
+    "craete an acount for learn all of things about technologies or share experiences.",
+};
 
 const Page = () => {
   return (

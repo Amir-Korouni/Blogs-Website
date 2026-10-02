@@ -1,16 +1,14 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Post Detail",
-  description:
-    "Read technical articles about frontend, backend, AI engineering, and modern technologies.",
+  title: "Profile",
 };
 
 const Page = () => {
   return (
     <>
       <section>
-        <h2>Post Detail</h2>
+        <h2>Profile</h2>
       </section>
     </>
   );
