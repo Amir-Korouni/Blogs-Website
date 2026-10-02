@@ -1,9 +1,9 @@
+import Hero from "@/components/layout/Public/Hero";
+
 export default function Home() {
   return (
     <>
-      <section className="w-full h-[50vh] flex justify-center items-center">
-        <h2>Home</h2>
-      </section>
+      <Hero />
     </>
   );
 }
