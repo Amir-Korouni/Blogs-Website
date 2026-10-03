@@ -63,6 +63,8 @@ body {
   --card: #152f59;
   --card-foreground: #020617;
 
+  --category-page: #253043;
+
   --primary: #0369a1;
   --primary-foreground: #ffffff;
 
@@ -78,6 +80,8 @@ body {
 
   --card: #1e293b;
   --card-foreground: #020617;
+
+    --category-page: #0f2242;
 
   --primary: #0369a1;
   --primary-foreground: #ffffff;
