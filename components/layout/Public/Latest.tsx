@@ -11,7 +11,7 @@ type latestSectionprops = {
 const LatestSection = ({ posts }: latestSectionprops) => {
   return (
     <>
-      <section className="w-full min-h-[100vh] bg-[#03132d] bordet-t border-t-[1px]">
+      <section className="w-full min-h-[100vh] bg-[var(--latest-section)] bordet-t border-t-[1px]">
         <section className="size-full flex flex-col justify-center items-center">
           <section className="w-[60%] h-[20%]">
             <h2 className="text-[clamp(1.8rem,4vw,3rem)]">Latest Post</h2>
