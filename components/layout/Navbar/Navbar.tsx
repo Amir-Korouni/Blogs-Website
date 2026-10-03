@@ -7,7 +7,7 @@ import { signInUp } from "@/config/navigation";
 const Navbar = () => {
   return (
     <>
-      <nav className="w-full h-[8vh] fixed top-0 left-0">
+      <nav className="w-full h-[8vh] fixed z-10 top-0 left-0">
         <section className="hidden lg:flex size-full flex justify-around items-center px-10 bg-[#111827] text-white">
           <section>
             <h2>DEVLOG</h2>

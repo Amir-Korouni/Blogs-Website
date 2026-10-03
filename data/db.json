@@ -1,0 +1,40 @@
+{
+  "Posts": [
+    {
+      "id": "1",
+      "category": "Front-end",
+      "title": "Understanding React.",
+      "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
+      "author": "Amir Korouni",
+      "date": "October 3 2026",
+      "readingTime": "6 min"
+    },
+    {
+      "id": "2",
+      "category": "Front-end",
+      "title": "Understanding TypeScript.",
+      "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
+      "author": "Amir Korouni",
+      "date": "October 3 2026",
+      "readingTime": "10 min"
+    },
+    {
+      "id": "3",
+      "category": "Back-end",
+      "title": "Understanding Nest.",
+      "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
+      "author": "Amir Sajadian",
+      "date": "October 3 2026",
+      "readingTime": "10 min"
+    },
+    {
+      "id": "4",
+      "category": "Back-end",
+      "title": "Understanding Express.",
+      "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
+      "author": "Amir Sajadian",
+      "date": "October 1 2026",
+      "readingTime": "7 min"
+    }
+  ]
+}

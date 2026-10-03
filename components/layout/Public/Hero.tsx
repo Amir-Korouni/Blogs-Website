@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 const Hero = () => {
   return (
     <>
-      <section className="w-full h-[100vh] bg-background border border-px">
+      <section className="w-full h-[100vh] bg-background">
         <section className="w-[50%] md:w-[60%] sm:w-[80%] h-full m-auto flex flex-col gap-15 justify-center items-center">
           <h2 className="w-full text-left text-[clamp(2.5rem,7vw,4rem)]">
             DEVLOG
