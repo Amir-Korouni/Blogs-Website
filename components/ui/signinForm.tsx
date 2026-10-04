@@ -2,7 +2,7 @@
 import { PostAuth } from "@/lib/api/auth";
 import { signinState, SigninValidation } from "@/lib/validations/auth";
 import { SignInFormData } from "@/Types/signin";
-import { Button } from "@base-ui/react";
+import { Button, Input } from "@base-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, useActionState, useState } from "react";
 
@@ -63,7 +63,7 @@ const SigninForm = () => {
         <div className="flex flex-col gap-2">
           <label htmlFor="password">Password</label>
 
-          <input
+          <Input
             type="password"
             name="password"
             id="password"

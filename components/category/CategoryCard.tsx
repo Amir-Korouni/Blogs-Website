@@ -4,6 +4,10 @@ type categoryProps = {
   category: "Front-end" | "Back-end" | "AI" | "DevOps" | "General";
 };
 
+type props = {
+  category: categoryProps[];
+};
+
 const CategoryCard = ({ category }: categoryProps) => {
   return (
     <>

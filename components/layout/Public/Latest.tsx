@@ -12,7 +12,7 @@ const LatestSection = ({ posts }: latestSectionprops) => {
   return (
     <>
       <section className="w-full min-h-[100vh] bg-[var(--latest-section)] bordet-t border-t-[1px]">
-        <section className="size-full flex flex-col justify-center items-center gap-10">
+        <div className="size-full flex flex-col justify-center items-center gap-10">
           <section className="w-[60%] h-[20%] mt-10">
             <h2 className="text-[clamp(1.8rem,4vw,3rem)]">Latest Post</h2>
             <h3 className="text-[clamp(0.8rem,3vw,1.5rem)]">
@@ -20,7 +20,7 @@ const LatestSection = ({ posts }: latestSectionprops) => {
             </h3>
           </section>
           <section className="w-[60%] min-h-[70%]">
-            <section
+            <div
               className="w-full
                 grid
                 grid-cols-1
@@ -33,7 +33,7 @@ const LatestSection = ({ posts }: latestSectionprops) => {
               {posts.map((post) => (
                 <PostCard key={post.id} data={post} />
               ))}
-            </section>
+            </div>
             {/* <PostGrid /> */}
           </section>
           <section className="w-[50%] h-[20%] flex justify-end items-center mt-5">
@@ -47,7 +47,7 @@ const LatestSection = ({ posts }: latestSectionprops) => {
               </Button>
             </Link>
           </section>
-        </section>
+        </div>
       </section>
     </>
   );

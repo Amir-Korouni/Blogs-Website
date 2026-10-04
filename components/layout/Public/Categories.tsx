@@ -1,4 +1,5 @@
 import CategoryCard from "@/components/category/CategoryCard";
+import { CategoriesList } from "@/config/home";
 
 const Categories = () => {
   return (
