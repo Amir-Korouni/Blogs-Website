@@ -1,5 +1,5 @@
+import Footer from "@/components/layout/Footer/Footer";
 import Navbar from "@/components/layout/Navbar/Navbar";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
 
 export default function PublicLayout({
@@ -12,6 +12,7 @@ export default function PublicLayout({
       <ThemeProvider>
         <Navbar />
         <main>{children}</main>
+        <Footer />
       </ThemeProvider>
     </>
   );

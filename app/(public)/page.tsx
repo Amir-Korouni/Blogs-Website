@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer/Footer";
 import Categories from "@/components/layout/Public/Categories";
 import Hero from "@/components/layout/Public/Hero";
 import LatestSection from "@/components/layout/Public/Latest";
@@ -8,9 +9,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
-
       <LatestSection posts={posts} />
-
       <Categories />
     </>
   );

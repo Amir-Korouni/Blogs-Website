@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <>
       <section className="w-full h-[100vh] bg-background">
-        <section className="w-[50%] md:w-[60%] sm:w-[80%] h-full m-auto flex flex-col gap-15 justify-center items-center">
+        <div className="w-[50%] md:w-[60%] sm:w-[80%] h-full m-auto flex flex-col gap-15 justify-center items-center">
           <h2 className="w-full text-left text-[clamp(2.5rem,7vw,4rem)]">
             DEVLOG
           </h2>
@@ -38,7 +38,7 @@ const Hero = () => {
               Start Writing
             </Button>
           </div>
-        </section>
+        </div>
         <div
           className="
           absolute

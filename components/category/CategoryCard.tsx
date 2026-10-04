@@ -1,7 +1,7 @@
 import { Card, CardContent } from "../ui/card";
 
 type categoryProps = {
-  category: "Front-end" | "Back-end" | "AI" | "etc";
+  category: "Front-end" | "Back-end" | "AI" | "DevOps" | "General";
 };
 
 const CategoryCard = ({ category }: categoryProps) => {
@@ -12,15 +12,20 @@ const CategoryCard = ({ category }: categoryProps) => {
             max-w-[250px]
             min-h-[200px]
 
+            max-md:w-[150px]
+            max-md:h-[150px]
+
             bg-card
             text-card-foreground
             rounded-[20px]
             border
             border-[#334155]
 
+            cursor-pointer
+
             transition-transform
             duration-300
-            hover:-translate-y-1
+            hover:scale-105
              flex
               justify-center
               items-center
