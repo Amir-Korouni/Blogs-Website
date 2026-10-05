@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { navLinks } from "@/config/navigation";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -23,20 +25,24 @@ const Hero = () => {
             </p>
           </div>
           <div className="w-full flex justify-between">
-            <Button
-              size="lg"
-              aria-label="Explore more Posts"
-              className="cursor-pointer rounded h-[50px] bg-[#3B82F6] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[100px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
-            >
-              Explore more Posts
-            </Button>
-            <Button
-              size="lg"
-              aria-label="Start writing post"
-              className="cursor-pointer rounded h-[50px] bg-[#3B82F6] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[100px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
-            >
-              Start Writing
-            </Button>
+            <Link href={navLinks[1].href}>
+              <Button
+                size="lg"
+                aria-label="Explore more Posts"
+                className="cursor-pointer rounded h-[50px] bg-[#3B82F6] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[100px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
+              >
+                Explore more {navLinks[1].name}
+              </Button>
+            </Link>
+            <Link href="/dashboard">
+              <Button
+                size="lg"
+                aria-label="Start writing post"
+                className="cursor-pointer rounded h-[50px] bg-[#3B82F6] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[100px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
+              >
+                Start Writing
+              </Button>
+            </Link>
           </div>
         </div>
         <div

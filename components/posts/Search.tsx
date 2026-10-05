@@ -4,7 +4,7 @@ import { Input } from "@base-ui/react";
 const Search = () => {
   return (
     <>
-      <div className="w-[60%] flex justify-between">
+      <div className="w-[50%] flex justify-between">
         <div>
           <label htmlFor="search">Search Posts</label>
           <Input

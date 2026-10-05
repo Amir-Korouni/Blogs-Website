@@ -6,7 +6,7 @@ const PostGrid = async () => {
   const posts: Posts[] = await getPosts();
   return (
     <>
-      <section className="w-full h-full bg-[#152f59] flex justify-center items-center">
+      <section className="w-full h-full bg-transparent flex justify-center items-center">
         <div
           className="w-[full]
                 grid

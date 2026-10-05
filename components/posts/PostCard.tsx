@@ -39,7 +39,7 @@ const PostCard = ({ data }: postData) => {
             <CardTitle className="flex flex-col gap-2">
               <h3 className="text-sm text-blue-400">{data?.category}</h3>
               <Link
-                href={`/posts/${"data?.slug"}`}
+                href={`/posts/${data?.slug}`}
                 className="text-[clamp(1.1rem,2vw,1.4rem)]
                 leading-tight
                 text-blue-700
@@ -74,8 +74,8 @@ const PostCard = ({ data }: postData) => {
             py-3"
           >
             <p className="text-sm">{data.author}</p>
-            <time dateTime={data?.date} className="text-sm">
-              {data.date}
+            <time dateTime={data?.publishedAt} className="text-sm">
+              {data.publishedAt}
             </time>
             <p className="text-sm">{data.readingTime}</p>
           </CardFooter>
