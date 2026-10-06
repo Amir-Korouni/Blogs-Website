@@ -1,14 +1,7 @@
+import { Category } from "@/Types/category";
 import { Card, CardContent } from "../ui/card";
 
-type categoryProps = {
-  category: "Front-end" | "Back-end" | "AI" | "DevOps" | "General";
-};
-
-type props = {
-  category: categoryProps[];
-};
-
-const CategoryCard = ({ category }: categoryProps) => {
+const CategoryCard = ({ category }: Category) => {
   return (
     <>
       <Card
@@ -29,10 +22,12 @@ const CategoryCard = ({ category }: categoryProps) => {
 
             transition-transform
             duration-300
-            hover:scale-105
+            hover:scale-104
              flex
               justify-center
               items-center
+
+              hover:drop-shadow-[0_0_15px_#152f59]
             "
       >
         <CardContent className="w-full text-center">

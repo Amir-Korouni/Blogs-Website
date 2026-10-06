@@ -12,7 +12,7 @@ const Page = () => {
   return (
     <>
       <main>
-        <section className="w-full h-[50vh] bg-[var(--latest-section)]  text-zinc-100 flex flex-col justify-center items-center">
+        <section className="w-full h-[40vh] bg-[var(--latest-section)]  text-zinc-100 flex flex-col justify-center items-center">
           <div className="text-foreground">
             <h2 className="text-[clamp(1.8rem,4vw,3rem)]">All Posts</h2>
             <p className="text-[clamp(0.8rem,3vw,1.5rem)]">

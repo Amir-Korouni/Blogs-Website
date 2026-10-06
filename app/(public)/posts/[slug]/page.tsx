@@ -2,22 +2,41 @@ import PostArticle from "@/components/posts/PostArticle";
 import { getPostDetail } from "@/lib/api/posts";
 import { Posts } from "@/Types/post";
 import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Post Detail",
-  description:
-    "Read technical articles about frontend, backend, AI engineering, and modern technologies.",
-};
+import { notFound } from "next/navigation";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const postDetail: Posts[] = await getPostDetail(slug);
+
+  if (postDetail.length === 0) {
+    return {
+      title: "Page not found.",
+    };
+  }
+
+  const post = postDetail[0];
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+  };
+}
+
 const Page = async ({ params }: PageProps) => {
   const { slug } = await params;
   console.log("SLUG:", slug);
   const postDetail: Posts[] = await getPostDetail(slug);
+  if (postDetail.length === 0) {
+    notFound();
+  }
   const post = postDetail[0];
+
   return (
     <>
       <main>
