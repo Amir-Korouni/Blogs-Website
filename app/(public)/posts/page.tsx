@@ -1,6 +1,7 @@
 import Pagination from "@/components/posts/Pagination";
-import PostGrid from "@/components/posts/PostGrid";
+import {PostGrid} from "@/components/posts/PostGrid";
 import Search from "@/components/posts/Search";
+import { getSearchPost } from "@/lib/api/posts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,7 +9,14 @@ export const metadata: Metadata = {
   description: "Explore all articles about modern technologies.",
 };
 
-const Page = () => {
+type PostPageProp = {
+  searchParams: Promise<{ query?: string }>;
+};
+
+const Page = async ({ searchParams }: PostPageProp) => {
+  const { query } = await searchParams;
+
+  const posts = await getSearchPost(query);
   return (
     <>
       <main>
@@ -28,7 +36,7 @@ const Page = () => {
         </section>
         <section className="w-full h-[100vh] flex flex-col justify-center items-center bg-background">
           <h2 className="text-[clamp(1.8rem,4vw,3rem)]">Posts</h2>
-          <PostGrid />
+          <PostGrid posts={posts} />
         </section>
         <section className="w-full h-[10vh] flex justify-center items-center">
           <Pagination />

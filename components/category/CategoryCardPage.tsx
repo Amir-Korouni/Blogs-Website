@@ -23,7 +23,7 @@ const CategoryCardPage = ({ category, quantity }: categoryProps) => {
 
             cursor-pointer
 
-            duration-300
+            duration-500
             hover:scale-102
              flex
               justify-center
@@ -32,19 +32,20 @@ const CategoryCardPage = ({ category, quantity }: categoryProps) => {
               hover:drop-shadow-[0_0_15px_#0f2242]
             "
       >
-        <CardContent className="w-full h-[8rem] text-center">
-          <Link
-            href={`posts/${category.category}`}
-            className="text-[clamp(0.875rem,1.5vw,1.9rem)]
+        <Link
+          href={`categories/${category.slug}`}
+          className="w-full text-[clamp(0.875rem,1.5vw,1.9rem)]
                 leading-relaxed
                 text-zinc-300"
-          >
+        >
+          <CardContent className="w-full h-[8rem] text-center">
             {category.category}
-          </Link>
-        </CardContent>
+          </CardContent>
+        </Link>
         <CardFooter className="w-full h-[4rem] bg-[#152f59] flex justify-center items-center ">
-          <Link href={`posts/${category.category}`}
-            className="text-[clamp(0.875rem,1vw,1.9rem)]
+          <Link
+            href={`categories/${category.slug}`}
+            className="w-full text-center text-[clamp(0.875rem,1vw,1.9rem)]
                 leading-relaxed
                 text-zinc-300"
           >

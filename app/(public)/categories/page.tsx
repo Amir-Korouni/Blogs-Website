@@ -15,17 +15,23 @@ const Categories = () => {
         <section className="w-full min-h-[100vh] mt-[10px] mb-[10px] flex flex-col justify-center items-center bg-background">
           <div className="w-[80%]  xl:w-[80%] md:w-[85%] sm:w-[100%] flex justify-center items-center gap-8 flex-wrap">
             <CategoryCardPage
-              category={{ category: "Front-end" }}
+              category={{ category: "Front-end", slug: "front-end" }}
               quantity={25}
             />
             <CategoryCardPage
-              category={{ category: "Back-end" }}
+              category={{ category: "Back-end", slug: "back-end" }}
               quantity={20}
             />
-            <CategoryCardPage category={{ category: "AI" }} quantity={30} />
-            <CategoryCardPage category={{ category: "DevOps" }} quantity={18} />
             <CategoryCardPage
-              category={{ category: "General" }}
+              category={{ category: "AI", slug: "ai" }}
+              quantity={30}
+            />
+            <CategoryCardPage
+              category={{ category: "DevOps", slug: "devops" }}
+              quantity={18}
+            />
+            <CategoryCardPage
+              category={{ category: "General", slug: "general" }}
               quantity={23}
             />
           </div>

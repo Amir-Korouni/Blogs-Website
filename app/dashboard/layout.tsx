@@ -21,13 +21,7 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  <html
-    lang="en"
-    className={`${roboto.className} h-full antialiased`}
-    suppressHydrationWarning
-  >
-    <body className="min-h-full flex flex-col bg-color-background text-color-foreground">
-      <ThemeProvider>{children}</ThemeProvider>
-    </body>
-  </html>;
+  <section className="min-h-screen bg-background text-foreground">
+    {children}
+  </section>;
 }

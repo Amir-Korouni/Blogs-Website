@@ -1,9 +1,9 @@
 const Page = () => {
   return (
     <>
-      <section>
-        <h2>Dashboard</h2>
-      </section>
+      <main>
+        <h1>Dashboard</h1>
+      </main>
     </>
   );
 };

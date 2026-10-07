@@ -7,9 +7,10 @@
       "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
       "content": "<h2>What are Server Components?</h2><p>Server Components allow us to render components on the server.</p><h2>Why are they useful?</h2><p>They can reduce the amount of JavaScript sent to the browser.</p>",
       "category": "Front-end",
+      "categorySlug": "front-end",
       "author": "Amir Korouni",
       "publishedAt": "October 3 2026",
-      "readingTime": "6 min"
+      "readingTime": 6
     },
     {
       "id": "2",
@@ -18,9 +19,10 @@
       "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
       "content": "<h2>What are Server Components?</h2><p>Server Components allow us to render components on the server.</p><h2>Why are they useful?</h2><p>They can reduce the amount of JavaScript sent to the browser.</p>",
       "category": "Front-end",
+      "categorySlug": "front-end",
       "author": "Amir Korouni",
       "publishedAt": "October 3 2026",
-      "readingTime": "10 min"
+      "readingTime": 10
     },
     {
       "id": "3",
@@ -29,9 +31,10 @@
       "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
       "content": "<h2>What are Server Components?</h2><p>Server Components allow us to render components on the server.</p><h2>Why are they useful?</h2><p>They can reduce the amount of JavaScript sent to the browser.</p>",
       "category": "Back-end",
+      "categorySlug": "back-end",
       "author": "Amir Sajadian",
       "publishedAt": "October 3 2026",
-      "readingTime": "10 min"
+      "readingTime": 10
     },
     {
       "id": "4",
@@ -40,9 +43,10 @@
       "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
       "content": "<h2>What are Server Components?</h2><p>Server Components allow us to render components on the server.</p><h2>Why are they useful?</h2><p>They can reduce the amount of JavaScript sent to the browser.</p>",
       "category": "Back-end",
+      "categorySlug": "back-end",
       "author": "Amir Sajadian",
       "publishedAt": "October 1 2026",
-      "readingTime": "7 min"
+      "readingTime": 7
     },
     {
       "id": "5",
@@ -51,9 +55,10 @@
       "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
       "content": "<h2>What are Server Components?</h2><p>Server Components allow us to render components on the server.</p><h2>Why are they useful?</h2><p>They can reduce the amount of JavaScript sent to the browser.</p>",
       "category": "Back-end",
+      "categorySlug": "back-end",
       "author": "Reza Dehghan",
       "publishedAt": "October 1 2025",
-      "readingTime": "7 min"
+      "readingTime": 7
     },
     {
       "id": "6",
@@ -62,9 +67,10 @@
       "excerpt": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, quo doloribus quae deserunt, voluptate quam aut ducimus optio sed blanditiis ullam beatae eum facere voluptatibus adipisci similique? Fugit, temporibus dolorum?",
       "content": "<h2>What are Server Components?</h2><p>Server Components allow us to render components on the server.</p><h2>Why are they useful?</h2><p>They can reduce the amount of JavaScript sent to the browser.</p>",
       "category": "Back-end",
+      "categorySlug": "back-end",
       "author": "Reza Dehghan",
       "publishedAt": "October 1 2025",
-      "readingTime": "7 min"
+      "readingTime": 7
     }
   ],
   "UsersLogin": [

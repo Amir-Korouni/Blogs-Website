@@ -1,7 +1,25 @@
+"use client";
 import { CategoriesList } from "@/config/home";
 import { Input } from "@base-ui/react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 const Search = () => {
+  const searchParam = useSearchParams();
+  const pathName = usePathname();
+  const { replace } = useRouter();
+
+  const handleSearch = useDebouncedCallback((term: string) => {
+    console.log(term);
+    const params = new URLSearchParams(searchParam);
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathName}?${params.toString()}`);
+  }, 500);
+
   return (
     <>
       <div className="w-[50%] flex justify-between">
@@ -12,6 +30,7 @@ const Search = () => {
             name="search"
             id="search"
             aria-describedby="input-search"
+            
             placeholder="Search..."
             className="
                 w-full
@@ -26,7 +45,9 @@ const Search = () => {
                 focus:ring-blue-500
                 focus:border-blue-500
               "
-          ></Input>
+            onChange={(e) => handleSearch(e.target.value)}
+            defaultValue={searchParam.get("query")?.toString()}
+          />
         </div>
         <div>
           <label htmlFor="search">Filter Posts</label>

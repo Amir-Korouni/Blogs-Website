@@ -77,7 +77,7 @@ const PostCard = ({ data }: postData) => {
             <time dateTime={data?.publishedAt} className="text-sm">
               {data.publishedAt}
             </time>
-            <p className="text-sm">{data.readingTime}</p>
+            <p className="text-sm">{data.readingTime} min</p>
           </CardFooter>
         </article>
       </Card>
