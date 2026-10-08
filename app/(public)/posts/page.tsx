@@ -1,7 +1,7 @@
 import Pagination from "@/components/posts/Pagination";
 import {PostGrid} from "@/components/posts/PostGrid";
 import Search from "@/components/posts/Search";
-import { getSearchPost } from "@/lib/api/posts";
+import { getPosts, getSearchPost } from "@/lib/api/posts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

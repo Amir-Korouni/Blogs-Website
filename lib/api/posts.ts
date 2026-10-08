@@ -1,3 +1,4 @@
+import { Posts } from "@/Types/post";
 import { apiCall } from "./client";
 
 export async function getPosts() {
@@ -11,12 +12,15 @@ export async function getPostDetail(url: string) {
 }
 
 export async function getSearchPost(query?: string) {
-  const response = await apiCall.get("/Posts", {
-    params: query ? { q: query } : undefined,
-  });
+  const response = await apiCall.get("/Posts");
 
-  console.log("Query", query);
-  console.log("DATA:", response.data);
+  if (!query) {
+    return response.data;
+  }
 
-  return response.data;
+  const search = query.toLowerCase();
+
+  return response.data.filter((post: Posts) =>
+    post.title.toLowerCase().includes(search)
+  );
 }
