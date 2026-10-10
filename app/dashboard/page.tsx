@@ -2,7 +2,9 @@ const Page = () => {
   return (
     <>
       <main>
-        <h1>Dashboard</h1>
+        <section>
+          <h1>Dashboard</h1>
+        </section>
       </main>
     </>
   );

@@ -3,12 +3,13 @@ import { CategoriesList } from "@/config/home";
 import { Input } from "@/components/ui/input";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 const Search = () => {
   const searchParam = useSearchParams();
   const pathName = usePathname();
-  const { replace } = useRouter();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const handleSearch = useDebouncedCallback((term: string) => {
     console.log(term);
@@ -18,7 +19,9 @@ const Search = () => {
     } else {
       params.delete("query");
     }
-    replace(`${pathName}?${params.toString()}`);
+    startTransition(() => {
+      router.replace(`${pathName}?${params.toString()}`);
+    });
   }, 500);
 
   const [query, setQuery] = useState(
@@ -54,6 +57,11 @@ const Search = () => {
               handleSearch(e.target.value);
             }}
           />
+          {isPending && (
+            <p className="mt-2 text-sm text-muted-foreground">
+              Updating Results...
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="search">Filter Posts</label>
@@ -75,6 +83,7 @@ const Search = () => {
                 focus:border-blue-500
               "
           >
+            <option value="all">All</option>
             {CategoriesList.map((category) => (
               <option key={category} value={category}>
                 {category}

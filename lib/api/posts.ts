@@ -11,7 +11,7 @@ export async function getPostDetail(url: string) {
   return response.data;
 }
 
-export async function getSearchPost(query?: string) {
+export async function getSearchPost(query?: string): Promise<Posts[]> {
   const response = await apiCall.get("/Posts");
 
   if (!query) {
@@ -21,6 +21,6 @@ export async function getSearchPost(query?: string) {
   const search = query.toLowerCase();
 
   return response.data.filter((post: Posts) =>
-    post.title.toLowerCase().includes(search)
+    post.title.toLowerCase().includes(search),
   );
 }

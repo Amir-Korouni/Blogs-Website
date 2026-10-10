@@ -1,8 +1,10 @@
 import Pagination from "@/components/posts/Pagination";
-import {PostGrid} from "@/components/posts/PostGrid";
+import { PostGrid } from "@/components/posts/PostGrid";
 import Search from "@/components/posts/Search";
 import { getPosts, getSearchPost } from "@/lib/api/posts";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "Posts",
@@ -36,7 +38,9 @@ const Page = async ({ searchParams }: PostPageProp) => {
         </section>
         <section className="w-full h-[100vh] flex flex-col justify-center items-center bg-background">
           <h2 className="text-[clamp(1.8rem,4vw,3rem)]">Posts</h2>
-          <PostGrid posts={posts} />
+          <Suspense fallback={<Loading />}>
+            <PostGrid posts={posts} />
+          </Suspense>
         </section>
         <section className="w-full h-[10vh] flex justify-center items-center">
           <Pagination />

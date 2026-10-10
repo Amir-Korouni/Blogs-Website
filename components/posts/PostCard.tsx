@@ -16,7 +16,7 @@ const PostCard = ({ data }: postData) => {
   return (
     <>
       <Card
-        className="w-full
+        className="
             max-w-[370px]
             min-h-[250px]
 

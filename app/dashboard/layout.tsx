@@ -21,7 +21,9 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  <section className="min-h-screen bg-background text-foreground">
-    {children}
-  </section>;
+  return (
+    <section className="min-h-screen bg-background text-foreground">
+      {children}
+    </section>
+  );
 }
