@@ -1,6 +1,6 @@
-import { roboto } from "@/font/font";
+import DashboardNavbar from "@/components/layout/Navbar/DashboardNavbar";
 import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: {
@@ -22,8 +22,13 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="min-h-screen bg-background text-foreground">
-      {children}
-    </section>
+    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+      <div className="w-full flex-none md:w-64">
+        <DashboardNavbar />
+      </div>
+      <div className="w-full grow p-6 overflow-hidden md:overflow-y-auto">
+        {children}
+      </div>
+    </div>
   );
 }

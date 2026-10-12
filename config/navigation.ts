@@ -1,4 +1,9 @@
-export const navLinks = [
+type navLinksType = {
+  name:string,
+  href:string
+}
+
+export const navLinks:navLinksType[] = [
   {
     name: "Home",
     href: "/",

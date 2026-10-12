@@ -1,8 +1,8 @@
 import { Posts } from "@/Types/post";
 import { apiCall } from "./client";
 
-export async function getPosts() {
-  const response = await apiCall.get("/Posts");
+export async function getPosts():Promise<Posts[]> {
+  const response = await apiCall.get<Posts[]>("/Posts");
   return response.data;
 }
 

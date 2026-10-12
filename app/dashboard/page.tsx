@@ -1,9 +1,34 @@
-const Page = () => {
+import PostsTable from "@/components/dashboard/PostsTable";
+import SearchNew from "@/components/dashboard/SearchNew";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { getPosts, getSearchPost } from "@/lib/api/posts";
+import { Posts } from "@/Types/post";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+import { Suspense } from "react";
+import Loading from "./loading";
+
+type dashboardType = {
+  searchParams: Promise<{ query?: string }>;
+};
+
+const Page = async ({ searchParams }: dashboardType) => {
+  const { query } = await searchParams;
+  const posts = await getSearchPost(query);
   return (
     <>
-      <main>
-        <section>
-          <h1>Dashboard</h1>
+      <main className="w-full h-[100vh] border">
+        <section className="size-full flex flex-col justify-start items-center mt-10">
+          <h2 className="w-full text-[clamp(1rem,2.5vw,2rem)] text-left ml-15">
+            Dashboard
+          </h2>
+          <SearchNew />
+          <div className="w-full h-[50vh] flex justify-center items-center">
+            <Suspense fallback={<Loading />}>
+              <PostsTable posts={posts} />
+            </Suspense>
+          </div>
         </section>
       </main>
     </>
