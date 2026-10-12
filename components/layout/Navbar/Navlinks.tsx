@@ -13,7 +13,10 @@ const NavLinks = () => {
           <li key={item.href}>
             <Link
               href={item.href}
-              className={clsx("duration-200 hover:text-[#1D4ED8] hover:underline", {"text-[#1D4ED8] underline": pathname === item.href})}
+              className={clsx(
+                "duration-200 hover:text-[#1D4ED8] hover:underline",
+                { "text-[#1D4ED8] underline": pathname === item.href },
+              )}
             >
               {item.name}
             </Link>

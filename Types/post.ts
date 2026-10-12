@@ -4,6 +4,7 @@ export type Posts = {
   slug: string;
   excerpt: string;
   content: string;
+  status: "Published" | "UnPublished";
   category: string;
   author: string;
   publishedAt: string;

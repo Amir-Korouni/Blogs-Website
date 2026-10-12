@@ -1,4 +1,4 @@
-import PostsTable from "@/components/dashboard/PostsTable";
+import DashboardTable from "@/components/dashboard/DashboardTable";
 import SearchNew from "@/components/dashboard/SearchNew";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,7 +26,7 @@ const Page = async ({ searchParams }: dashboardType) => {
           <SearchNew />
           <div className="w-full h-[50vh] flex justify-center items-center">
             <Suspense fallback={<Loading />}>
-              <PostsTable posts={posts} />
+              <DashboardTable posts={posts} />
             </Suspense>
           </div>
         </section>

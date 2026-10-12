@@ -1,5 +1,5 @@
 "use client";
-import { CategoriesList } from "@/config/home";
+import { CategoriesList } from "@/config/dropDownLists";
 import { Input } from "@/components/ui/input";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";

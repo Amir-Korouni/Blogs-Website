@@ -1,5 +1,5 @@
 import CategoryCard from "@/components/category/CategoryCard";
-import { CategoriesList } from "@/config/home";
+import { CategoriesList } from "@/config/dropDownLists";
 
 const Categories = () => {
   return (

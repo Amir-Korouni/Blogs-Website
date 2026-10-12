@@ -7,7 +7,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { Pencil, Trash2 } from "lucide-react";
@@ -26,14 +25,14 @@ export default async function PostsTable({ posts }: PostTableType) {
     );
   }
   return (
-    <div className="w-full overflow-hidden rounded-lg border ">
-      <div className="w-full  overflow-x-auto">
+    <div className="w-full h-full overflow-hidden rounded-lg border ">
+      <div className="w-full overflow-x-auto">
         <Table className="min-w-[700px]">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[35%]">Title</TableHead>
               <TableHead>Category</TableHead>
-              <TableHead>Author</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead>Created At</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -48,7 +47,7 @@ export default async function PostsTable({ posts }: PostTableType) {
 
                 <TableCell>{post.category}</TableCell>
 
-                <TableCell>{post.author}</TableCell>
+                <TableCell>{post.status}</TableCell>
 
                 <TableCell className="whitespace-nowrap text-muted-foreground">
                   {post.publishedAt}
