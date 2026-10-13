@@ -1,11 +1,6 @@
 import DashboardTable from "@/components/dashboard/DashboardTable";
 import SearchNew from "@/components/dashboard/SearchNew";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { getPosts, getSearchPost } from "@/lib/api/posts";
-import { Posts } from "@/Types/post";
-import { Plus } from "lucide-react";
-import Link from "next/link";
+import { getSearchPost } from "@/lib/api/posts";
 import { Suspense } from "react";
 import Loading from "./loading";
 

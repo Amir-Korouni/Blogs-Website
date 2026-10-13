@@ -1,7 +1,7 @@
 import ToolBar from "@/components/dashboard/PostToolBar";
 import { Suspense } from "react";
 import Loading from "../loading";
-import { getPosts } from "@/lib/api/posts";
+import { getSearchPost } from "@/lib/api/posts";
 import PostsTable from "@/components/dashboard/PostsTable";
 import Pagination from "@/components/dashboard/PagePagination";
 
@@ -9,25 +9,34 @@ type Props = {
   searchParams: Promise<{
     page?: number;
     query?: string;
+    status?: string;
+    category?: string;
   }>;
 };
 
 const Page = async ({ searchParams }: Props) => {
-  const params = await searchParams;
+  const { page, query, status, category } = await searchParams;
 
-  const requestedPage = Number(params.page) || 1;
+  const requestedPage = Number(page) || 1;
 
-  const posts = await getPosts();
+  const posts = await getSearchPost(query);
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesStatus = !status || post.status === status;
+    const matchesCategory = !category || post.category === category;
+
+    return matchesStatus && matchesCategory;
+  });
 
   const pageSize = 10;
-  const totalPosts = posts.length;
+  const totalPosts = filteredPosts.length;
   const totalPages = Math.ceil(totalPosts / pageSize);
 
   const currentPage = Math.min(totalPages || 1, Math.max(1, requestedPage));
 
   const offset = (currentPage - 1) * pageSize;
 
-  const paginatedPosts = posts.slice(offset, offset + pageSize);
+  const paginatedPosts = filteredPosts.slice(offset, offset + pageSize);
   return (
     <>
       <main className="w-full h-[100vh] border">

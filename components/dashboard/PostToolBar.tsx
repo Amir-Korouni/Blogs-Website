@@ -1,7 +1,49 @@
+"use client";
 import { CategoriesList, Status } from "@/config/dropDownLists";
 import { Input } from "../ui/input";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRef, useTransition } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 const ToolBar = () => {
+  const search = useSearchParams();
+  const pathName = usePathname();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const initialQuery = search.get("query")?.toString() ?? "";
+  const QueryRef = useRef(initialQuery);
+
+  const handleSetUrl = useDebouncedCallback((term: string) => {
+    const param = new URLSearchParams(search);
+    if (term) {
+      param.set("query", term);
+    } else {
+      param.delete("query");
+    }
+
+    startTransition(() => {
+      router.push(
+        param.toString() ? `${pathName}?${param.toString()}` : pathName,
+      );
+    });
+  }, 500);
+
+  const handleFilter = (key: string, value: string) => {
+    console.log(key);
+    const param = new URLSearchParams(search.toString());
+    if (value === "all") {
+      param.delete(key);
+    } else {
+      param.set(key, value);
+    }
+
+    param.delete("page");
+
+    const queryString = param.toString();
+
+    router.push(queryString ? `${pathName}?${queryString}` : pathName);
+  };
   return (
     <>
       <section className="w-full h-[10vh] flex justify-between px-10 mt-10">
@@ -22,10 +64,19 @@ const ToolBar = () => {
                 focus:ring-2
                 focus:ring-blue-500
                 focus:border-blue-500"
+          defaultValue={QueryRef.current}
+          onChange={(param) => {
+            handleSetUrl(param.target.value);
+          }}
         />
+        {isPending && (
+          <p className="mt-2 text-sm text-muted-foreground">
+            Updating Results...
+          </p>
+        )}
 
         <div className="w-[20%] flex">
-          <label htmlFor="search">Filter By Status</label>
+          <label htmlFor="status">Filter By Status</label>
           <select
             name="select"
             id="select"
@@ -43,6 +94,10 @@ const ToolBar = () => {
                         focus:ring-blue-500
                         focus:border-blue-500
                       "
+            value={search.get("status") ?? "all"}
+            onChange={(event) => {
+              handleFilter("status", event.target.value);
+            }}
           >
             <option value="all">All</option>
             {Status.map((status) => (
@@ -54,11 +109,11 @@ const ToolBar = () => {
         </div>
 
         <div className="w-[20%] flex">
-          <label htmlFor="search">Filter By Category</label>
+          <label htmlFor="category">Filter By Category</label>
           <select
-            name="select"
-            id="select"
-            aria-describedby="select-search"
+            name="category"
+            id="category"
+            aria-describedby="category-list"
             className="
                         w-full
                         h-10
@@ -72,6 +127,10 @@ const ToolBar = () => {
                         focus:ring-blue-500
                         focus:border-blue-500
                       "
+            onChange={(event) => {
+              handleFilter("category", event.target.value);
+            }}
+            value={search.get("category") ?? "all"}
           >
             <option value="all">All</option>
             {CategoriesList.map((category) => (

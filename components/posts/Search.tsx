@@ -3,7 +3,7 @@ import { CategoriesList } from "@/config/dropDownLists";
 import { Input } from "@/components/ui/input";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { useState, useTransition } from "react";
+import { useRef, useTransition } from "react";
 
 const Search = () => {
   const searchParam = useSearchParams();
@@ -11,22 +11,35 @@ const Search = () => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
+  const initialQuery = searchParam.get("query")?.toString() ?? "";
+  const initialQueryRef = useRef(initialQuery);
+
   const handleSearch = useDebouncedCallback((term: string) => {
-    console.log(term);
     const params = new URLSearchParams(searchParam);
     if (term) {
       params.set("query", term);
     } else {
       params.delete("query");
     }
+
     startTransition(() => {
-      router.replace(`${pathName}?${params.toString()}`);
+      router.replace(
+        params.toString() ? `${pathName}?${params.toString()}` : pathName,
+      );
     });
   }, 500);
 
-  const [query, setQuery] = useState(
-    searchParam.get("query")?.toString() ?? "",
-  );
+  const handleFilter = (term: string) => {
+    const param = new URLSearchParams();
+    if (term === "all") {
+      param.delete("category");
+    } else {
+      param.set("category", term);
+    }
+
+    const queryString = param.toString();
+    router.push(queryString ? `${pathName}?${queryString}` : pathName);
+  };
   return (
     <>
       <div className="w-[50%] flex justify-between">
@@ -51,9 +64,8 @@ const Search = () => {
                 focus:ring-blue-500
                 focus:border-blue-500
               "
-            value={query}
+            defaultValue={initialQueryRef.current}
             onChange={(e) => {
-              setQuery(e.target.value);
               handleSearch(e.target.value);
             }}
           />
@@ -82,6 +94,9 @@ const Search = () => {
                 focus:ring-blue-500
                 focus:border-blue-500
               "
+            onChange={(event) => {
+              handleFilter(event.target.value);
+            }}
           >
             <option value="all">All</option>
             {CategoriesList.map((category) => (

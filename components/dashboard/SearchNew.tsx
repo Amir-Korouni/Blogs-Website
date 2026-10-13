@@ -12,7 +12,9 @@ const SearchNew = () => {
   const pathName = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const query = useRef<string>(searchParam.get("query") ?? "");
+
+  const initialQuery = searchParam.get("query")?.toString() ?? "";
+  const QueryRef = useRef(initialQuery);
 
   const handleChange = useDebouncedCallback((value: string) => {
     const params = new URLSearchParams(searchParam);
@@ -23,7 +25,9 @@ const SearchNew = () => {
     }
 
     startTransition(() => {
-      router.replace(`${pathName}?${params.toString()}`);
+      router.replace(
+        params.toString() ? `${pathName}?${params.toString()}` : pathName,
+      );
     });
   }, 500);
 
@@ -47,9 +51,8 @@ const SearchNew = () => {
                 focus:ring-2
                 focus:ring-blue-500
                 focus:border-blue-500"
-          defaultValue={query.current}
+          defaultValue={QueryRef.current}
           onChange={(event) => {
-            query.current = event.target.value;
             handleChange(event.target.value);
           }}
         />
