@@ -1,12 +1,7 @@
 import { CategoriesList, Status } from "@/config/dropDownLists";
 import { Input } from "../ui/input";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const ToolBar = () => {
-  const search = useSearchParams();
-  const pathName = usePathname();
-  const router = useRouter();
-
   return (
     <>
       <section className="w-full h-[10vh] flex justify-between px-10 mt-10">
