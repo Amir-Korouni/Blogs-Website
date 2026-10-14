@@ -56,7 +56,7 @@ export default async function DashboardTable({ posts }: PostTableType) {
                 <TableCell>
                   <div className="flex justify-end gap-2">
                     <Button
-                      variant="ghost"
+                      variant="default"
                       size="icon"
                       aria-label={`Edit ${post.title}`}
                     >
@@ -64,7 +64,7 @@ export default async function DashboardTable({ posts }: PostTableType) {
                     </Button>
 
                     <Button
-                      variant="ghost"
+                      variant="default"
                       size="icon"
                       aria-label={`Delete ${post.title}`}
                     >

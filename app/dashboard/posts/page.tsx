@@ -4,6 +4,9 @@ import Loading from "../loading";
 import { getSearchPost } from "@/lib/api/posts";
 import PostsTable from "@/components/dashboard/PostsTable";
 import Pagination from "@/components/dashboard/PagePagination";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 type Props = {
   searchParams: Promise<{
@@ -41,9 +44,33 @@ const Page = async ({ searchParams }: Props) => {
     <>
       <main className="w-full h-[100vh] border">
         <section className="size-full flex flex-col  items-center mt-10">
-          <h2 className="w-full text-[clamp(1rem,2.5vw,2rem)] text-left ml-15">
-            Posts
-          </h2>
+          <div className="w-full flex justify-between items-center px-10">
+            <h2 className="w-full text-[clamp(1rem,2.5vw,2rem)] text-left ml-15">
+              Posts
+            </h2>
+            <Link href="/dashboard/posts/create">
+              <Button
+                aria-label="Create new post"
+                className="
+              xl:w-[200px]
+              md:w-[150px]
+              sm:w-[100px]
+              h-10
+              bg-blue-500
+              text-white
+              rounded
+              hover:bg-blue-600
+              focus:outline-none
+              focus:ring-2
+              focus:ring-blue-500
+              cursor-pointer
+            "
+              >
+                New Post
+                <Plus />
+              </Button>
+            </Link>
+          </div>
           <ToolBar />
           <div className="w-full h-[50vh] flex justify-center items-center">
             <Suspense fallback={<Loading />}>

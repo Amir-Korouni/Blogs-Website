@@ -16,7 +16,6 @@ type PostPageProp = {
 };
 
 const Page = async ({ searchParams }: PostPageProp) => {
-  const params = await searchParams;
   const { query, page, category } = await searchParams;
 
   const requestedPage = Number(page) || 1;

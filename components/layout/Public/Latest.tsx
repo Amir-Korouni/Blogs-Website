@@ -34,7 +34,6 @@ const LatestSection = ({ posts }: latestSectionprops) => {
                 <PostCard key={post.id} data={post} />
               ))}
             </div>
-            {/* <PostGrid /> */}
           </section>
           <section className="w-[50%] h-[20%] flex justify-end items-center mt-5">
             <Link href={navLinks[1].href}>

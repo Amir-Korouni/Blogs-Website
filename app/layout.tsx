@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ],
 
   creator: "Y Team",
-  publisher: "DEVLOG",
+  publisher: "Vira",
 
   metadataBase: new URL("http://localhost:3001"),
 

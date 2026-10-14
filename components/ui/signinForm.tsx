@@ -11,6 +11,7 @@ const SigninForm = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+    console.log("Rerender");
   };
 
   const UserData = { ...user };
