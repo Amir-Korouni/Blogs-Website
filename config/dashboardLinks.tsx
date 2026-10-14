@@ -24,11 +24,6 @@ export const DashboardNavLinks: linksType[] = [
     icon: FileText,
   },
   {
-    name: "Categories",
-    href: "/dashboard/categories",
-    icon: FolderOpen,
-  },
-  {
     name: "Profile",
     href: "/dashboard/profile",
     icon: UserRound,
