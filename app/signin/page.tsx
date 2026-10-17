@@ -46,7 +46,7 @@ const Page = () => {
           max-lg:w-[80%]
           max-sm:w-[90%]
           max-w-3xl
-          h-[60vh]
+          h-[75vh]
           mx-auto
           flex 
           flex-col 

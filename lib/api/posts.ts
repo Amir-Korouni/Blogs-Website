@@ -1,26 +1,60 @@
 import { Posts } from "@/Types/post";
 import { apiCall } from "./client";
+import { AxiosResponse } from "axios";
+import { ClientType } from "./Types/client.type";
+import { AppHttpError } from "./Error/client.error";
 
-export async function getPosts(): Promise<Posts[]> {
-  const response = await apiCall.get<Posts[]>("/Posts");
-  return response.data;
+async function safeHttpCall<T extends object>(
+  fn: () => Promise<AxiosResponse<T>>,
+): Promise<ClientType<T>> {
+  try {
+    const response = await fn();
+    return {
+      isOk: true,
+      data: response.data,
+    };
+  } catch (error) {
+    return {
+      isOk: false,
+      error: new AppHttpError(error as Error),
+    };
+  }
 }
 
-export async function getPostDetail(url: string) {
-  const response = await apiCall.get(`/Posts?slug=${url}`);
-  return response.data;
+export async function getPosts(): Promise<ClientType<Posts[]>> {
+  return safeHttpCall(() => apiCall.get<Posts[]>("/Posts"));
 }
 
-export async function getSearchPost(query?: string): Promise<Posts[]> {
-  const response = await apiCall.get("/Posts");
+export async function getPostDetail(url: string): Promise<ClientType<Posts[]>> {
+  return safeHttpCall(() => apiCall.get<Posts[]>(`/Posts?slug=${url}`));
+}
 
-  if (!query) {
-    return response.data;
+export async function getSearchPost(
+  query?: string,
+): Promise<ClientType<Posts[]> | undefined> {
+  const response = await safeHttpCall(() => apiCall.get<Posts[]>("/Posts"));
+
+  if (!response.isOk) {
+    console.log(response.error.message);
+    response.error.redirect();
+    return;
   }
 
-  const search = query.toLowerCase();
+  if (!query) {
+    return response;
+  }
 
-  return response.data.filter((post: Posts) =>
+  const search = query?.toLocaleLowerCase().trim();
+
+  if (!search) {
+    return response;
+  }
+
+  const filteredPosts = response.data.filter((post: Posts) =>
     post.title.toLowerCase().includes(search),
   );
+  return {
+    isOk: true,
+    data: filteredPosts,
+  };
 }

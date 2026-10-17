@@ -73,11 +73,16 @@ const PostCard = ({ data }: postData) => {
             px-4
             py-3"
           >
-            <p className="text-sm">{data.author}</p>
-            <time dateTime={data?.publishedAt} className="text-sm">
+            <p className="text-[clamp(0.8rem,0.5vw,0.9rem)]">{data.author}</p>
+            <time
+              dateTime={data?.publishedAt}
+              className="text-[clamp(0.8rem,0.5vw,0.9rem)]"
+            >
               {data.publishedAt}
             </time>
-            <p className="text-sm">{data.readingTime} min</p>
+            <p className="text-[clamp(0.8rem,0.5vw,0.9rem)]">
+              {data.readingTime} min
+            </p>
           </CardFooter>
         </article>
       </Card>

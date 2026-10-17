@@ -1,7 +1,7 @@
 import Pagination from "@/components/posts/Pagination";
 import { PostGrid } from "@/components/posts/PostGrid";
 import Search from "@/components/posts/Search";
-import { getPosts, getSearchPost } from "@/lib/api/posts";
+import {  getSearchPost } from "@/lib/api/posts";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import Loading from "./loading";
@@ -39,7 +39,7 @@ const Page = async ({ searchParams }: PostPageProp) => {
   return (
     <>
       <main>
-        <section className="w-full h-[40vh] bg-[var(--latest-section)]  text-zinc-100 flex flex-col justify-center items-center">
+        <section className="w-full h-[50vh] bg-[var(--latest-section)]  text-zinc-100 flex flex-col justify-center items-center">
           <div className="text-foreground">
             <h2 className="text-[clamp(1.8rem,4vw,3rem)]">All Posts</h2>
             <p className="text-[clamp(0.8rem,3vw,1.5rem)]">
@@ -53,7 +53,7 @@ const Page = async ({ searchParams }: PostPageProp) => {
             <Search />
           </div>
         </section>
-        <section className="w-full h-[100vh] flex flex-col justify-center items-center bg-background">
+        <section className="w-full h-auto flex flex-col justify-center items-center bg-background">
           <h2 className="text-[clamp(1.8rem,4vw,3rem)]">Posts</h2>
           <Suspense fallback={<Loading />}>
             <PostGrid posts={paginationPosts} />

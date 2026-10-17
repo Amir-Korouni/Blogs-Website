@@ -10,17 +10,22 @@ type PageProps = {
 
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
+}: PageProps): Promise<Metadata | undefined> {
   const { slug } = await params;
-  const postDetail: Posts[] = await getPostDetail(slug);
+  const postDetail = await getPostDetail(slug);
+  if (!postDetail.isOk) {
+    console.log(postDetail.error.message);
+    postDetail.error.redirect();
+    return;
+  }
 
-  if (postDetail.length === 0) {
+  if (postDetail.data.length === 0) {
     return {
       title: "Page not found.",
     };
   }
 
-  const post = postDetail[0];
+  const post = postDetail.data[0];
 
   return {
     title: post.title,
@@ -31,11 +36,17 @@ export async function generateMetadata({
 const Page = async ({ params }: PageProps) => {
   const { slug } = await params;
   console.log("SLUG:", slug);
-  const postDetail: Posts[] = await getPostDetail(slug);
-  if (postDetail.length === 0) {
+  const postDetail = await getPostDetail(slug);
+  if (!postDetail.isOk) {
+    console.log(postDetail.error.message);
+    postDetail.error.redirect();
+    return;
+  }
+
+  if (postDetail.data.length === 0) {
     notFound();
   }
-  const post = postDetail[0];
+  const post = postDetail.data[0];
 
   return (
     <>
