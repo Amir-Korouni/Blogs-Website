@@ -25,6 +25,28 @@ export async function getPosts(): Promise<ClientType<Posts[]>> {
   return safeHttpCall(() => apiCall.get<Posts[]>("/Posts"));
 }
 
+export async function getLatestPosts(): Promise<ClientType<Posts[]>> {
+  return safeHttpCall(async () => {
+    const response = await apiCall.get("/Posts?_page=1&_per_page=5");
+
+    return {
+      ...response,
+      data: response.data.data,
+    };
+  });
+}
+
+export async function getPostsByTag(
+  slug: string,
+): Promise<ClientType<Posts[]>> {
+  return safeHttpCall(async () => {
+    const response = await apiCall.get(
+      `/Posts?tags.slug=${encodeURIComponent(slug)}`,
+    );
+    return response;
+  });
+}
+
 export async function getPostDetail(url: string): Promise<ClientType<Posts[]>> {
   return safeHttpCall(() => apiCall.get<Posts[]>(`/Posts?slug=${url}`));
 }

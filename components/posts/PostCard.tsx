@@ -37,7 +37,9 @@ const PostCard = ({ data }: postData) => {
         >
           <CardHeader>
             <CardTitle className="flex flex-col gap-2">
-              <h3 className="text-sm text-blue-400">{data?.category}</h3>
+              <Link href={`/categories/${data?.categorySlug}`}>
+                <h3 className="text-sm text-blue-400">{data?.category}</h3>
+              </Link>
               <Link
                 href={`/posts/${data?.slug}`}
                 className="text-[clamp(1.1rem,2vw,1.4rem)]
@@ -59,6 +61,30 @@ const PostCard = ({ data }: postData) => {
             >
               {data?.excerpt}
             </p>
+            {/* Tags */}
+            {data.tags?.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-4 px-4 pb-4 border-t">
+                {data.tags?.map((tag) => (
+                  <Link
+                    key={tag.id}
+                    href={`/tags/${tag.slug}`}
+                    className="
+                    rounded-md
+                    border border-blue-500/30
+                    bg-blue-500/10
+                    px-2 py-1
+                    text-xs
+                    text-blue-400
+                    transition-colors
+                    hover:bg-blue-500/20
+                    hover:text-blue-300
+                    "
+                  >
+                    {tag.name}
+                  </Link>
+                ))}
+              </div>
+            )}
           </CardContent>
 
           <CardFooter

@@ -1,3 +1,9 @@
+type tagsType = {
+  id: string;
+  name: string;
+  slug: string;
+};
+
 export type Posts = {
   id: string;
   title: string;
@@ -6,6 +12,8 @@ export type Posts = {
   content: string;
   status: "Published" | "UnPublished";
   category: string;
+  categorySlug: string;
+  tags: tagsType[];
   author: string;
   publishedAt: string;
   readingTime: number;

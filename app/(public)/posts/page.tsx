@@ -1,7 +1,7 @@
 import Pagination from "@/components/posts/Pagination";
 import { PostGrid } from "@/components/posts/PostGrid";
 import Search from "@/components/posts/Search";
-import {  getSearchPost } from "@/lib/api/posts";
+import { getSearchPost } from "@/lib/api/posts";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import Loading from "./loading";
@@ -21,8 +21,13 @@ const Page = async ({ searchParams }: PostPageProp) => {
   const requestedPage = Number(page) || 1;
 
   const posts = await getSearchPost(query);
+  if (!posts?.isOk) {
+    console.log(posts?.error.message);
+    posts?.error.redirect();
+    return;
+  }
 
-  const filteredPost = posts.filter((post) => {
+  const filteredPost = posts.data.filter((post) => {
     const matchesCategory = !category || post.category === category;
     return matchesCategory;
   });
