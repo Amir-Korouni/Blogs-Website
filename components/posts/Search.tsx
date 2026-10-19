@@ -30,7 +30,7 @@ const Search = () => {
   }, 500);
 
   const handleFilter = (term: string) => {
-    const param = new URLSearchParams();
+    const param = new URLSearchParams(searchParam);
     if (term === "all") {
       param.delete("category");
     } else {
@@ -94,6 +94,7 @@ const Search = () => {
                 focus:ring-blue-500
                 focus:border-blue-500
               "
+            value={searchParam.get("category") ?? "all"}
             onChange={(event) => {
               handleFilter(event.target.value);
             }}

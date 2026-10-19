@@ -15,7 +15,7 @@ const Tags = async ({ params }: TagsType) => {
   }
   return (
     <main className="container mx-auto px-4 py-12 flex flex-col justify-center items-center">
-      <header className="w-[80%] h-auto flex flex-col gap-4 px-5 mb-10 border-b">
+      <header className="w-[80%] h-auto flex flex-col gap-4 px-5 mb-10 border-b border-foreground">
         <h1 className="text-[clamp(1.8rem,4vw,3rem)]"># Tag: {slug}</h1>
         <p className="text-[clamp(0.9rem,1.2vw,1.8rem)] text-foreground">
           {" "}

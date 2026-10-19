@@ -18,3 +18,13 @@ export type Posts = {
   publishedAt: string;
   readingTime: number;
 };
+
+export type PaginatedPosts = {
+  data: Posts[];
+  first: number;
+  prev: number | null;
+  next: number | null;
+  last: number;
+  pages: number;
+  items: number;
+};

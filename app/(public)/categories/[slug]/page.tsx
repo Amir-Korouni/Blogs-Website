@@ -1,8 +1,8 @@
 import notFound from "@/app/not-found";
+import InfiniteCategory from "@/components/posts/InfiniteCategory";
 import PostCard from "@/components/posts/PostCard";
 import { getPostCategory } from "@/lib/api/categories";
-import { getPostDetail } from "@/lib/api/posts";
-import { Posts } from "@/Types/post";
+import { PaginatedPosts } from "@/Types/post";
 import { Metadata } from "next";
 
 type PageProps = {
@@ -13,15 +13,15 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const categories: Posts[] = await getPostCategory(slug);
+  const categories: PaginatedPosts = await getPostCategory(slug, 1, 3);
 
-  if (categories.length === 0) {
+  if (categories.data.length === 0) {
     return {
       title: "Page not found",
     };
   }
 
-  const post = categories[0];
+  const post = categories.data[0];
   return {
     title: post.title,
     description: post.excerpt,
@@ -30,8 +30,8 @@ export async function generateMetadata({
 
 const Page = async ({ params }: PageProps) => {
   const { slug } = await params;
-  const categories: Posts[] = await getPostCategory(slug);
-  if (categories.length === 0) {
+  const categories: PaginatedPosts = await getPostCategory(slug);
+  if (categories.data.length === 0) {
     notFound();
   }
   console.log(categories);
@@ -51,20 +51,8 @@ const Page = async ({ params }: PageProps) => {
               Articles about {slug} development and modern web technologies.
             </p>
           </div>
-          <div
-            className="w-full
-              grid
-              grid-cols-1
-              md:grid-cols-2
-              xl:grid-cols-3
-              gap-6
-              xl:gap-8
-              justify-items-center"
-          >
-            {categories.map((category) => (
-              <PostCard data={category} key={category.id} />
-            ))}
-          </div>
+
+          <InfiniteCategory slug={slug} />
         </section>
       </main>
     </>

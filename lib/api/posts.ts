@@ -1,4 +1,4 @@
-import { Posts } from "@/Types/post";
+import { PaginatedPosts, Posts } from "@/Types/post";
 import { apiCall } from "./client";
 import { AxiosResponse } from "axios";
 import { ClientType } from "./Types/client.type";
@@ -45,6 +45,28 @@ export async function getPostsByTag(
     );
     return response;
   });
+}
+
+export async function getPostPage(
+  page: number = 1,
+  limit: number = 3,
+  query?: string,
+  category?: string,
+): Promise<ClientType<PaginatedPosts>> {
+  const params = new URLSearchParams({
+    _page: String(page),
+    _per_page: String(limit),
+  });
+
+  if (query?.trim()) {
+    params.set("title:contains", query.trim());
+  }
+
+  if (category) {
+    params.set("category", category);
+  }
+
+  return safeHttpCall(() => apiCall.get(`/Posts?${params.toString()}`));
 }
 
 export async function getPostDetail(url: string): Promise<ClientType<Posts[]>> {
