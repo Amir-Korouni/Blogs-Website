@@ -61,7 +61,7 @@ const PostCard = ({ data }: postData) => {
             >
               {data?.excerpt}
             </p>
-            {/* Tags */}
+
             {data.tags?.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4 px-4 pb-4 border-t">
                 {data.tags?.map((tag) => (

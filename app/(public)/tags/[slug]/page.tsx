@@ -1,5 +1,8 @@
+import InfiniteTag from "@/components/posts/InfiniteTag";
 import PostCard from "@/components/posts/PostCard";
-import { getPostsByTag } from "@/lib/api/posts";
+import { getPostsByTag } from "@/lib/api/tags";
+import { PaginatedPosts } from "@/Types/post";
+import { notFound } from "next/navigation";
 
 type TagsType = {
   params: Promise<{ slug: string }>;
@@ -8,11 +11,11 @@ type TagsType = {
 const Tags = async ({ params }: TagsType) => {
   const { slug } = await params;
   const posts = await getPostsByTag(slug);
-  if (!posts.isOk) {
-    console.log(posts.error.message);
-    posts.error.redirect();
-    return;
+  if (posts.data.length === 0) {
+    notFound();
   }
+  console.log(posts);
+
   return (
     <main className="container mx-auto px-4 py-12 flex flex-col justify-center items-center">
       <header className="w-[80%] h-auto flex flex-col gap-4 px-5 mb-10 border-b border-foreground">
@@ -29,11 +32,7 @@ const Tags = async ({ params }: TagsType) => {
       </header>
 
       {posts.data.length > 0 ? (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {posts.data.map((post) => (
-            <PostCard key={post.id} data={post} />
-          ))}
-        </div>
+        <InfiniteTag slug={slug} />
       ) : (
         <p className="py-12 text-center text-muted-foreground">
           No posts found for this tag.

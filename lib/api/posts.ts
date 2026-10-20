@@ -36,17 +36,6 @@ export async function getLatestPosts(): Promise<ClientType<Posts[]>> {
   });
 }
 
-export async function getPostsByTag(
-  slug: string,
-): Promise<ClientType<Posts[]>> {
-  return safeHttpCall(async () => {
-    const response = await apiCall.get(
-      `/Posts?tags.slug=${encodeURIComponent(slug)}`,
-    );
-    return response;
-  });
-}
-
 export async function getPostPage(
   page: number = 1,
   limit: number = 3,

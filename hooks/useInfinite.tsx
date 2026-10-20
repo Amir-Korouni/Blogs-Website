@@ -2,6 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getPostPage } from "@/lib/api/posts";
+import { getPostsByTag } from "@/lib/api/tags";
 import { getPostCategory } from "@/lib/api/categories";
 
 /**
@@ -35,6 +36,20 @@ export function useInfiniteCategory(slug: string) {
     initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
+      return lastPage.next ?? undefined;
+    },
+  });
+}
+
+export function useInfiniteTags(slug: string) {
+  return useInfiniteQuery({
+    queryKey: ["tags", "infinite", "tags", slug],
+    queryFn: ({ pageParam }) => getPostsByTag(slug, pageParam, 3),
+
+    initialPageParam: 1,
+
+    getNextPageParam: (lastPage) => {
+
       return lastPage.next ?? undefined;
     },
   });
