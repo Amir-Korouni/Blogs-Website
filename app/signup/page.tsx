@@ -17,7 +17,7 @@ const Page = () => {
           className="
           w-full
           max-w-3xl
-          h-[75vh]
+          h-auto
           flex flex-col 
           items-center 
           justify-center 

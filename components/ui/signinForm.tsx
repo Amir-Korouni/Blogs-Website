@@ -1,34 +1,58 @@
 "use client";
 import { PostAuth } from "@/lib/api/auth";
 import { signinState, SigninValidation } from "@/lib/validations/auth";
-import { SignInFormData } from "@/Types/signin";
 import { Button, Input } from "@base-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { ChangeEvent, useActionState, useState } from "react";
+import { useActionState, useState } from "react";
 
 const SigninForm = () => {
-  const [user, setUser] = useState<SignInFormData>({ email: "", password: "" });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-    console.log("Rerender");
-  };
-
-  const UserData = { ...user };
-
-  const submitForm = async () => {
-    const Auth = await PostAuth(UserData);
-    console.log(Auth);
-  };
-
   const initialState: signinState = { errors: {}, message: null };
-  const [state, formAction] = useActionState(SigninValidation, initialState);
+  const [state, formAction, isPending] = useActionState(
+    SigninValidation,
+    initialState,
+  );
+
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (formData: FormData) => {
+    setAuthError(null);
+    setIsSubmitting(true);
+
+    try {
+      const email = formData.get("email");
+      const password = formData.get("password");
+      if (typeof email !== "string" || typeof password !== "string") {
+        setAuthError("Invalid form data.");
+        return;
+      }
+      const response = await PostAuth({ email, password });
+      console.log(response);
+    } catch (error) {
+      setAuthError("Sign in failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <form
-        action={formAction}
+        action={async (formData) => {
+          const validationResult = await SigninValidation(
+            initialState,
+            formData,
+          );
+
+          if (
+            validationResult.errors?.email?.length ||
+            validationResult.errors?.password?.length
+          ) {
+            await formAction(formData);
+            return;
+          }
+          await handleSubmit(formData);
+        }}
         className="w-[70%] max-md:w-[80%] flex flex-col gap-8"
-        onSubmit={submitForm}
       >
         <div className="flex flex-col gap-2">
           <label htmlFor="email">Email</label>
@@ -36,6 +60,7 @@ const SigninForm = () => {
             type="email"
             name="email"
             id="email"
+            aria-invalid={!!state.errors?.email?.length}
             aria-describedby="input-email"
             className="
                 w-full
@@ -50,16 +75,21 @@ const SigninForm = () => {
                 focus:ring-blue-500
                 focus:border-blue-500
               "
-            onChange={(e) => {
-              handleChange(e);
-            }}
           />
-          <div id="input-email" aria-live="polite" aria-atomic="true">
-            {state?.errors?.email && (
-              <p className="text-red-500">{state.errors.email}</p>
-            )}
+          <div id="input-password" aria-live="polite">
+            {state.errors?.password?.map((error) => (
+              <p key={error} className="text-red-500">
+                {error}
+              </p>
+            ))}
           </div>
         </div>
+
+        {(authError || state.message) && (
+          <p role="alert" className="text-red-500">
+            {authError || state.message}
+          </p>
+        )}
 
         <div className="flex flex-col gap-2">
           <label htmlFor="password">Password</label>
@@ -82,19 +112,22 @@ const SigninForm = () => {
                 focus:ring-blue-500
                 focus:border-blue-500
               "
-            onChange={(e) => handleChange(e)}
           />
-          <div>
-            {state?.errors?.password && (
-              <p className="text-red-500">{state.errors.password}</p>
-            )}
-          </div>
-          <div>
-            {state.errors?.email && state.errors.password && (
-              <p className="text-red-500">{state.message}</p>
-            )}
+          <div id="input-password" aria-live="polite">
+            {state.errors?.password?.map((error) => (
+              <p key={error} className="text-red-500">
+                {error}
+              </p>
+            ))}
           </div>
         </div>
+
+        {(authError || state.message) && (
+          <p role="alert" className="text-red-500">
+            {authError || state.message}
+          </p>
+        )}
+
         <Button
           aria-label="submit button"
           type="submit"
@@ -111,7 +144,7 @@ const SigninForm = () => {
               cursor-pointer
             "
         >
-          Sign in
+          {isPending || isSubmitting ? "Signing in..." : "Sign in"}
         </Button>
       </form>
     </>

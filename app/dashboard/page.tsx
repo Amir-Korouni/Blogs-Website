@@ -11,6 +11,11 @@ type dashboardType = {
 const Page = async ({ searchParams }: dashboardType) => {
   const { query } = await searchParams;
   const posts = await getSearchPost(query);
+  if (!posts?.isOk) {
+    console.log(posts?.error.message);
+    posts?.error.redirect();
+    return;
+  }
   return (
     <>
       <main className="w-full h-[100vh] border">
@@ -21,7 +26,7 @@ const Page = async ({ searchParams }: dashboardType) => {
           <SearchNew />
           <div className="w-full h-[50vh] flex justify-center items-center">
             <Suspense fallback={<Loading />}>
-              <DashboardTable posts={posts} />
+              <DashboardTable posts={posts.data} />
             </Suspense>
           </div>
         </section>

@@ -1,20 +1,84 @@
 "use client";
+import { PostAuth, PostAuthSignup } from "@/lib/api/auth";
 import { signupState, signupValidation } from "@/lib/validations/auth";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import { Input } from "./input";
 
 const SingupForm = () => {
   const initialState: signupState = { errors: {}, message: null };
-  const [state, formAction] = useActionState(signupValidation, initialState);
+  const [state, formAction, isPending] = useActionState(
+    signupValidation,
+    initialState,
+  );
+
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (formData: FormData) => {
+    setAuthError(null);
+    setIsSubmitting(true);
+
+    try {
+      const name = formData.get("name");
+      const username = formData.get("username");
+      const email = formData.get("email");
+      const password = formData.get("password");
+
+      if (
+        typeof name !== "string" ||
+        typeof username !== "string" ||
+        typeof email !== "string" ||
+        typeof password !== "string"
+      ) {
+        setAuthError("Invalid form data.");
+        return;
+      }
+
+      const response = await PostAuthSignup({
+        name,
+        username,
+        email,
+        password,
+      });
+      console.log(response);
+    } catch (error) {
+      setAuthError("Sign in failed. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
-      <form action={formAction} className="w-[70%] flex flex-col gap-8">
+      <form
+        action={async (formData) => {
+          const validationResult = await signupValidation(
+            initialState,
+            formData,
+          );
+
+          if (
+            validationResult.errors?.name?.length ||
+            validationResult.errors?.username?.length ||
+            validationResult.errors?.email?.length ||
+            validationResult.errors?.password?.length
+          ) {
+            // Let useActionState manage validation errors.
+            await formAction(formData);
+            return;
+          }
+          await handleSubmit(formData);
+        }}
+        className="w-[70%] flex flex-col gap-8"
+      >
         <div className="flex flex-col gap-2">
           <label htmlFor="name">Name</label>
 
-          <input
+          <Input
             type="text"
             name="name"
             id="name"
+            aria-invalid={!!state.errors?.name?.length}
             aria-describedby="input-name"
             className="
                 w-full
@@ -30,20 +94,23 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
-          <div id="input-name" aria-live="polite" aria-atomic="true">
-            {state?.errors?.name && (
-              <p className="text-red-500">{state.errors.name}</p>
-            )}
+          <div id="input-name" aria-live="polite">
+            {state.errors?.name?.map((error) => (
+              <p key={error} className="text-red-500">
+                {error}
+              </p>
+            ))}
           </div>
         </div>
 
         <div className="flex flex-col gap-2">
           <label htmlFor="username">Username</label>
 
-          <input
+          <Input
             type="text"
             name="username"
             id="username"
+            aria-invalid={!!state.errors?.username?.length}
             aria-describedby="input-username"
             className="
                 w-full
@@ -59,17 +126,24 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
-          <div id="input-username" aria-live="polite" aria-atomic="true">
-            {state?.errors?.username && (
-              <p className="text-red-500">{state.errors.username}</p>
-            )}
+          <div id="input-username" aria-live="polite">
+            {state.errors?.username?.map((error) => (
+              <p key={error} className="text-red-500">
+                {error}
+              </p>
+            ))}
           </div>
         </div>
 
+        {(authError || state.message) && (
+          <p role="alert" className="text-red-500">
+            {authError || state.message}
+          </p>
+        )}
+
         <div className="flex flex-col gap-2">
           <label htmlFor="email">Email</label>
-
-          <input
+          <Input
             type="email"
             name="email"
             id="email"
@@ -88,12 +162,20 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
-          <div id="input-email" aria-live="polite" aria-atomic="true">
-            {state?.errors?.email && (
-              <p className="text-red-500">{state.errors.email}</p>
-            )}
+          <div id="input-email" aria-live="polite">
+            {state.errors?.email?.map((error) => (
+              <p key={error} className="text-red-500">
+                {error}
+              </p>
+            ))}
           </div>
         </div>
+
+        {(authError || state.message) && (
+          <p role="alert" className="text-red-500">
+            {authError || state.message}
+          </p>
+        )}
 
         <div className="flex flex-col gap-2">
           <label htmlFor="password">Password</label>
@@ -117,10 +199,12 @@ const SingupForm = () => {
                 focus:border-blue-500
               "
           />
-          <div id="input-password" aria-live="polite" aria-atomic="true">
-            {state?.errors?.password && (
-              <p className="text-red-500">{state.errors.password}</p>
-            )}
+          <div id="input-password" aria-live="polite">
+            {state.errors?.password?.map((error) => (
+              <p key={error} className="text-red-500">
+                {error}
+              </p>
+            ))}
           </div>
         </div>
 

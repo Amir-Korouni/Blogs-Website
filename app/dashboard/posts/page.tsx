@@ -23,8 +23,13 @@ const Page = async ({ searchParams }: Props) => {
   const requestedPage = Number(page) || 1;
 
   const posts = await getSearchPost(query);
+  if (!posts?.isOk) {
+    console.log(posts?.error.message);
+    posts?.error.redirect();
+    return;
+  }
 
-  const filteredPosts = posts.filter((post) => {
+  const filteredPosts = posts.data.filter((post) => {
     const matchesStatus = !status || post.status === status;
     const matchesCategory = !category || post.category === category;
 

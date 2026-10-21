@@ -386,11 +386,15 @@
       "email": "amirkorouni@gmail.com",
       "password": "123456789",
       "id": "FhBkqMoq5w8"
-    },
+    }
+  ],
+  "UsersSignup": [
     {
-      "email": "",
-      "password": "",
-      "id": "lWiwMD2QW_w"
+      "id": "1",
+      "name": "Amir",
+      "username": "AmirKKK",
+      "email": "www.darkghost87@gmail.com",
+      "password": "123456789"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
