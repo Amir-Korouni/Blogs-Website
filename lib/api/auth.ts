@@ -8,7 +8,9 @@ export async function PostAuth(UserData: SignInFormData): Promise<UserData> {
   return response.data;
 }
 
-export async function PostAuthSignup(UserData: SignUpFormData) {
+export async function PostAuthSignup(
+  UserData: SignUpFormData,
+): Promise<UserData> {
   const response = await apiCall.post("/UsersSignup", { ...UserData });
   return response.data;
 }
