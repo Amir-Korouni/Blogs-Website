@@ -1,8 +1,7 @@
-import SigninForm from "@/components/ui/signinForm";
-import ThemeToggle from "@/components/ui/ThemeToggle";
-import Link from "next/link";
+import { GalleryVerticalEnd } from "lucide-react";
+import { LoginForm } from "@/components/login-form";
 import { Metadata } from "next";
-import { signInUp } from "@/config/navigation";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sign in",
@@ -15,79 +14,48 @@ export const metadata: Metadata = {
   },
 };
 
-const Page = () => {
+export default function LoginPage() {
   return (
-    <main className="relative min-h-screen  flex items-center justify-between">
-      <section
-        className="w-[50%] h-[100vh] 
-        max-md:absolute
-        max-md:inset-0
-        max-md:w-full
-        max-md:h-full
-        max-md:-z-10
-        bg-gradient-to-br from-[#020617] via-[#0F172A] to-[#164E63]
-        text-white"
-      >
-        <div className="size-full flex flex-col items-center justify-center gap-10">
-          <h2 className="w-[400px] text-left text-bold text-[clamp(2rem,4vw,4rem)]">
-            DEVLOG
-          </h2>
-          <div className="w-[400px] flex flex-col gap-5 text-[clamp(1rem,2vw,1.5rem)] text-left">
-            <h3>Build your knowledge </h3>
-            <br />
-            <h3>share your ideas and experiences</h3>
-          </div>
-        </div>
-      </section>
-      <section
-        className="
-          w-[50%]
-          max-md:w-[70%]
-          max-lg:w-[80%]
-          max-sm:w-[90%]
-          max-w-3xl
-          h-[75vh]
-          mx-auto
-          flex 
-          flex-col 
-          items-center 
-          justify-center 
-          gap-8 
-          bg-[#0B1120] 
-          p-6 
-          sm:p-8 
-          rounded-lg 
-          shadow-[0_10px_20px_rgba(59,130,246,0.30)]
-          text-white
-        "
-      >
-        <div className="w-[70%] flex items-center justify-between">
-          <div>
-            <h1 className="text-[clamp(2rem,3vw,2.5rem)] font-bold">DEVLOG</h1>
-            <h2 className="text-[clamp(1.8rem,3vw,1.8rem)] mt-2">
-              Welcome back
-            </h2>
-          </div>
-          <div>
-            <ThemeToggle />
-          </div>
-        </div>
-
-        <SigninForm />
-
-        <div className="text-center text-sm sm:text-base">
-          <p>Don't have an account?</p>
-
-          <Link
-            href={signInUp.Signup.href}
-            className="text-blue-500 hover:underline"
-          >
-            {signInUp.Signup.name}
+    <div className="grid min-h-svh lg:grid-cols-2">
+      <div className="flex flex-col gap-4 p-6 md:p-10">
+        <div className="flex justify-center gap-2 md:justify-start">
+          <Link href="/" className="flex items-center gap-2 font-medium">
+            <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              <GalleryVerticalEnd className="size-4" />
+            </div>
+            DEVLOGS
           </Link>
         </div>
-      </section>
-    </main>
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-full max-w-xs">
+            <LoginForm />
+          </div>
+        </div>
+      </div>
+      <div className="relative hidden bg-muted lg:block relative min-h-screen  flex items-center justify-between">
+        <section
+          className="w-[100%] h-[100vh] 
+          max-md:absolute
+          max-md:inset-0
+          max-md:w-full
+          max-md:h-full
+          max-md:-z-10
+          bg-gradient-to-br from-[#020617] via-[#0F172A] to-[#164E63]
+          text-white"
+        >
+          <div className="size-full flex flex-col items-center justify-center gap-10">
+            <h2 className="w-[400px] text-left text-bold text-[clamp(2rem,4vw,4rem)]">
+              DEVLOG
+            </h2>
+            <div className="w-[400px] flex flex-col gap-5 text-[clamp(1rem,2vw,1.5rem)] text-left">
+              <h3>Build your knowledge </h3>
+              <br />
+              <h3>share your ideas and experiences</h3>
+            </div>
+          </div>
+        </section>
+        <section />
+      </div>
+    </div>
   );
-};
-
-export default Page;
+}

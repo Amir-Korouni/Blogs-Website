@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Posts } from "@/Types/post";
+import { Button } from "../ui/button";
 
 export type postData = {
   data: Posts;
@@ -65,9 +66,10 @@ const PostCard = ({ data }: postData) => {
             {data.tags?.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4 px-4 pb-4 border-t">
                 {data.tags?.map((tag) => (
-                  <Link
+                  <Button
                     key={tag.id}
-                    href={`/tags/${tag.slug}`}
+                    variant="ghost"
+                    aria-label="Posts tag"
                     className="
                     rounded-md
                     border border-blue-500/30
@@ -81,7 +83,7 @@ const PostCard = ({ data }: postData) => {
                     "
                   >
                     {tag.name}
-                  </Link>
+                  </Button>
                 ))}
               </div>
             )}
