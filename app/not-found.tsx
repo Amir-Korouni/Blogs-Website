@@ -1,4 +1,4 @@
-import { navLinks, signInUp } from "@/config/navigation";
+import { navLinks, signInUp } from "@/config/navigation.config";
 import Link from "next/link";
 
 const notFound = () => {
@@ -17,14 +17,14 @@ const notFound = () => {
               </p>
               <p className="text-white drop-shadow-[0_0_55px_#a855f7]">
                 You may have mistyped the address or the page may have been
-                moved. You can 
+                moved. You can
                 <span className="w-[50px] text-blue-500 rounded duration-700 hover:bg-purple-500 hover:text-white shadow-purple-500/50">
                   <Link href={signInUp.Signin.href}>
                     {" "}
                     {signInUp.Signin.name}{" "}
                   </Link>
                 </span>
-                or see 
+                or see
                 <span className="w-[50px] text-blue-500 rounded duration-700 hover:bg-purple-500 hover:text-white shadow-purple-500/50">
                   <Link href={navLinks[1].href}> {navLinks[1].name} </Link>
                 </span>

@@ -1,7 +1,7 @@
 import Categories from "@/components/layout/Public/Categories";
 import Hero from "@/components/layout/Public/Hero";
 import LatestSection from "@/components/layout/Public/Latest";
-import { getLatestPosts } from "@/lib/api/posts";
+import { getLatestPosts } from "@/lib/api/posts.service";
 
 export default async function Home() {
   const posts = await getLatestPosts();

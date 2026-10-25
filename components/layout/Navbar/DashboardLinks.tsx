@@ -1,5 +1,5 @@
-import { DashboardNavLinks } from "@/config/dashboardLinks";
-import { navLinks } from "@/config/navigation";
+import { DashboardNavLinks } from "@/config/dashboardLinks.config";
+import { navLinks } from "@/config/navigation.config";
 import { clsx } from "cn";
 import { Link2Icon } from "lucide-react";
 import Link from "next/link";

@@ -12,10 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import ThemeToggle from "./ui/ThemeToggle";
-import { signinState, SigninValidation } from "@/lib/validations/auth";
+import {
+  signinState,
+  SigninValidation,
+} from "@/lib/validations/auth.validation";
 import { useActionState, useState } from "react";
-import { PostAuth } from "@/lib/api/auth";
-import { signInUp } from "@/config/navigation";
+import { PostAuth } from "@/lib/api/auth.service";
+import { signInUp } from "@/config/navigation.config";
 
 export function LoginForm({
   className,

@@ -2,7 +2,7 @@
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { navLinks, signInUp } from "@/config/navigation";
+import { navLinks, signInUp } from "@/config/navigation.config";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 

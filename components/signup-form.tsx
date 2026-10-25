@@ -15,9 +15,12 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { signInUp } from "@/config/navigation";
-import { PostAuthSignup } from "@/lib/api/auth";
-import { signupState, signupValidation } from "@/lib/validations/auth";
+import { signInUp } from "@/config/navigation.config";
+import { PostAuthSignup } from "@/lib/api/auth.service";
+import {
+  signupState,
+  signupValidation,
+} from "@/lib/validations/auth.validation";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 import { startTransition } from "react";

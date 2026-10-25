@@ -1,6 +1,6 @@
 import DashboardTable from "@/components/dashboard/DashboardTable";
 import SearchNew from "@/components/dashboard/SearchNew";
-import { getSearchPost } from "@/lib/api/posts";
+import { getSearchPost } from "@/lib/api/posts.service";
 import { Suspense } from "react";
 import Loading from "./loading";
 

@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Posts } from "@/Types/post";
+import { Posts } from "@/Types/post.type";
 import { Button } from "../ui/button";
 
 export type postData = {

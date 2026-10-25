@@ -1,4 +1,4 @@
-import { Category } from "@/Types/category";
+import { Category } from "@/Types/category.type";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import Link from "next/link";
 

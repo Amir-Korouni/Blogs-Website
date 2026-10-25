@@ -1,7 +1,7 @@
 import ToolBar from "@/components/dashboard/PostToolBar";
 import { Suspense } from "react";
 import Loading from "../loading";
-import { getSearchPost } from "@/lib/api/posts";
+import { getSearchPost } from "@/lib/api/posts.service";
 import PostsTable from "@/components/dashboard/PostsTable";
 import Pagination from "@/components/dashboard/PagePagination";
 import Link from "next/link";

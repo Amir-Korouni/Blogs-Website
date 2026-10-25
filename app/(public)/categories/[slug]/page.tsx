@@ -1,8 +1,8 @@
 import notFound from "@/app/not-found";
 import InfiniteCategory from "@/components/posts/InfiniteCategory";
 import PostCard from "@/components/posts/PostCard";
-import { getPostCategory } from "@/lib/api/categories";
-import { PaginatedPosts } from "@/Types/post";
+import { getPostCategory } from "@/lib/api/categories.service";
+import { PaginatedPosts } from "@/Types/post.type";
 import { Metadata } from "next";
 
 type PageProps = {

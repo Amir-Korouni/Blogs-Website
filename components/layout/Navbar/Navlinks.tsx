@@ -1,5 +1,5 @@
 "use client";
-import { navLinks } from "@/config/navigation";
+import { navLinks } from "@/config/navigation.config";
 import { clsx } from "cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

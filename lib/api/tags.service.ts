@@ -1,5 +1,5 @@
-import { PaginatedPosts } from "@/Types/post";
-import { apiCall } from "./client";
+import { PaginatedPosts } from "@/Types/post.type";
+import { apiCall } from "./client.service";
 
 export async function getPostsByTag(
   slug: string,

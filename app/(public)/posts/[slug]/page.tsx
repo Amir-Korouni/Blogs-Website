@@ -1,6 +1,6 @@
 import PostArticle from "@/components/posts/PostArticle";
-import { getPostDetail } from "@/lib/api/posts";
-import { Posts } from "@/Types/post";
+import { getPostDetail } from "@/lib/api/posts.service";
+import { Posts } from "@/Types/post.type";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

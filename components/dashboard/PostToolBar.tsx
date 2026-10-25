@@ -1,5 +1,5 @@
 "use client";
-import { CategoriesList, Status } from "@/config/dropDownLists";
+import { CategoriesList, Status } from "@/config/dropDownLists.config";
 import { Input } from "../ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useTransition } from "react";

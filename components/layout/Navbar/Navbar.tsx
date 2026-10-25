@@ -3,7 +3,7 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import NavLinks from "./Navlinks";
 import MobileNav from "./MobileNav";
-import { signInUp } from "@/config/navigation";
+import { signInUp } from "@/config/navigation.config";
 import { useScrolled } from "@/hooks/useScrolled";
 
 const Navbar = () => {

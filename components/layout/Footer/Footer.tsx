@@ -1,4 +1,4 @@
-import { navLinks, socialMedias } from "@/config/navigation";
+import { navLinks, socialMedias } from "@/config/navigation.config";
 import Link from "next/link";
 
 const Footer = () => {

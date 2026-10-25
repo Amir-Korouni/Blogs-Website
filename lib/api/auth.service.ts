@@ -1,7 +1,7 @@
-import { SignInFormData } from "@/Types/signin";
-import { apiCall } from "./client";
+import { SignInFormData } from "@/Types/signin.type";
+import { apiCall } from "./client.service";
 import { UserData } from "next-auth/providers/42-school";
-import { SignUpFormData } from "@/Types/signup";
+import { SignUpFormData } from "@/Types/signup.type";
 
 export async function PostAuth(UserData: SignInFormData): Promise<UserData> {
   const response = await apiCall.post("/UsersLogin", { ...UserData });

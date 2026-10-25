@@ -1,5 +1,5 @@
-import { PaginatedPosts, Posts } from "@/Types/post";
-import { apiCall } from "./client";
+import { PaginatedPosts, Posts } from "@/Types/post.type";
+import { apiCall } from "./client.service";
 import { AxiosResponse } from "axios";
 import { ClientType } from "./Types/client.type";
 import { AppHttpError } from "./Error/client.error";

@@ -1,9 +1,9 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getPostPage } from "@/lib/api/posts";
-import { getPostsByTag } from "@/lib/api/tags";
-import { getPostCategory } from "@/lib/api/categories";
+import { getPostPage } from "@/lib/api/posts.service";
+import { getPostsByTag } from "@/lib/api/tags.service";
+import { getPostCategory } from "@/lib/api/categories.service";
 
 /**
  * @version 1.0.0
@@ -49,7 +49,6 @@ export function useInfiniteTags(slug: string) {
     initialPageParam: 1,
 
     getNextPageParam: (lastPage) => {
-
       return lastPage.next ?? undefined;
     },
   });

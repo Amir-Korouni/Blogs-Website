@@ -1,5 +1,5 @@
 import PostCard from "./PostCard";
-import { Posts } from "@/Types/post";
+import { Posts } from "@/Types/post.type";
 
 type PostGridProp = {
   posts: Posts[];

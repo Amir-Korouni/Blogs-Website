@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { navLinks } from "@/config/navigation";
+import { navLinks } from "@/config/navigation.config";
 import Link from "next/link";
 
 const Hero = () => {
