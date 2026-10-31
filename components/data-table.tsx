@@ -477,7 +477,7 @@ export function DataTable({ data: posts }: PostTableType) {
                 <TableRow>
                   <TableHead className="w-[35%]">Title</TableHead>
                   <TableHead>Category</TableHead>
-                  <TableHead>Author</TableHead>
+                  <TableHead>status</TableHead>
                   <TableHead>Created At</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -492,7 +492,7 @@ export function DataTable({ data: posts }: PostTableType) {
 
                     <TableCell>{post.category}</TableCell>
 
-                    <TableCell>{post.author}</TableCell>
+                    <TableCell>{post.status}</TableCell>
 
                     <TableCell className="whitespace-nowrap text-muted-foreground">
                       {post.publishedAt}

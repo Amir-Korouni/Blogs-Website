@@ -36,6 +36,17 @@ export async function getLatestPosts(): Promise<ClientType<Posts[]>> {
   });
 }
 
+export async function getLatestPostsInDashboard(): Promise<ClientType<Posts[]>> {
+  return safeHttpCall(async () => {
+    const response = await apiCall.get("/Posts?_page=1&_per_page=4");
+
+    return {
+      ...response,
+      data: response.data.data,
+    };
+  });
+}
+
 export async function getPostPage(
   page: number = 1,
   limit: number = 3,
