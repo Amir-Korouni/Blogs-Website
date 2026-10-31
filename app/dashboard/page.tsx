@@ -1,38 +1,36 @@
-import DashboardTable from "@/components/dashboard/DashboardTable";
-import SearchNew from "@/components/dashboard/SearchNew";
-import { getSearchPost } from "@/lib/api/posts.service";
-import { Suspense } from "react";
-import Loading from "./loading";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { DataTable } from "@/components/data-table";
+import { SectionCards } from "@/components/section-cards";
 
-type dashboardType = {
-  searchParams: Promise<{ query?: string }>;
-};
+import { getPosts } from "@/lib/api/posts.service";
 
-const Page = async ({ searchParams }: dashboardType) => {
-  const { query } = await searchParams;
-  const posts = await getSearchPost(query);
-  if (!posts?.isOk) {
-    console.log(posts?.error.message);
-    posts?.error.redirect();
-    return;
+export default async function Page() {
+  const result = await getPosts();
+
+  if (!result.isOk) {
+    return (
+      <section className="flex flex-1 items-center justify-center p-6">
+        <p className="text-destructive">
+          Failed to load posts. Please try again later.
+        </p>
+      </section>
+    );
   }
-  return (
-    <>
-      <main className="w-full h-[100vh] border">
-        <section className="size-full flex flex-col justify-start items-center mt-10">
-          <h2 className="w-full text-[clamp(1rem,2.5vw,2rem)] text-left ml-15">
-            Dashboard
-          </h2>
-          <SearchNew />
-          <div className="w-full h-[50vh] flex justify-center items-center">
-            <Suspense fallback={<Loading />}>
-              <DashboardTable posts={posts.data} />
-            </Suspense>
-          </div>
-        </section>
-      </main>
-    </>
-  );
-};
 
-export default Page;
+  const posts = result.data;
+  return (
+    <div className="flex flex-1 flex-col">
+      <div className="@container/main flex flex-1 flex-col gap-2">
+        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          <SectionCards />
+
+          {/* <div className="px-4 lg:px-6">
+            <ChartAreaInteractive />
+          </div> */}
+
+          <DataTable data={posts} />
+        </div>
+      </div>
+    </div>
+  );
+}

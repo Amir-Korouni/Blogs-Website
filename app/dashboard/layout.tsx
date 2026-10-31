@@ -1,6 +1,10 @@
 import DashboardNavbar from "@/components/layout/Navbar/DashboardNavbar";
 import type { Metadata } from "next";
 import "@/app/globals.css";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { CSSProperties } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -22,13 +26,21 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <div className="w-full flex-none md:w-64">
-        <DashboardNavbar />
-      </div>
-      <div className="w-full grow p-6 overflow-hidden md:overflow-y-auto">
-        {children}
-      </div>
-    </div>
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as CSSProperties
+      }
+    >
+      <AppSidebar variant="inset" />
+
+      <SidebarInset>
+        <SiteHeader />
+
+        <main className="flex flex-1 flex-col">{children}</main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

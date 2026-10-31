@@ -29,3 +29,33 @@ export const DashboardNavLinks: linksType[] = [
     icon: UserRound,
   },
 ];
+
+export const dataNav = {
+  navMain: [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: (
+        <House
+        />
+      ),
+    },
+    {
+      title: "Posts",
+      url: "/dashboard/posts",
+      icon: (
+        <FileText
+        />
+      ),
+    },
+    {
+      title: "Profile",
+      url: "/dashboard/profile",
+      icon: (
+        <UserRound
+        />
+      ),
+    },
+    
+  ],
+}
