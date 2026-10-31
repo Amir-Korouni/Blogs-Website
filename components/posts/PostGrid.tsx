@@ -18,7 +18,7 @@ export const PostGrid = ({ posts }: PostGridProp) => {
     <section className="w-full min-h-[80%] bg-transparent flex justify-center items-start">
       <div
         className="
-          w-[80%]
+          w-[100%]
           grid
           grid-cols-1
           md:grid-cols-2
