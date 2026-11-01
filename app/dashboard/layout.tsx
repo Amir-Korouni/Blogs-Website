@@ -1,4 +1,3 @@
-import DashboardNavbar from "@/components/layout/Navbar/DashboardNavbar";
 import type { Metadata } from "next";
 import "@/app/globals.css";
 

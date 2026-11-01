@@ -1,25 +1,25 @@
-import { Bell, LogOut, Settings2Icon, User } from "lucide-react";
+import { Bell, Home, LogOut, Paperclip, Settings2Icon, User } from "lucide-react";
 
 export const navSec = {
   navSecondary: [
     {
       title: "Settings",
-      url: "/dashboard/settings",
+      url: "/admin/settings",
       icon: <Settings2Icon />,
     },
     {
       title: "Account",
-      url: "/dashboard/account",
+      url: "/admin/account",
       icon: <User />,
     },
     {
-      title: "Notification",
-      url: "#",
-      icon: <Bell />,
+      title: "Back to main page",
+      url: "/",
+      icon: <Paperclip/>,
     },
     {
       title: "Logout",
-      url: "/dashboard/logout",
+      url: "/admin/logout",
       icon: <LogOut />,
     },
   ],

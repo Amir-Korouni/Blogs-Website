@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`w-full h-[8vh] duration-300 ${scrolled ? "fixed z-15 top-0 bg-[#111827]/90 shadow-lg backdrop-blur-md" : "relative bg-transparent"}`}
+        className={`w-full h-[100px] duration-300 ${scrolled ? "fixed z-15 top-0 bg-[#111827]/90 shadow-lg backdrop-blur-md" : "relative bg-transparent"}`}
       >
         <section className="hidden lg:flex size-full flex justify-around items-center px-10 bg-[#111827] text-white">
           <section>
@@ -26,7 +26,6 @@ const Navbar = () => {
               >
                 <h3>{signInUp.Signin.name}</h3>
               </Link>
-              {/* <h3><p className="text-sm">User Name</p></h3> */}
               <ThemeToggle />
             </section>
           </section>
