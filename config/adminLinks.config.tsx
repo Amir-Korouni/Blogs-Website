@@ -1,4 +1,4 @@
-import { BookAIcon, ChartArea, FileText, House, Tag } from "lucide-react";
+import { BookAIcon, ChartArea, FileText, House, Tag, User } from "lucide-react";
 
 export const dataNavAdmin = {
   navMain: [
@@ -21,6 +21,11 @@ export const dataNavAdmin = {
       title: "Tags",
       url: "/admin/tags",
       icon: <Tag />,
+    },
+    {
+      title: "Users",
+      url: "/admin/users",
+      icon: <User />,
     },
     {
       title: "Analytics",

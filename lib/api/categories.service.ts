@@ -1,5 +1,6 @@
 import { PaginatedPosts } from "@/Types/post.type";
 import { apiCall } from "./client.service";
+import { AdminCategory } from "@/Types/category.type";
 
 export async function getPostCategory(
   slug: string,

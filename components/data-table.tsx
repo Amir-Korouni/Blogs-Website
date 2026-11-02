@@ -477,8 +477,8 @@ export function DataTable({ data: posts }: PostTableType) {
                 <TableRow>
                   <TableHead className="w-[35%]">Title</TableHead>
                   <TableHead>Category</TableHead>
-                  <TableHead>status</TableHead>
-                  <TableHead>Created At</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Published At</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -494,9 +494,7 @@ export function DataTable({ data: posts }: PostTableType) {
 
                     <TableCell>{post.status}</TableCell>
 
-                    <TableCell className="whitespace-nowrap text-muted-foreground">
-                      {post.publishedAt}
-                    </TableCell>
+                    <TableCell>{post.publishedAt}</TableCell>
 
                     <TableCell>
                       <div className="flex justify-end gap-2">
@@ -754,3 +752,5 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
     </Drawer>
   );
 }
+
+

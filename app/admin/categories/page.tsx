@@ -1,11 +1,11 @@
-import { DataTable } from "@/components/data-table";
+import { DataTableCategory } from "@/components/category/DataTableCategory";
+import { DataTableTags } from "@/components/tags/DataTableTags";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { getPosts } from "@/lib/api/posts.service";
+import { getTagsPosts } from "@/lib/api/posts.service";
 import { Plus } from "lucide-react";
 
-const Page = async() => {
-  const result = await getPosts();
+const Page = async () => {
+  const result = await getTagsPosts();
 
   if (!result.isOk) {
     return (
@@ -21,29 +21,20 @@ const Page = async() => {
   return (
     <>
       <div className="flex flex-1 flex-col">
-        <div className="@container/main flex flex-1 flex-col gap-2">
+        <div className="@container/main flex flex-col gap-2">
           <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
             <h2 className="text-[clamp(1.4rem,4vw,2.4rem)]">Category</h2>
             <Button
               aria-label="create post"
               className="cursor-pointer min-w-[100px] min-h-[45px]"
             >
-              Create Post
+              Create Category
               <Plus />
             </Button>
           </div>
-          <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
-            <Input
-              id="search"
-              name="search"
-              type="search"
-              placeholder="Search blogs ..."
-              aria-describedby="input-search-posts"
-              className="h-[2.5rem]"
-            />
-          </div>
+
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <DataTable data={posts} />
+            <DataTableTags data={posts} />
           </div>
         </div>
       </div>

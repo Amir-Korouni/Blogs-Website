@@ -3,6 +3,8 @@ import { apiCall } from "./client.service";
 import { AxiosResponse } from "axios";
 import { ClientType } from "./Types/client.type";
 import { AppHttpError } from "./Error/client.error";
+import { AdminCategory } from "@/Types/category.type";
+import { Tags } from "@/Types/tags.type";
 
 async function safeHttpCall<T extends object>(
   fn: () => Promise<AxiosResponse<T>>,
@@ -36,7 +38,9 @@ export async function getLatestPosts(): Promise<ClientType<Posts[]>> {
   });
 }
 
-export async function getLatestPostsInDashboard(): Promise<ClientType<Posts[]>> {
+export async function getLatestPostsInDashboard(): Promise<
+  ClientType<Posts[]>
+> {
   return safeHttpCall(async () => {
     const response = await apiCall.get("/Posts?_page=1&_per_page=4");
 
@@ -101,4 +105,17 @@ export async function getSearchPost(
     isOk: true,
     data: filteredPosts,
   };
+}
+
+// Category in Admin Panel
+
+export function getCategoryPosts() {
+  return safeHttpCall(() => apiCall.get<AdminCategory[]>("/Category"));
+}
+
+
+// Tags in Admin Panel 
+
+export function getTagsPosts() {
+  return safeHttpCall(() => apiCall.get<Tags[]>("/Tags"));
 }

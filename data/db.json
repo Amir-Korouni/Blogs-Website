@@ -376,6 +376,61 @@
       ]
     }
   ],
+  "Category": [
+    {
+      "id": "1",
+      "category": "Front End",
+      "slug": "front-end"
+    },
+    {
+      "id": "2",
+      "category": "Back End",
+      "slug": "back-end"
+    },
+    {
+      "id": "3",
+      "category": "AI Engineering",
+      "slug": "ai-engineering"
+    },
+    {
+      "id": "4",
+      "category": "DevOps",
+      "slug": "devops"
+    },
+    {
+      "id": "5",
+      "category": "General",
+      "slug": "general"
+    }
+  ],
+
+  "Tags": [
+    {
+      "id": "1",
+      "tag": "React",
+      "slug": "react"
+    },
+    {
+      "id": "2",
+      "tag": "TypeScript",
+      "slug": "typescript"
+    },
+    {
+      "id": "3",
+      "tag": "Next",
+      "slug": "next"
+    },
+    {
+      "id": "4",
+      "tag": "Nest.js",
+      "slug": "nest"
+    },
+    {
+      "id": "5",
+      "tag": "Express.js",
+      "slug": "express"
+    }
+  ],
   "UsersLogin": [
     {
       "id": "1",
