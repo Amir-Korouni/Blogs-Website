@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { roboto } from "@/font/font";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import { Lora } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const lora = Lora({subsets:['latin'],variable:'--font-serif'});
 
 export const metadata: Metadata = {
   title: {
@@ -61,7 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${roboto.className} h-full antialiased`}
+      className={cn("h-full", "antialiased", roboto.className, "font-serif", lora.variable)}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground)]">

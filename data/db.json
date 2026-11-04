@@ -431,6 +431,28 @@
       "slug": "express"
     }
   ],
+
+  "User": [
+    {
+      "id": "1",
+      "title": "Amir",
+      "email": "www.darkghost87@gmail.com",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "title": "Armin",
+      "email": "www.armin@gmail.com",
+      "role": "user"
+    },
+    {
+      "id": "3",
+      "title": "Admir",
+      "email": "www.darkghost87@gmail.com",
+      "role": "user"
+    }
+  ],
+
   "UsersLogin": [
     {
       "id": "1",

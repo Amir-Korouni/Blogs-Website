@@ -34,7 +34,7 @@ const CategoryCard = ({ category }: Category) => {
           <p
             className="text-[clamp(0.875rem,1.5vw,1.9rem)]
                 leading-relaxed
-                text-zinc-300"
+                text-[var(--forground)]"
           >
             {category}
           </p>

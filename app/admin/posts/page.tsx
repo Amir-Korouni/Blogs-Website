@@ -1,13 +1,24 @@
-import { getPosts } from "@/lib/api/posts.service";
+import { getPostPage, getPosts } from "@/lib/api/posts.service";
 import { DataTable } from "@/components/data-table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import Pagination from "@/components/dashboard/PagePagination";
+import { constants } from "buffer";
 
-const Page = async () => {
-  const result = await getPosts();
+type PageProps = {
+  searchParams: Promise<{ page?: string }>;
+};
 
-  if (!result.isOk) {
+const Page = async ({ searchParams }: PageProps) => {
+  const { page } = await searchParams;
+
+  const limit = 7;
+  const currentPage = Math.max(1, Number(page) || 1);
+
+  const posts = await getPostPage(currentPage, limit);
+
+  if (!posts.isOk) {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
         <p className="text-destructive">
@@ -17,7 +28,7 @@ const Page = async () => {
     );
   }
 
-  const posts = result.data;
+  const { data, pages } = posts.data;
   return (
     <>
       <div className="flex flex-1 flex-col">
@@ -43,8 +54,9 @@ const Page = async () => {
             />
           </div>
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <DataTable data={posts} />
+            <DataTable data={data} />
           </div>
+          <Pagination currentPage={currentPage} totalPages={pages} />
         </div>
       </div>
     </>

@@ -5,6 +5,7 @@ import { ClientType } from "./Types/client.type";
 import { AppHttpError } from "./Error/client.error";
 import { AdminCategory } from "@/Types/category.type";
 import { Tags } from "@/Types/tags.type";
+import { PaginatedUser, User } from "@/Types/user.type";
 
 async function safeHttpCall<T extends object>(
   fn: () => Promise<AxiosResponse<T>>,
@@ -113,9 +114,37 @@ export function getCategoryPosts() {
   return safeHttpCall(() => apiCall.get<AdminCategory[]>("/Category"));
 }
 
-
-// Tags in Admin Panel 
+// Tags in Admin Panel
 
 export function getTagsPosts() {
   return safeHttpCall(() => apiCall.get<Tags[]>("/Tags"));
+}
+
+// Get all users from data base.
+
+export function getUsersInfo() {
+  return safeHttpCall(() => apiCall.get<User[]>("/User"));
+}
+
+
+export async function getUserPage(
+  page: number = 1,
+  limit: number = 3,
+  query?: string,
+  category?: string,
+): Promise<ClientType<PaginatedUser>> {
+  const params = new URLSearchParams({
+    _page: String(page),
+    _per_page: String(limit),
+  });
+
+  if (query?.trim()) {
+    params.set("title:contains", query.trim());
+  }
+
+  if (category) {
+    params.set("category", category);
+  }
+
+  return safeHttpCall(() => apiCall.get(`/User?${params.toString()}`));
 }

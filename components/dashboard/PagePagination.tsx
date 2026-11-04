@@ -38,7 +38,7 @@ const Pagination = ({ currentPage, totalPages }: PaginationTypes) => {
         <section className="flex justify-center items-center">
           <div>
             <Button
-              variant="default"
+              variant="outline"
               disabled={currentPage === 1}
               className="cursor-pointer rounded xl:w-[150px] md:w-[70px] sm:w-[50px]"
               onClick={handlePrevious}
@@ -49,7 +49,7 @@ const Pagination = ({ currentPage, totalPages }: PaginationTypes) => {
           <div>
             {pages.map((page) => (
               <Button
-                variant="default"
+                variant="outline"
                 key={page}
                 className={clsx(
                   "cursor-pointer rounded xl:w-[150px] md:w-[70px] sm:w-[50px] bg-transparent text-foreground",
@@ -63,7 +63,7 @@ const Pagination = ({ currentPage, totalPages }: PaginationTypes) => {
           </div>
           <div>
             <Button
-              variant="default"
+              variant="outline"
               disabled={currentPage === totalPages}
               className="cursor-pointer rounded xl:w-[150px] md:w-[70px] sm:w-[50px]"
               onClick={handleNext}

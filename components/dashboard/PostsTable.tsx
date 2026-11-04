@@ -8,24 +8,26 @@ import {
 } from "@/components/ui/table";
 
 import { Button } from "@/components/ui/button";
-
 import { Pencil, Trash2 } from "lucide-react";
 import { Posts } from "@/Types/post.type";
 
-type PostTableType = {
+type PostTableProps = {
   posts: Posts[];
 };
 
-export default async function PostsTable({ posts }: PostTableType) {
+export default function PostsTable({ posts }: PostTableProps) {
   if (posts.length === 0) {
     return (
-      <section className="w-full h-full flex justify-center items-center">
-        <p className="text-lg text-muted-foreground">No posts found.</p>
+      <section className="flex h-full w-full items-center justify-center">
+        <p className="text-lg text-muted-foreground">
+          No posts found.
+        </p>
       </section>
     );
   }
+
   return (
-    <div className="w-full h-full overflow-hidden rounded-lg border ">
+    <div className="w-full overflow-hidden rounded-lg border">
       <div className="w-full overflow-x-auto">
         <Table className="min-w-[700px]">
           <TableHeader>
@@ -33,7 +35,7 @@ export default async function PostsTable({ posts }: PostTableType) {
               <TableHead className="w-[35%]">Title</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Created At</TableHead>
+              <TableHead>Published At</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>

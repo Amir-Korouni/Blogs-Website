@@ -14,6 +14,7 @@ import { getLatestPostsInDashboard } from "@/lib/api/posts.service";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
+import Loading from "./loading";
 
 const Page = async () => {
   const posts = await getLatestPostsInDashboard();
@@ -168,7 +169,7 @@ const Page = async () => {
           </p>
 
           <div className="w-full min-w-0">
-            <Suspense>
+            <Suspense fallback={<Loading />}>
               <PostGrid posts={posts.data} />
             </Suspense>
           </div>

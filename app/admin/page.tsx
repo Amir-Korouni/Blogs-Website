@@ -1,10 +1,21 @@
 import { SectionCards } from "@/components/section-cards";
 import { DataTable } from "@/components/data-table";
-import { getPosts } from "@/lib/api/posts.service";
+import { getPostPage } from "@/lib/api/posts.service";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import Pagination from "@/components/dashboard/PagePagination";
 
-const Page = async () => {
-  const posts = await getPosts();
+type PageProps = {
+  searchParams: Promise<{ page?: string }>;
+};
+
+const Page = async ({ searchParams }: PageProps) => {
+  const { page } = await searchParams;
+
+  const limit = 7;
+  const currentPage = Math.max(1, Number(page) || 1);
+
+  const posts = await getPostPage(currentPage, limit);
+
   if (!posts.isOk) {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
@@ -14,6 +25,8 @@ const Page = async () => {
       </section>
     );
   }
+
+  const { data, pages } = posts.data;
   return (
     <>
       <div className="flex flex-1 flex-col">
@@ -23,8 +36,9 @@ const Page = async () => {
             <div className="px-4 lg:px-6">
               <ChartAreaInteractive />
             </div>
-            <DataTable data={posts.data} />
+            <DataTable data={data} />
           </div>
+          <Pagination currentPage={currentPage} totalPages={pages} />
         </div>
       </div>
     </>

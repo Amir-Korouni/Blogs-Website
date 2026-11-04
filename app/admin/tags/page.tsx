@@ -1,10 +1,12 @@
-import { DataTableCategory } from "@/components/category/DataTableCategory";
+import { DataTableTags } from "@/components/tags/DataTableTags";
 import { Button } from "@/components/ui/button";
-import { getCategoryPosts, getPosts } from "@/lib/api/posts.service";
+import { getCategoryPosts, getPosts, getTagsPosts } from "@/lib/api/posts.service";
 import { Plus } from "lucide-react";
+import { Suspense } from "react";
+import Loading from "../loading";
 
-const Page = async() => {
-  const result = await getCategoryPosts();
+const Page = async () => {
+  const result = await getTagsPosts();
 
   if (!result.isOk) {
     return (
@@ -33,7 +35,9 @@ const Page = async() => {
           </div>
 
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <DataTableCategory data={posts} />
+            <Suspense fallback={<Loading />}>
+              <DataTableTags data={posts} />
+            </Suspense>
           </div>
         </div>
       </div>

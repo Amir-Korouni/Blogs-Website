@@ -1,3 +1,4 @@
+import { AxiosResponseHeaders, RawAxiosHeaders } from "axios";
 import { AppHttpError } from "../Error/client.error";
 
 export type ClientType<T extends object = any> =

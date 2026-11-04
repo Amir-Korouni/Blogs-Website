@@ -16,7 +16,7 @@ const CategoryCardPage = ({ category, quantity }: categoryProps) => {
             min-h-[250px]
 
             bg-card
-            text-card-foreground
+            text-(var-[--foreground])
             rounded-[20px]
             border
             border-[#334155]
@@ -36,7 +36,7 @@ const CategoryCardPage = ({ category, quantity }: categoryProps) => {
           href={`categories/${category.slug}`}
           className="w-full text-[clamp(0.875rem,1.5vw,1.9rem)]
                 leading-relaxed
-                text-zinc-300"
+                text-(var-[--card-foreground])"
         >
           <CardContent className="w-full h-[8rem] text-center">
             {category.category}

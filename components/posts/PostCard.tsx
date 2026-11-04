@@ -19,14 +19,13 @@ const PostCard = ({ data }: postData) => {
       <Card
         className="
             max-w-[370px]
-            min-h-[250px]
-
+            min-h-[300px]
             bg-card
-            text-card-foreground
+            
+            text-[var(--foreground)]
             rounded
             border
             border-[#334155]
-
             transition-transform
             duration-300
             hover:-translate-y-1
@@ -58,7 +57,7 @@ const PostCard = ({ data }: postData) => {
             <p
               className="text-[clamp(0.875rem,1.5vw,1rem)]
                 leading-relaxed
-                text-zinc-300"
+                text-[var(--forground)]"
             >
               {data?.excerpt}
             </p>
@@ -72,7 +71,7 @@ const PostCard = ({ data }: postData) => {
                     aria-label="Posts tag"
                     className="
                     rounded-md
-                    border border-blue-500/30
+                    border border-blue-500
                     bg-blue-500/10
                     px-2 py-1
                     text-xs
@@ -97,7 +96,7 @@ const PostCard = ({ data }: postData) => {
             justify-between
             items-center
             bg-[#3B82F6]
-            text-zinc-900
+            text-[var(--forground)]
             px-4
             py-3"
           >
