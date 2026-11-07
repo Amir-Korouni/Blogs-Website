@@ -10,6 +10,6 @@ export default defineConfig({
       schemas: "./lib/api/generated/models",
       client: "react-query",
       httpClient: "axios",
-    },
+    }
   },
 });
