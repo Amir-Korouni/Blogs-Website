@@ -18,10 +18,11 @@ const PostCard = ({ data }: postData) => {
     <>
       <Card
         className="
+             flex
+            flex-col
             max-w-[370px]
             min-h-[300px]
             bg-card
-            
             text-[var(--foreground)]
             rounded
             border
@@ -31,10 +32,7 @@ const PostCard = ({ data }: postData) => {
             hover:-translate-y-1
             "
       >
-        <article
-          key={data?.id}
-          className="size-full flex flex-col justify-between"
-        >
+        <article key={data?.id} className="size-full flex flex-1 flex-col">
           <CardHeader>
             <CardTitle className="flex flex-col gap-2">
               <Link href={`/categories/${data?.categorySlug}`}>
@@ -98,7 +96,8 @@ const PostCard = ({ data }: postData) => {
             bg-[#3B82F6]
             text-[var(--forground)]
             px-4
-            py-3"
+            py-3
+            mt-auto"
           >
             <p className="text-[clamp(0.8rem,0.5vw,0.9rem)]">{data.author}</p>
             <time

@@ -20,7 +20,7 @@ import { PostAuthSignup } from "@/api/auth.service";
 import {
   signupState,
   signupValidation,
-} from "@lib/validations/auth.validation";
+} from "@/lib/validations/auth.validation";
 import Link from "next/link";
 import { useActionState, useState } from "react";
 import { startTransition } from "react";

@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import { Tags } from "@/Types/tags.type";
+import Link from "next/link";
 
 type TagsTableProps = {
   data: Tags[];

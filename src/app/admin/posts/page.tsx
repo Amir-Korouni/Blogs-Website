@@ -36,13 +36,15 @@ const Page = async ({ searchParams }: PageProps) => {
           <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
             <h2 className="text-[clamp(1.4rem,4vw,2.4rem)]">Posts</h2>
             <Link href="/create">
-              <Button
-                aria-label="create post"
-                className="cursor-pointer min-w-[100px] min-h-[45px]"
-              >
-                Create Post
-                <Plus />
-              </Button>
+              <Link href="/admin/posts/create">
+                <Button
+                  aria-label="create post"
+                  className="cursor-pointer min-w-[100px] min-h-[45px]"
+                >
+                  Create Post
+                  <Plus />
+                </Button>
+              </Link>
             </Link>
           </div>
           <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">

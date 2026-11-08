@@ -11,6 +11,7 @@ import {
 import { Posts } from "@/Types/post.type";
 
 import { Pencil, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 type PostTableProps = {
   data: Posts[];
@@ -49,13 +50,15 @@ export function DataTable({ data: posts }: PostTableProps) {
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      aria-label={`Edit ${post.title}`}
-                    >
-                      <Pencil className="size-4" />
-                    </Button>
+                    <Link href={post.id}>
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        aria-label={`Edit ${post.title}`}
+                      >
+                        <Pencil className="size-4" />
+                      </Button>
+                    </Link>
 
                     <Button
                       variant="outline"

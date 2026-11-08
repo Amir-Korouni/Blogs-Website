@@ -1,4 +1,5 @@
 import { AxiosError, isAxiosError } from "axios";
+import { redirect } from "next/navigation";
 
 export class AppHttpError extends Error {
   private readonly _originalError: Error | AxiosError;
@@ -36,6 +37,7 @@ export class AppHttpError extends Error {
   }
 
   redirect() {
-    window.location.href = `/${this.statusCode}?source=${window.location.href}`;
+    // window.location.href = `/${this.statusCode}?source=${window.location.href}`;
+    redirect(`/${this.statusCode}?source=${window.location.href}`);
   }
 }

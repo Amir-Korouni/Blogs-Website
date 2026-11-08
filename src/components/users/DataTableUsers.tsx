@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import { User } from "@/Types/user.type";
+import Link from "next/link";
 
 type UserTableProps = {
   users: User[];
@@ -53,13 +54,15 @@ export default function DataTableUsers({ users }: UserTableProps) {
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Edit ${user.title}`}
-                    >
-                      <Pencil className="size-4" />
-                    </Button>
+                    <Link href={`/admin/users/${user.id}/page`}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Edit ${user.title}`}
+                      >
+                        <Pencil className="size-4" />
+                      </Button>
+                    </Link>
 
                     <Button
                       variant="ghost"

@@ -1,9 +1,7 @@
 import Pagination from "@/components/dashboard/PagePagination";
-import { Button } from "@/components/ui/button";
 import DataTableUsers from "@/components/users/DataTableUsers";
 import UeserSectionCard from "@/components/users/UserSectionCards";
 import { getUserPage } from "@/api/posts.service";
-import { Plus } from "lucide-react";
 import { Suspense } from "react";
 
 type PageProp = {
@@ -34,13 +32,6 @@ const Page = async ({ searchParams }: PageProp) => {
       <div className="@container/main flex flex-col justify-center items-center gap-2">
         <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
           <h2 className="text-[clamp(1.4rem,4vw,2.4rem)]">User Managment</h2>
-          <Button
-            aria-label="create post"
-            className="cursor-pointer min-w-[150px] min-h-[55px]"
-          >
-            Add User
-            <Plus />
-          </Button>
         </div>
         <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
           <h3 className="text-[clamp(1.4rem,4vw,2rem)]">

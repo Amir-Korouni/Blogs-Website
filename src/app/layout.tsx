@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "swagger-ui-react/swagger-ui.css";
 import { roboto } from "@/font/font";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { Lora } from "next/font/google";

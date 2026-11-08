@@ -1,10 +1,12 @@
 import { DataTableTags } from "@/components/tags/DataTableTags";
 import { Button } from "@/components/ui/button";
-import { getTagsPosts } from "@/api/posts.service";
+import { getCategoryPosts, getTagsPosts } from "@/api/posts.service";
 import { Plus } from "lucide-react";
+import DataTableCategory from "@/components/category/DataTableCategory";
+import Link from "next/link";
 
 const Page = async () => {
-  const result = await getTagsPosts();
+  const result = await getCategoryPosts();
 
   if (!result.isOk) {
     return (
@@ -23,17 +25,19 @@ const Page = async () => {
         <div className="@container/main flex flex-col gap-2">
           <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
             <h2 className="text-[clamp(1.4rem,4vw,2.4rem)]">Category</h2>
-            <Button
-              aria-label="create post"
-              className="cursor-pointer min-w-[100px] min-h-[45px]"
-            >
-              Create Category
-              <Plus />
-            </Button>
+            <Link href="/admin/categories/create">
+              <Button
+                aria-label="create post"
+                className="cursor-pointer min-w-[100px] min-h-[45px]"
+              >
+                Create Category
+                <Plus />
+              </Button>
+            </Link>
           </div>
 
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <DataTableTags data={posts} />
+            <DataTableCategory categories={posts} />
           </div>
         </div>
       </div>
