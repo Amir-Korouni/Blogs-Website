@@ -1,7 +1,7 @@
 import Pagination from "@/components/dashboard/PagePagination";
 import DataTableUsers from "@/components/users/DataTableUsers";
 import UeserSectionCard from "@/components/users/UserSectionCards";
-import { getUserPage } from "@/api/posts.service";
+import { getUserPage } from "@/app/api/posts.service";
 import { Suspense } from "react";
 
 type PageProp = {

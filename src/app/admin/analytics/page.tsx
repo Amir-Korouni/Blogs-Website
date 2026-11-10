@@ -4,7 +4,7 @@ import { ChartBarHorizontal } from "@/components/analytics/CategoryChart";
 import { OverviewCardAnalytics } from "@/components/analytics/OverviewCards";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { TopPostsTable } from "@/components/analytics/TopPostsTable";
-import { getLatestPosts } from "@/api/posts.service";
+import { getLatestPosts } from "@/app/api/posts.service";
 import RecentActivity from "@/components/analytics/RecentActivity";
 
 const Page = async () => {

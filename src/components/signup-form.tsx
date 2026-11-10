@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { signInUp } from "@/config/navigation.config";
-import { PostAuthSignup } from "@/api/auth.service";
+import { PostAuthSignup } from "@/app/api/auth.service";
 import {
   signupState,
   signupValidation,

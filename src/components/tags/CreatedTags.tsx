@@ -58,8 +58,8 @@ export function CreatedTags() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Edit User</CardTitle>
-        <CardDescription>Edit User with Id.</CardDescription>
+        <CardTitle>Edit Tags</CardTitle>
+        <CardDescription>Edit tags with Id.</CardDescription>
       </CardHeader>
       <CardContent>
         <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
@@ -70,13 +70,13 @@ export function CreatedTags() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-title">
-                    first name
+                    Tag
                   </FieldLabel>
                   <Input
                     {...field}
                     id="form-rhf-demo-title"
                     aria-invalid={fieldState.invalid}
-                    placeholder="First name ...."
+                    placeholder="Tag ...."
                     autoComplete="off"
                   />
                   {fieldState.invalid && (
@@ -94,7 +94,7 @@ export function CreatedTags() {
             Reset
           </Button>
           <Button type="submit" form="form-rhf-demo">
-            update user
+            update tag
           </Button>
         </Field>
       </CardFooter>

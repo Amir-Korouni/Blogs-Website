@@ -1,5 +1,5 @@
 import PostArticle from "@/components/posts/PostArticle";
-import { getPostDetail } from "@/api/posts.service";
+import { getPostDetail } from "@/app/api/posts.service";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

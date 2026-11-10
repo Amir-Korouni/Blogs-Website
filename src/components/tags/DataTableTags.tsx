@@ -55,13 +55,15 @@ export function DataTableTags({ data: tags }: TagsTableProps) {
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Edit ${tag.tag}`}
-                    >
-                      <Pencil className="size-4" />
-                    </Button>
+                    <Link href={"/admin/tags/id/edit"}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Edit ${tag.tag}`}
+                      >
+                        <Pencil className="size-4" />
+                      </Button>
+                    </Link>
 
                     <Button
                       variant="ghost"

@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from "../ui/input-group";
-import { FieldDescription } from "@base-ui/react";
 
 const formSchema = z.object({
   name: z

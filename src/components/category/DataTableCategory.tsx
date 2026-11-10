@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import { AdminCategory } from "@/Types/category.type";
+import Link from "next/link";
 
 type CategoryTableProps = {
   categories: AdminCategory[];
@@ -49,13 +50,15 @@ export default function DataTableCategory({ categories }: CategoryTableProps) {
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Edit ${category.category}`}
-                    >
-                      <Pencil className="size-4" />
-                    </Button>
+                    <Link href={"/admin/categories/id/edit"}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label={`Edit ${category.category}`}
+                      >
+                        <Pencil className="size-4" />
+                      </Button>
+                    </Link>
 
                     <Button
                       variant="ghost"

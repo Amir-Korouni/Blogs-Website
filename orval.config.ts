@@ -3,13 +3,15 @@ import { defineConfig } from "orval";
 export default defineConfig({
   devlog: {
     input: {
-      target: "./swagger/openapi.json",
+      target: "./public/swagger/openapi.json",
     },
     output: {
-      target: "./src/lib/api/generated/api.ts",
-      schemas: "./src/lib/api/generated/models",
+      target: "./src/api/generated/endpoints.ts",
+      schemas: "./src/api/generated/models",
+      mode: "tags-split",
       client: "react-query",
       httpClient: "axios",
-    }
+      indexFiles: true,
+    },
   },
 });

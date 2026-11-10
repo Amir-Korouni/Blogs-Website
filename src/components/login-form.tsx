@@ -17,7 +17,7 @@ import {
   SigninValidation,
 } from "@/lib/validations/auth.validation";
 import { useActionState, useState } from "react";
-import { PostAuth } from "@/api/auth.service";
+import { PostAuth } from "@/app/api/auth.service";
 import { signInUp } from "@/config/navigation.config";
 
 export function LoginForm({

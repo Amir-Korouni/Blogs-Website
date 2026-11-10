@@ -1,6 +1,6 @@
 import { SectionCards } from "@/components/section-cards";
 import { DataTable } from "@/components/data-table";
-import { getPostPage } from "@/api/posts.service";
+import { getPostPage } from "@/app/api/posts.service";
 import Pagination from "@/components/dashboard/PagePagination";
 
 type PageProps = {

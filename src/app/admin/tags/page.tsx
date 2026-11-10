@@ -1,6 +1,6 @@
 import { DataTableTags } from "@/components/tags/DataTableTags";
 import { Button } from "@/components/ui/button";
-import { getTagsPosts } from "@/api/posts.service";
+import { getTagsPosts } from "@/app/api/posts.service";
 import { Plus } from "lucide-react";
 import { Suspense } from "react";
 import Loading from "../loading";

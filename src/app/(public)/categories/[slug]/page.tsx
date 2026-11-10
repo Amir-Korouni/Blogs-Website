@@ -1,6 +1,6 @@
 import notFound from "@/app/not-found";
 import InfiniteCategory from "@/components/posts/InfiniteCategory";
-import { getPostCategory } from "@/api/categories.service";
+import { getPostCategory } from "@/app/api/categories.service";
 import { PaginatedPosts } from "@/Types/post.type";
 import { Metadata } from "next";
 

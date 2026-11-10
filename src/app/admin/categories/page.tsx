@@ -1,6 +1,5 @@
-import { DataTableTags } from "@/components/tags/DataTableTags";
 import { Button } from "@/components/ui/button";
-import { getCategoryPosts, getTagsPosts } from "@/api/posts.service";
+import { getCategoryPosts } from "@/app/api/posts.service";
 import { Plus } from "lucide-react";
 import DataTableCategory from "@/components/category/DataTableCategory";
 import Link from "next/link";

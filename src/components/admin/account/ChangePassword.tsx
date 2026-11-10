@@ -74,19 +74,19 @@ export function ChangePass() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="form-rhf-ChangePass" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="Current_Password"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
+                  <FieldLabel htmlFor="form-rhf-ChangePass-title">
                     Current Password
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-title"
+                    id="form-rhf-ChangePass-title"
                     aria-invalid={fieldState.invalid}
                     placeholder="your Current Password ...."
                     autoComplete="off"
@@ -103,12 +103,12 @@ export function ChangePass() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
+                  <FieldLabel htmlFor="form-rhf-ChangePass-title">
                     New Password
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-title"
+                    id="form-rhf-ChangePass-title"
                     aria-invalid={fieldState.invalid}
                     placeholder="New Password ...."
                     autoComplete="off"
@@ -125,12 +125,12 @@ export function ChangePass() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
+                  <FieldLabel htmlFor="form-rhf-ChangePass-title">
                     Confirm Password
                   </FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-title"
+                    id="form-rhf-ChangePass-title"
                     aria-invalid={fieldState.invalid}
                     placeholder="Confirm Password ...."
                     autoComplete="off"
@@ -149,7 +149,7 @@ export function ChangePass() {
           <Button type="button" variant="outline" onClick={() => form.reset()}>
             Reset
           </Button>
-          <Button type="submit" form="form-rhf-demo">
+          <Button type="submit" form="form-rhf-ChangePass">
             Update Password
           </Button>
         </Field>

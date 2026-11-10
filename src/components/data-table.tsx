@@ -50,7 +50,7 @@ export function DataTable({ data: posts }: PostTableProps) {
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
-                    <Link href={post.id}>
+                    <Link href={`/admin/posts/${post.id}/edit`}>
                       <Button
                         variant="outline"
                         size="icon"

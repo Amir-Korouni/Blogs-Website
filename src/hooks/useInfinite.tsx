@@ -1,9 +1,9 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getPostPage } from "@/api/posts.service";
-import { getPostsByTag } from "@/api/tags.service";
-import { getPostCategory } from "@/api/categories.service";
+import { getPostPage } from "@/app/api/posts.service";
+import { getPostsByTag } from "@/app/api/tags.service";
+import { getPostCategory } from "@/app/api/categories.service";
 
 /**
  * @version 1.0.0
