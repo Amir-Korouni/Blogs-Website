@@ -6,8 +6,8 @@ export default defineConfig({
       target: "./public/swagger/openapi.json",
     },
     output: {
-      target: "./src/api/generated/endpoints.ts",
-      schemas: "./src/api/generated/models",
+      target: "./src/app/api/generated/endpoints.ts",
+      schemas: "./src/app/api/generated/models",
       mode: "tags-split",
       client: "react-query",
       httpClient: "axios",
