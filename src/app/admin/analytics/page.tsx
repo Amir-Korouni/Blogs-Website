@@ -27,19 +27,19 @@ const Page = async () => {
           <div>
             <ChartAreaInteractive />
           </div>
-          <div className="w-full flex justify-between items-center gap-5 border p-5">
-            <div className="w-[50%]">
+          <div className="w-full m-auto flex justify-center items-center gap-8 flex-wrap">
+            <div className="2xl:w-[700px] xl:w-[400px] md:w-[400px] max-sm:w-[500px] min-h-[250px]">
               <ChartPieLabelList />
             </div>
-            <div className="w-[50%]">
+            <div className="2xl:w-[700px] xl:w-[400px] md:w-[400px] max-sm:w-[500px] min-h-[250px]">
               <ChartBarHorizontal />
             </div>
           </div>
-          <div className="w-full flex justify-between items-center gap-5  border p-5">
-            <div className="w-[50%]">
+          <div className="w-full m-auto flex justify-center items-center gap-8 flex-wrap">
+            <div className="2xl:w-[700px] xl:w-[400px] md:w-[400px] max-sm:w-[500px] min-h-[250px]">
               <TopPostsTable posts={result} />
             </div>
-            <div className="w-[50%]">
+            <div className="2xl:w-[700px] xl:w-[400px] md:w-[400px] max-sm:w-[500px] min-h-[250px]">
               <RecentActivity />
             </div>
           </div>

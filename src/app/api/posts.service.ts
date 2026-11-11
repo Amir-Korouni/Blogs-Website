@@ -57,6 +57,7 @@ export async function getPostPage(
   limit: number = 3,
   query?: string,
   category?: string,
+  status?: string,
 ): Promise<ClientType<PaginatedPosts>> {
   const params = new URLSearchParams({
     _page: String(page),
@@ -69,6 +70,10 @@ export async function getPostPage(
 
   if (category) {
     params.set("category", category);
+  }
+
+  if (status) {
+    params.set("status", status);
   }
 
   return safeHttpCall(() => apiCall.get(`/Posts?${params.toString()}`));
@@ -125,7 +130,6 @@ export function getTagsPosts() {
 export function getUsersInfo() {
   return safeHttpCall(() => apiCall.get<User[]>("/User"));
 }
-
 
 export async function getUserPage(
   page: number = 1,

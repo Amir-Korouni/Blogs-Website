@@ -1,18 +1,26 @@
 "use client";
-import { CategoriesList } from "@/config/dropDownLists.config";
-import { Input } from "@/components/ui/input";
+import { CategoriesList, Status } from "@/config/dropDownLists.config";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { useRef, useTransition } from "react";
+import { useTransition } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Input } from "../ui/input";
 
-const Search = () => {
+type searchType = {
+  ifAdmin?: boolean;
+};
+
+const Search = ({ ifAdmin }: searchType) => {
   const searchParam = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-
-  const initialQuery = searchParam.get("query")?.toString() ?? "";
-  const initialQueryRef = useRef(initialQuery);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParam);
@@ -29,12 +37,24 @@ const Search = () => {
     });
   }, 500);
 
-  const handleFilter = (term: string) => {
+  const handleFilter = (term: string | null) => {
     const param = new URLSearchParams(searchParam);
     if (term === "all") {
       param.delete("category");
     } else {
-      param.set("category", term);
+      param.set("category", term!);
+    }
+
+    const queryString = param.toString();
+    router.push(queryString ? `${pathName}?${queryString}` : pathName);
+  };
+
+  const handleFilterState = (term: string | null) => {
+    const param = new URLSearchParams(searchParam);
+    if (term === "all") {
+      param.delete("status");
+    } else {
+      param.set("status", term!);
     }
 
     const queryString = param.toString();
@@ -42,8 +62,8 @@ const Search = () => {
   };
   return (
     <>
-      <div className="w-[50%] flex justify-between">
-        <div>
+      <div className="w-[100%] flex justify-between">
+        <div className="w-[40%]">
           <label htmlFor="search">Search Posts</label>
           <Input
             type="search"
@@ -74,38 +94,66 @@ const Search = () => {
             </p>
           )}
         </div>
-        <div>
-          <label htmlFor="search">Filter Posts</label>
-          <select
-            name="select"
-            id="select"
-            aria-describedby="select-search"
-            className="
-                w-full
-                h-10
-                rounded
-                border
-                border-gray-300
-                px-3
-                py-2
-                focus:outline-none
-                focus:ring-2
-                focus:ring-blue-500
-                focus:border-blue-500
-              "
-            value={searchParam.get("category") ?? "all"}
-            onChange={(event) => {
-              handleFilter(event.target.value);
-            }}
-          >
-            <option value="all">All</option>
-            {CategoriesList.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
+        {!ifAdmin && (
+          <div className="w-[40%]">
+            <label htmlFor="search">Filter Posts</label>
+            <Select
+              value={searchParam.get("category") ?? "all"}
+              onValueChange={(value) => {
+                handleFilter(value);
+              }}
+            >
+              <SelectTrigger
+                id="select"
+                name="select"
+                aria-describedby="select-search"
+                className="w-full h-10"
+              >
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+
+                {CategoriesList.map((category) => (
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+        {ifAdmin && (
+          <div className="w-[40%]">
+            <label htmlFor="search">Filter Posts</label>
+            <Select
+              value={searchParam.get("category") ?? "all"}
+              onValueChange={(value) => {
+                handleFilterState(value );
+              }}
+            >
+              <SelectTrigger
+                id="select"
+                name="select"
+                aria-describedby="select-search"
+                className="w-full h-10"
+              >
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+
+                {Status.map((status) => (
+                  <SelectItem key={status} value={status}>
+                    {status}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
       </div>
     </>
   );

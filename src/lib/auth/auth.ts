@@ -27,7 +27,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
         const { email, password } = parsedCredentials.data;
-        
+
         return null;
       },
     }),

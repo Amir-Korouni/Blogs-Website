@@ -40,4 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/swagger/openapi.json
+/public/swagger/openapi.json

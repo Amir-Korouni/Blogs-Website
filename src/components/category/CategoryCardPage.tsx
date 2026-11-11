@@ -42,7 +42,7 @@ const CategoryCardPage = ({ category, quantity }: categoryProps) => {
             {category.category}
           </CardContent>
         </Link>
-        <CardFooter className="w-full h-[4rem] bg-[#152f59] flex justify-center items-center ">
+        <CardFooter className="w-full h-[4rem] bg-[var(--accent)] flex justify-center items-center ">
           <Link
             href={`categories/${category.slug}`}
             className="w-full text-center text-[clamp(0.875rem,1vw,1.9rem)]

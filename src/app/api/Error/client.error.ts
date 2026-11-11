@@ -38,6 +38,8 @@ export class AppHttpError extends Error {
 
   redirect() {
     // window.location.href = `/${this.statusCode}?source=${window.location.href}`;
+    console.log("Status Code:", this.statusCode);
+    console.log("Error:", this);
     redirect(`/${this.statusCode}?source=${window.location.href}`);
   }
 }

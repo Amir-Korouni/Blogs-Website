@@ -18,7 +18,7 @@ const Page = () => {
               Explore articles and experiences from developers around the world.
             </p>
           </div>
-          <div className="w-full mt-10 flex flex-col justify-center items-center text-foreground border-t border-t-px">
+          <div className="w-[60%] mt-10 flex flex-col justify-center items-center text-foreground border-t border-t-px">
             <h2 className="mt-5 text-[clamp(1.8rem,4vw,3rem)]">
               Search | Filter
             </h2>

@@ -73,7 +73,7 @@ const PostCard = ({ data }: postData) => {
                     bg-blue-500/10
                     px-2 py-1
                     text-xs
-                    text-blue-400
+                    text-blue-700
                     transition-colors
                     hover:bg-blue-500/20
                     hover:text-blue-300

@@ -1,22 +1,27 @@
 import { getPostPage } from "@/app/api/posts.service";
 import { DataTable } from "@/components/data-table";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Pagination from "@/components/dashboard/PagePagination";
 import Link from "next/link";
+import Search from "@/components/posts/Search";
 
 type PageProps = {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{
+    page?: string;
+    query?: string;
+    category?: string;
+    status?: string;
+  }>;
 };
 
 const Page = async ({ searchParams }: PageProps) => {
-  const { page } = await searchParams;
+  const { page, query, category, status } = await searchParams;
 
   const limit = 7;
   const currentPage = Math.max(1, Number(page) || 1);
 
-  const posts = await getPostPage(currentPage, limit);
+  const posts = await getPostPage(currentPage, limit, query, category, status);
 
   if (!posts.isOk) {
     return (
@@ -46,14 +51,7 @@ const Page = async ({ searchParams }: PageProps) => {
             </Link>
           </div>
           <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
-            <Input
-              id="search"
-              name="search"
-              type="search"
-              placeholder="Search blogs ..."
-              aria-describedby="input-search-posts"
-              className="h-[2.5rem]"
-            />
+            <Search ifAdmin={true} />
           </div>
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
             <DataTable data={data} />

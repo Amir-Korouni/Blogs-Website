@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <>
       <section className="w-full h-[100vh] bg-background">
-        <div className="w-[50%] md:w-[60%] sm:w-[80%] h-full m-auto flex flex-col gap-15 justify-center items-center">
+        <div className="w-[50%] md:w-[60%] xl:w-[75%] max-sm:w-[85%] h-full m-auto flex flex-col gap-15 justify-center items-center">
           <h2 className="w-full text-left text-[clamp(2.5rem,7vw,4rem)]">
             DEVLOG
           </h2>
@@ -29,7 +29,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 aria-label="Explore more Posts"
-                className="cursor-pointer rounded h-[50px] bg-[#3B82F6] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[100px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
+                className="cursor-pointer rounded h-[50px] bg-[var(--primary)] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[120px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
               >
                 Explore more {navLinks[1].name}
               </Button>
@@ -38,7 +38,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 aria-label="Start writing post"
-                className="cursor-pointer rounded h-[50px] bg-[#3B82F6] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[100px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
+                className="cursor-pointer rounded h-[50px] bg-[var(--primary)] p-6 max-md:w-[120px] md:h-[40px] max-sm:w-[100px] max-sm:h-[40px] text-[clamp(0.6rem,1.2vw,1.8rem)]"
               >
                 Start Writing
               </Button>

@@ -56,7 +56,7 @@ const chartConfig = {
 
 export function ChartPieLabelList() {
   return (
-    <Card className="flex flex-col" size="default">
+    <Card className="flex flex-col max-w-[500px] min-h-[250px]" size="default">
       <CardHeader className="items-center pb-0">
         <CardTitle>Pie Chart - Label List</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
