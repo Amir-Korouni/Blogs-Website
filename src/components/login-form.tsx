@@ -17,8 +17,9 @@ import {
   SigninValidation,
 } from "@/lib/validations/auth.validation";
 import { useActionState, useState } from "react";
-import { PostAuth } from "@/app/api/auth.service";
 import { signInUp } from "@/config/navigation.config";
+import { authControllerLogin } from "@/app/api/generated";
+import { useRouter } from "next/navigation";
 
 export function LoginForm({
   className,
@@ -33,6 +34,8 @@ export function LoginForm({
   const [authError, setAuthError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const route = useRouter();
+
   const handleSubmit = async (formData: FormData) => {
     setAuthError(null);
     setIsSubmitting(true);
@@ -44,10 +47,29 @@ export function LoginForm({
         setAuthError("Invalid form data.");
         return;
       }
-      const response = await PostAuth({ email, password });
-      console.log(response);
+
+      /**
+       * @description Now we request to back-end and wait for response
+       */
+      const response = await authControllerLogin({ email, password });
+      console.log(response.data);
+
+      /**
+       * @description Save accessToken JWT.
+       *
+       */
+      const data = response.data.accessToken;
+      console.log(data);
+
+      localStorage.setItem("Token", data);
+
+      /**
+       * @description Navigate to / (home)
+       */
+      route.replace(`/`);
+
     } catch (error) {
-      setAuthError("Sign in failed. Please try again.");
+      setAuthError(`Sign in failed. Please try again.Error is ${error}`);
     } finally {
       setIsSubmitting(false);
     }

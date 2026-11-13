@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { signInUp } from "@/config/navigation.config";
-import { PostAuthSignup } from "@/app/api/auth.service";
 import {
   signupState,
   signupValidation,
@@ -24,6 +23,8 @@ import {
 import Link from "next/link";
 import { useActionState, useState } from "react";
 import { startTransition } from "react";
+import { authControllerRegister } from "@/app/api/generated";
+import { useRouter } from "next/navigation";
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const initialState: signupState = { errors: {}, message: null };
@@ -35,12 +36,13 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [authError, setAuthError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const route = useRouter();
+
   const handleSignup = async (formData: FormData) => {
     setAuthError(null);
     setIsSubmitting(true);
 
     try {
-      const name = formData.get("name");
       const username = formData.get("username");
       const email = formData.get("email");
       const password = formData.get("password");
@@ -55,16 +57,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         return;
       }
 
-      const response = await PostAuthSignup({
-        name,
+      const response = await authControllerRegister({
         username,
         email,
         password,
       });
 
       console.log(response);
+
+      route.push("/signin");
     } catch (error) {
-      setAuthError("Sign up failed. Please try again.");
+      setAuthError(`Sign up failed. Please try again. Error: ${error}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -108,28 +111,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         <form onSubmit={handleFormSubmit}>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="name">Full Name</FieldLabel>
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Amir Korouni"
-                required
-                aria-invalid={!!state.errors?.name?.length}
-                aria-describedby="input-name"
-              />
-              <div id="input-name" aria-live="polite">
-                {state.errors?.name?.map((error) => (
-                  <p key={error} className="text-red-500">
-                    {error}
-                  </p>
-                ))}
-              </div>
-            </Field>
-            <Field>
               <FieldLabel htmlFor="name">User name</FieldLabel>
               <Input
-                id="name"
+                id="username"
                 name="username"
                 type="text"
                 placeholder="Amir_Ko"

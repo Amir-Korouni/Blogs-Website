@@ -27,6 +27,8 @@ import type {
   CreateUserModels,
   LoginAuthModels
 } from '../models';
+import { apiClient } from '../apiClient';
+import { signinType } from '../types/auth.type';
 
 
 
@@ -41,7 +43,7 @@ export const authControllerRegister = (
  ): Promise<AxiosResponse<void>> => {
 
 
-    return axios.post(
+    return apiClient.post(
       `/auth/register`,
       createUserModels,options
     );
@@ -116,10 +118,10 @@ export const useAuthControllerRegister = <TError = AxiosError<void>,
  */
 export const authControllerLogin = (
     loginAuthModels: LoginAuthModels, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<void>> => {
+ ): Promise<AxiosResponse<signinType>> => {
 
 
-    return axios.post(
+    return apiClient.post(
       `/auth/login`,
       loginAuthModels,options
     );
