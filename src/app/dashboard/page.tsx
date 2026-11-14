@@ -1,6 +1,6 @@
-import CategoryCardPage from "@/src/components/category/CategoryCardPage";
-import { PostGrid } from "@/src/components/posts/PostGrid";
-import { Button } from "@/src/components/ui/button";
+import CategoryCardPage from "@/components/category/CategoryCardPage";
+import { PostGrid } from "@/components/posts/PostGrid";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,13 +8,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/src/components/ui/card";
+} from "@/components/ui/card";
 import { navLinks } from "@/config/navigation.config";
-import { getLatestPostsInDashboard } from "@/src/lib/api/posts.service";
+import { getLatestPostsInDashboard } from "@/app/api/posts.service";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { auth } from "@/lib/auth/auth";
+import { redirect } from "next/navigation";
 
 const Page = async () => {
   const posts = await getLatestPostsInDashboard();
@@ -23,6 +25,15 @@ const Page = async () => {
     console.log(posts?.error.message);
     posts?.error.redirect();
     return;
+  }
+
+  /**
+   * @description Now we want to protected dashboard route.
+   */
+    const session = await auth();
+
+  if (!session) {
+    redirect("/signin");
   }
 
   return (
@@ -165,7 +176,7 @@ const Page = async () => {
           </div>
 
           <p className="text-sm sm:text-base text-muted-foreground">
-            Discover what's new on DEVLOG.
+            Discover whats new on DEVLOG.
           </p>
 
           <div className="w-full min-w-0">

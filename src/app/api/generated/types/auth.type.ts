@@ -1,7 +1,8 @@
 type userType = {
   id: number;
-  username: string;
   email: string;
+  username: string;
+  role: "user" | "admin"
 };
 
 export type signinType = {

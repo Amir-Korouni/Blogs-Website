@@ -18,8 +18,8 @@ import {
 } from "@/lib/validations/auth.validation";
 import { useActionState, useState } from "react";
 import { signInUp } from "@/config/navigation.config";
-import { authControllerLogin } from "@/app/api/generated";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export function LoginForm({
   className,
@@ -51,23 +51,41 @@ export function LoginForm({
       /**
        * @description Now we request to back-end and wait for response
        */
-      const response = await authControllerLogin({ email, password });
-      console.log(response.data);
+      const response = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      console.log(response);
 
-      /**
-       * @description Save accessToken JWT.
-       *
-       */
-      const data = response.data.accessToken;
-      console.log(data);
+      if (response?.error) {
+        const ErrObj = {
+          message: `Authentication failed. Error: ${response.error}.`,
+          status: `Error status: ${response.status}`,
+          errorcode: `Error code: ${response.code}`,
+        };
+        console.error(ErrObj);
+      } else {
+        const successObj = {
+          message: `Authentication successful.`,
+          status: `status: ${response.status}`,
+        };
+        console.log(successObj);
+      }
 
-      localStorage.setItem("Token", data);
+      // /**
+      //  * @description Save accessToken JWT.
+      //  *
+      //  */
+      // const data = response.data.accessToken;
+      // console.log(data);
+
+      // localStorage.setItem("Token", data);
 
       /**
        * @description Navigate to / (home)
        */
-      route.replace(`/`);
-
+      route.replace(`/dashboard`);
     } catch (error) {
       setAuthError(`Sign in failed. Please try again.Error is ${error}`);
     } finally {

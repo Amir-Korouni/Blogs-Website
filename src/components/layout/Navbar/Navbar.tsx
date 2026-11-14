@@ -5,9 +5,11 @@ import NavLinks from "./Navlinks";
 import MobileNav from "./MobileNav";
 import { signInUp } from "@/config/navigation.config";
 import { useScrolled } from "@/hooks/useScrolled";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const scrolled = useScrolled(400);
+  const { data: session, status } = useSession();
   return (
     <>
       <nav
@@ -20,12 +22,22 @@ const Navbar = () => {
           <section className="w-[30vw] flex justify-between items-center">
             <NavLinks />
             <section className="flex gap-5">
-              <Link
-                href={signInUp.Signin.href}
-                className="w-[80px] h-[40px] duration-200 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-[10px] flex justify-center items-center"
-              >
-                <h3>{signInUp.Signin.name}</h3>
-              </Link>
+              {session && (
+                <Link
+                  href="/dashboard"
+                  className="w-[80px] h-[40px] duration-200 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-[10px] flex justify-center items-center"
+                >
+                  <h3>{session.user.name}</h3>
+                </Link>
+              )}
+              {!session && (
+                <Link
+                  href={signInUp.Signin.href}
+                  className="w-[80px] h-[40px] duration-200 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-[10px] flex justify-center items-center"
+                >
+                  <h3>{signInUp.Signin.name}</h3>
+                </Link>
+              )}
               <ThemeToggle />
             </section>
           </section>

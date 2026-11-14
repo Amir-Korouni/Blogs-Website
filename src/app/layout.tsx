@@ -5,6 +5,7 @@ import { roboto } from "@/font/font";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { Lora } from "next/font/google";
 import { cn } from "@/lib/utils";
+import Provider from "@/components/providers";
 
 const lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
 
@@ -76,7 +77,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground)]">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Provider>{children}</Provider>
+        </ThemeProvider>
       </body>
     </html>
   );
