@@ -5,6 +5,7 @@ import { useInfinitePosts } from "@/hooks/useInfinite";
 import InfiniteScrollTrigger from "@/components/posts/InfiniteScrollTrigger";
 import { useSearchParams } from "next/navigation";
 import PostCard from "./PostCard";
+import { Posts } from "@/Types/post.type";
 
 export default function InfinitePosts() {
   const searchParams = useSearchParams();
@@ -36,8 +37,14 @@ export default function InfinitePosts() {
     return <p>Failed to load posts: {error.message}</p>;
   }
 
-  const posts = data.pages.flatMap((page) => (page.isOk ? page.data.data : []));
+  const posts =
+    data?.pages.flatMap((page) => {
+      if (!page.isOk) return [];
 
+      return page.data;
+    }) ?? [];
+
+  console.log("Posts:", posts);
   return (
     <section className="w-full h-auto flex flex-col justify-center items-center">
       <div
@@ -51,7 +58,7 @@ export default function InfinitePosts() {
           justify-items-center"
       >
         {posts.map((post) => (
-          <PostCard key={post.id} data={post} />
+          <PostCard key={post.posts.id} posts={post.posts} />
         ))}
       </div>
 

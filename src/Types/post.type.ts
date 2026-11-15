@@ -1,23 +1,80 @@
-type tagsType = {
-  id: string;
-  name: string;
+/**
+ * getPosts(query: QueryPostsModels): Promise<Post[]>;
+
+QueryPostsModels {
+
+  search?: string;
+
+  categoryId?: number;
+
+  authorId?: number;
+
+  sortBy?: 'createdAt' | 'updatedAt' | 'title';
+
+  sortOrder?: 'ASC' | 'DESC';
+
+}
+
+Post[] {
+
+  id: number;
+
+  title: string;
+
   slug: string;
-};
+
+  content: string;
+
+  excerpt: string;
+
+  status: PostStatus;
+
+  author: User;
+
+  category: Category;
+
+  coverMedia: Media | null;
+
+  tags: Tag[];
+
+  createdAt: Date;
+
+  updatedAt: Date;
+
+}
+ */
 
 export type Posts = {
-  id: string;
+  id: number;
+
   title: string;
+
   slug: string;
-  excerpt: string;
+
   content: string;
-  status: "Published" | "UnPublished";
-  category: string;
-  categorySlug: string;
-  tags: tagsType[];
+
+  excerpt: string;
+
+  status: "Published" | "UnPublished" | "Draft";
+
   author: string;
-  publishedAt: string;
-  readingTime: number;
+
+  category: string;
+
+  coverMedia: string;
+
+  tags: number[];
+
+  createdAt: string;
+
+  updatedAt: string;
 };
+
+type nextType = {
+  next: string | null
+}
+
+export type PostsResponse = Posts[] & nextType;
 
 export type PaginatedPosts = {
   data: Posts[];

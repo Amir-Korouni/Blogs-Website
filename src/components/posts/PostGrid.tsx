@@ -1,12 +1,8 @@
 import PostCard from "./PostCard";
-import { Posts } from "@/Types/post.type";
+import {  PostsResponse } from "@/Types/post.type";
 
-type PostGridProp = {
-  posts: Posts[];
-};
-
-export const PostGrid = ({ posts }: PostGridProp) => {
-  if (posts.length === 0) {
+export const PostGrid = ({ posts }: PostsResponse) => {
+  if (!posts) {
     return (
       <section className="w-full h-full flex justify-center items-center">
         <p className="text-lg text-muted-foreground">No posts found.</p>
@@ -28,9 +24,9 @@ export const PostGrid = ({ posts }: PostGridProp) => {
           justify-items-center
         "
       >
-        {posts.map((item) => (
-          <PostCard key={item.id} data={item} />
-        ))}
+        {/* {posts.map((item) => ( */}
+        <PostCard key={posts.id} posts={posts} />
+        {/* ))} */}
       </div>
     </section>
   );

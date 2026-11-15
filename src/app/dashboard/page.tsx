@@ -10,16 +10,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { navLinks } from "@/config/navigation.config";
-import { getLatestPostsInDashboard } from "@/app/api/posts.service";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { auth } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
+import { postsControllerGetPosts } from "../api/generated";
 
 const Page = async () => {
-  const posts = await getLatestPostsInDashboard();
+  const posts = await postsControllerGetPosts();
 
   if (!posts?.isOk) {
     console.log(posts?.error.message);
@@ -181,7 +181,7 @@ const Page = async () => {
 
           <div className="w-full min-w-0">
             <Suspense fallback={<Loading />}>
-              <PostGrid posts={posts.data} />
+              <PostGrid posts={posts.data.posts} />
             </Suspense>
           </div>
         </div>

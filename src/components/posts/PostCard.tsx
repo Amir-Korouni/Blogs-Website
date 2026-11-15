@@ -9,11 +9,11 @@ import {
 import { Posts } from "@/Types/post.type";
 import { Button } from "../ui/button";
 
-export type postData = {
-  data: Posts;
+type postCard = {
+  posts: Posts;
 };
 
-const PostCard = ({ data }: postData) => {
+const PostCard = ({ posts }: postCard) => {
   return (
     <>
       <Card
@@ -32,21 +32,21 @@ const PostCard = ({ data }: postData) => {
             hover:-translate-y-1
             "
       >
-        <article key={data?.id} className="size-full flex flex-1 flex-col">
+        <article key={posts?.id} className="size-full flex flex-1 flex-col">
           <CardHeader>
             <CardTitle className="flex flex-col gap-2">
-              <Link href={`/categories/${data?.categorySlug}`}>
-                <h3 className="text-sm text-blue-400">{data?.category}</h3>
+              <Link href={`/categories/${posts?.slug}`}>
+                <h3 className="text-sm text-blue-400">{posts?.category}</h3>
               </Link>
               <Link
-                href={`/posts/${data?.slug}`}
+                href={`/posts/${posts?.title}`}
                 className="text-[clamp(1.1rem,2vw,1.4rem)]
                 leading-tight
                 text-blue-700
                 hover:text-blue-400
                 transition-colors"
               >
-                {data?.title}
+                {posts?.title}
               </Link>
             </CardTitle>
           </CardHeader>
@@ -57,17 +57,16 @@ const PostCard = ({ data }: postData) => {
                 leading-relaxed
                 text-[var(--forground)]"
             >
-              {data?.excerpt}
+              {posts?.excerpt}
             </p>
 
-            {data.tags?.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4 px-4 pb-4 border-t">
-                {data.tags?.map((tag) => (
-                  <Button
-                    key={tag.id}
-                    variant="ghost"
-                    aria-label="Posts tag"
-                    className="
+            <div className="flex flex-wrap gap-2 mt-4 px-4 pb-4 border-t">
+              {posts?.tags?.map((tag) => (
+                <Button
+                  key={tag}
+                  variant="ghost"
+                  aria-label="Posts tag"
+                  className="
                     rounded-md
                     border border-blue-500
                     bg-blue-500/10
@@ -78,12 +77,11 @@ const PostCard = ({ data }: postData) => {
                     hover:bg-blue-500/20
                     hover:text-blue-300
                     "
-                  >
-                    {tag.name}
-                  </Button>
-                ))}
-              </div>
-            )}
+                >
+                  {tag}
+                </Button>
+              ))}
+            </div>
           </CardContent>
 
           <CardFooter
@@ -99,15 +97,15 @@ const PostCard = ({ data }: postData) => {
             py-3
             mt-auto"
           >
-            <p className="text-[clamp(0.8rem,0.5vw,0.9rem)]">{data.author}</p>
+            <p className="text-[clamp(0.8rem,0.5vw,0.9rem)]">{posts.author}</p>
             <time
-              dateTime={data?.publishedAt}
+              dateTime={posts.createdAt}
               className="text-[clamp(0.8rem,0.5vw,0.9rem)]"
             >
-              {data.publishedAt}
+              {posts.content}
             </time>
             <p className="text-[clamp(0.8rem,0.5vw,0.9rem)]">
-              {data.readingTime} min
+              {posts.updatedAt}
             </p>
           </CardFooter>
         </article>

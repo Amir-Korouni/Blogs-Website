@@ -37,6 +37,9 @@ import type {
   PostsControllerGetPostsParams,
   UpdatePostModels
 } from '../models';
+import { PostsResponse } from '@/Types/post.type';
+import { apiCall,safeHttpCall } from '../../client.service';
+import { ClientType } from '../../Types/client.type';
 
 
 
@@ -141,14 +144,14 @@ export const usePostsControllerCreatePost = <TError = AxiosError<void>,
  */
 export const postsControllerGetPosts = (
     params?: PostsControllerGetPostsParams, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<void>> => {
+ ): Promise<ClientType<PostsResponse>> => {
 
 
-    return axios.get(
+    return safeHttpCall(() => apiCall.get(
       `/posts`,{
     ...options,
         params: {...params, ...options?.params},}
-    );
+    ))
   }
 
 export const getPostsControllerGetPostsUrl = (params?: PostsControllerGetPostsParams,) => {

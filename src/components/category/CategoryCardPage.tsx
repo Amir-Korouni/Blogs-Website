@@ -4,7 +4,7 @@ import Link from "next/link";
 
 type categoryProps = {
   category: Category;
-  quantity: number;
+  quantity?: number;
 };
 
 const CategoryCardPage = ({ category, quantity }: categoryProps) => {

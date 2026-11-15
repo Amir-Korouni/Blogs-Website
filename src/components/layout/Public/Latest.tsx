@@ -1,11 +1,11 @@
 import PostCard from "@/components/posts/PostCard";
 import { Button } from "@/components/ui/button";
 import { navLinks } from "@/config/navigation.config";
-import { Posts } from "@/Types/post.type";
+import { PostsResponse } from "@/Types/post.type";
 import Link from "next/link";
 
 type latestSectionprops = {
-  posts: Posts[];
+  posts: PostsResponse;
 };
 
 const LatestSection = ({ posts }: latestSectionprops) => {
@@ -30,8 +30,8 @@ const LatestSection = ({ posts }: latestSectionprops) => {
                 xl:gap-8
                 justify-items-center"
             >
-              {posts.map((post) => (
-                <PostCard key={post.id} data={post} />
+              {posts?.map((post) => (
+                <PostCard key={post.id} posts={post} />
               ))}
             </div>
           </section>
