@@ -5,10 +5,10 @@ import PostCard from "@/components/posts/PostCard";
 import InfiniteScrollTrigger from "@/components/posts/InfiniteScrollTrigger";
 
 type Props = {
-  slug: string;
+  categoryId: number | undefined;
 };
 
-export default function InfiniteCategory({ slug }: Props) {
+export default function InfiniteCategory({ categoryId }: Props) {
   const {
     data,
     fetchNextPage,
@@ -16,12 +16,12 @@ export default function InfiniteCategory({ slug }: Props) {
     isFetchingNextPage,
     isPending,
     isError,
-  } = useInfiniteCategory(slug);
+  } = useInfiniteCategory(categoryId);
 
   if (isPending) return <p>Loading...</p>;
   if (isError) return <p>Something went wrong.</p>;
 
-  const posts = data.pages.flatMap((page) => page.data);
+  const posts = data.pages.flatMap((page) => {return page.data});
 
   return (
     <>
@@ -36,7 +36,7 @@ export default function InfiniteCategory({ slug }: Props) {
           justify-items-center"
       >
         {posts.map((post) => (
-          <PostCard data={post} key={post.id} />
+          <PostCard post={post} key={post.id} />
         ))}
       </div>
 

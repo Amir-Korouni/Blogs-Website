@@ -42,11 +42,11 @@ export function DataTable({ data: posts }: PostTableProps) {
                   {post.title}
                 </TableCell>
 
-                <TableCell>{post.category}</TableCell>
+                <TableCell>{post.category.name}</TableCell>
 
                 <TableCell>{post.status}</TableCell>
 
-                <TableCell>{post.publishedAt}</TableCell>
+                <TableCell>{post.updatedAt}</TableCell>
 
                 <TableCell>
                   <div className="flex justify-end gap-2">

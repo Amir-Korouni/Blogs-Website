@@ -1,6 +1,8 @@
+import { categoriesControllerGetCategories } from "@/app/api/generated";
 import CategoryCardPage from "@/components/category/CategoryCardPage";
 
-const Categories = () => {
+const Categories = async () => {
+  const categoryPosts = await categoriesControllerGetCategories();
   return (
     <>
       <main>
@@ -14,26 +16,9 @@ const Categories = () => {
         </section>
         <section className="w-full min-h-[100vh] mt-[10px] mb-[10px] flex flex-col justify-center items-center bg-background">
           <div className="w-[80%]  xl:w-[80%] md:w-[85%] sm:w-[100%] flex justify-center items-center gap-8 flex-wrap">
-            <CategoryCardPage
-              category={{ category: "Front-end", slug: "front-end" }}
-              quantity={25}
-            />
-            <CategoryCardPage
-              category={{ category: "Back-end", slug: "back-end" }}
-              quantity={20}
-            />
-            <CategoryCardPage
-              category={{ category: "AI", slug: "ai" }}
-              quantity={30}
-            />
-            <CategoryCardPage
-              category={{ category: "DevOps", slug: "devops" }}
-              quantity={18}
-            />
-            <CategoryCardPage
-              category={{ category: "General", slug: "general" }}
-              quantity={23}
-            />
+            {categoryPosts.data?.map((item) => (
+              <CategoryCardPage key={item.id} category={item} />
+            ))}
           </div>
         </section>
       </main>

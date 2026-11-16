@@ -1,9 +1,9 @@
 "use client";
 
-import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
-import { postsControllerGetPosts } from "@/app/api/generated";
-import { PostsResponse } from "@/Types/post.type";
-import { ClientType } from "@/app/api/Types/client.type";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  postsControllerGetPosts,
+} from "@/app/api/generated";
 
 /**
  * @version 1.0.0
@@ -11,13 +11,7 @@ import { ClientType } from "@/app/api/Types/client.type";
  * @returns If lastpage.data.next was not undefined, next Page was returned.
  */
 export function useInfinitePosts(search?: string, category?: string) {
-  return useInfiniteQuery<
-    ClientType<PostsResponse>,
-    Error,
-    InfiniteData<ClientType<PostsResponse>>,
-    (string | undefined)[],
-    number
-  >({
+  return useInfiniteQuery({
     queryKey: ["posts", "infinite", search, category],
     queryFn: ({ pageParam }) =>
       postsControllerGetPosts({
@@ -28,28 +22,29 @@ export function useInfinitePosts(search?: string, category?: string) {
     initialPageParam: "1",
 
     getNextPageParam: (lastPage) => {
-      if (!lastPage.isOk) {
-        return undefined;
-      }
 
       return lastPage.data?.next ?? undefined;
     },
   });
 }
 
-// export function useInfiniteCategory(slug: string) {
-//   return useInfiniteQuery({
-//     queryKey: ["posts", "infinite", "category", slug],
+export function useInfiniteCategory(categoryId: number | undefined) {
+  return useInfiniteQuery({
+    queryKey: ["posts", "infinite", "category", categoryId],
 
-//     queryFn: ({ pageParam }) => getPostCategory(slug, pageParam, 3),
+    queryFn: () =>
+      postsControllerGetPosts({
+        categoryId,
+      }),
 
-//     initialPageParam: 1,
+    initialPageParam: 1,
 
-//     getNextPageParam: (lastPage) => {
-//       return lastPage.next ?? undefined;
-//     },
-//   });
-// }
+    getNextPageParam: (lastPage) => {
+      
+      return lastPage.data?.next ?? undefined;
+    },
+  });
+}
 
 // export function useInfiniteTags(slug: string) {
 //   return useInfiniteQuery({

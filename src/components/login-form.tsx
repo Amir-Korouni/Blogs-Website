@@ -73,15 +73,6 @@ export function LoginForm({
         console.log(successObj);
       }
 
-      // /**
-      //  * @description Save accessToken JWT.
-      //  *
-      //  */
-      // const data = response.data.accessToken;
-      // console.log(data);
-
-      // localStorage.setItem("Token", data);
-
       /**
        * @description Navigate to / (home)
        */

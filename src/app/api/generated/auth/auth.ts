@@ -27,7 +27,7 @@ import type {
   CreateUserModels,
   LoginAuthModels
 } from '../models';
-import { apiClient } from '../apiClient';
+import { apiClient } from '../../client.service';
 import { signinType } from '../types/auth.type';
 
 

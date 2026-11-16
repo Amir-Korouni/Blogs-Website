@@ -1,7 +1,8 @@
 import { SectionCards } from "@/components/section-cards";
 import { DataTable } from "@/components/data-table";
-import { getPostPage } from "@/app/api/posts.service";
 import Pagination from "@/components/dashboard/PagePagination";
+import { postsControllerGetAllPostsForAdmin } from "../api/generated";
+import { auth } from "@/lib/auth/auth";
 
 type PageProps = {
   searchParams: Promise<{ page?: string }>;
@@ -13,9 +14,18 @@ const Page = async ({ searchParams }: PageProps) => {
   const limit = 7;
   const currentPage = Math.max(1, Number(page) || 1);
 
-  const posts = await getPostPage(currentPage, limit);
+  // const data  = posts.data;
+  let data;
 
-  if (!posts.isOk) {
+  const session = await auth();
+
+  try {
+    const response = await postsControllerGetAllPostsForAdmin(
+      {},
+      { headers: { Authorization: `Bearer ${session?.expires}` } },
+    );
+    data = response.data;
+  } catch {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
         <p className="text-destructive">
@@ -25,7 +35,6 @@ const Page = async ({ searchParams }: PageProps) => {
     );
   }
 
-  const { data, pages } = posts.data;
   return (
     <>
       <div className="flex flex-1 flex-col">

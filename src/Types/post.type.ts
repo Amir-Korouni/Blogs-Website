@@ -1,87 +1,71 @@
-/**
- * getPosts(query: QueryPostsModels): Promise<Post[]>;
+// export type Posts = {
+//   id: number;
 
-QueryPostsModels {
+//   title: string;
 
-  search?: string;
+//   slug: string;
 
-  categoryId?: number;
+//   content: string;
 
-  authorId?: number;
+//   excerpt: string;
 
-  sortBy?: 'createdAt' | 'updatedAt' | 'title';
+//   status: "Published" | "UnPublished" | "Draft";
 
-  sortOrder?: 'ASC' | 'DESC';
+//   author: string;
 
-}
+//   category: string;
 
-Post[] {
+//   coverMedia: string;
 
+//   tags: number[];
+
+//   createdAt: string;
+
+//   updatedAt: string;
+// };
+
+// type nextType = {
+//   next: string | null
+// }
+
+// export type PostsResponse = Posts[] & nextType;
+
+export type User = {
   id: number;
+  username: string;
+  email: string;
+};
 
-  title: string;
-
+export type Category = {
+  id: number;
+  name: string;
   slug: string;
+};
 
-  content: string;
+export type Media = {
+  id: number;
+  url: string;
+  // Add other properties returned by your API.
+};
 
-  excerpt: string;
+export type Tag = {
+  id: number;
+  name: string;
+};
 
-  status: PostStatus;
-
-  author: User;
-
-  category: Category;
-
-  coverMedia: Media | null;
-
-  tags: Tag[];
-
-  createdAt: Date;
-
-  updatedAt: Date;
-
-}
- */
+export type PostStatus = "Published" | "UnPublished" | "Draft";
 
 export type Posts = {
   id: number;
-
   title: string;
-
   slug: string;
-
   content: string;
-
   excerpt: string;
-
-  status: "Published" | "UnPublished" | "Draft";
-
-  author: string;
-
-  category: string;
-
-  coverMedia: string;
-
-  tags: number[];
-
+  status: PostStatus;
+  author: User;
+  category: Category;
+  coverMedia: Media | null;
+  tags: Tag[];
   createdAt: string;
-
   updatedAt: string;
-};
-
-type nextType = {
-  next: string | null
-}
-
-export type PostsResponse = Posts[] & nextType;
-
-export type PaginatedPosts = {
-  data: Posts[];
-  first: number;
-  prev: number | null;
-  next: number | null;
-  last: number;
-  pages: number;
-  items: number;
 };

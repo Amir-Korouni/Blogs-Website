@@ -1,6 +1,14 @@
+// export type Category = {
+//   category: "Front-end" | "Back-end" | "AI" | "DevOps" | "General";
+//   slug: "front-end" | "back-end" | "ai" | "devops" | "general";
+// };
+
 export type Category = {
-  category: "Front-end" | "Back-end" | "AI" | "DevOps" | "General";
-  slug: "front-end" | "back-end" | "ai" | "devops" | "general";
+  id: number;
+  name: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type AdminCategory = {

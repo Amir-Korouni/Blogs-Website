@@ -24,7 +24,8 @@ const signinSchema = z.object({
     .email("Please enter a valid email address."),
   password: z
     .string("Please enter your password.")
-    .min(8, "Password must be at least 8 characters long."),
+    .min(8, "Password must be at least 8 characters long.")
+    .max(72), 
 });
 
 export async function SigninValidation(

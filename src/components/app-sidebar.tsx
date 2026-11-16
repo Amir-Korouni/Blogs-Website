@@ -19,6 +19,8 @@ import { navSec } from "@/Types/admin.type";
 import { NavUser } from "./nav-user";
 import { dataNavAdmin } from "@/config/adminLinks.config";
 import AdminNav from "./layout/Navbar/AdminLinks";
+import { auth } from "@/lib/auth/auth";
+import { useSession } from "next-auth/react";
 
 const data = {
   user: {
@@ -28,7 +30,10 @@ const data = {
   },
 };
 
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const session = useSession();
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -49,7 +54,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={navSec.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );

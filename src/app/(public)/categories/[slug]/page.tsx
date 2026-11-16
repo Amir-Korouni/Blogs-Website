@@ -1,8 +1,8 @@
 import notFound from "@/app/not-found";
 import InfiniteCategory from "@/components/posts/InfiniteCategory";
-import { getPostCategory } from "@/app/api/categories.service";
-import { PaginatedPosts } from "@/Types/post.type";
 import { Metadata } from "next";
+import { cache } from "react";
+import { categoriesControllerGetCategories } from "@/app/api/generated";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -12,28 +12,37 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const categories: PaginatedPosts = await getPostCategory(slug, 1, 3);
+  const category = await getCategoryBySlug(slug);
 
-  if (categories.data.length === 0) {
+  if (!category) {
     return {
-      title: "Page not found",
+      title: "Category not found",
     };
   }
 
-  const post = categories.data[0];
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: `${category.title} | DEVLOG`,
+    description: `Explore articles about ${category.slug}.`,
   };
 }
 
+const getCategoryBySlug = cache(async (slug: string) => {
+  const response = await categoriesControllerGetCategories();
+
+  return response.data.find(
+    (category) => category.slug === slug
+  ) ?? null;
+});
+
 const Page = async ({ params }: PageProps) => {
-  const { slug } = await params;
-  const categories: PaginatedPosts = await getPostCategory(slug);
-  if (categories.data.length === 0) {
+    const { slug } = await params;
+
+  const category = await getCategoryBySlug(slug);
+
+  if (!category) {
     notFound();
   }
-  console.log(categories);
+  
 
   const CategoryName = slug
     .split("-")
@@ -51,7 +60,7 @@ const Page = async ({ params }: PageProps) => {
             </p>
           </div>
 
-          <InfiniteCategory slug={slug} />
+          <InfiniteCategory categoryId={category?.id} />
         </section>
       </main>
     </>

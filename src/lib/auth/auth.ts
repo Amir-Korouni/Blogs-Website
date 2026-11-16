@@ -19,7 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           type: "email",
           placeholder: "m@example.com",
         },
-        username: {
+        password: {
           label: "password",
           type: "password",
         },
@@ -50,7 +50,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return {
             id: String(user.id),
             email: user.email,
-            password: user.username,
+            name: user.username,
             role: user.role,
             accessToken,
           };
@@ -73,6 +73,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user) {
         token.id = user.id;
         token.role = user.role;
+        token.name = user.name;
         token.accessToken = user.accessToken;
       }
       return token;
@@ -89,7 +90,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.role = token.role;
+      session.user.name = token.name;
       return session;
     },
   },
 });
+
+export async function logout() {
+  "use server";
+  await signOut({
+    redirectTo: "/signin",
+  });
+}

@@ -1,7 +1,11 @@
 import PostCard from "./PostCard";
-import {  PostsResponse } from "@/Types/post.type";
+import { Posts } from "@/Types/post.type";
 
-export const PostGrid = ({ posts }: PostsResponse) => {
+type postGrid = {
+  posts: Posts[];
+};
+
+export const PostGrid = ({ posts }: postGrid) => {
   if (!posts) {
     return (
       <section className="w-full h-full flex justify-center items-center">
@@ -24,9 +28,9 @@ export const PostGrid = ({ posts }: PostsResponse) => {
           justify-items-center
         "
       >
-        {/* {posts.map((item) => ( */}
-        <PostCard key={posts.id} posts={posts} />
-        {/* ))} */}
+        {posts.map((item) => (
+          <PostCard key={item.id} posts={item} />
+        ))}
       </div>
     </section>
   );

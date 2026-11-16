@@ -1,13 +1,12 @@
-import { Category } from "@/Types/category.type";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import Link from "next/link";
+import { Posts } from "@/Types/post.type";
 
 type categoryProps = {
-  category: Category;
-  quantity?: number;
+  category: Posts;
 };
 
-const CategoryCardPage = ({ category, quantity }: categoryProps) => {
+const CategoryCardPage = ({ category }: categoryProps) => {
   return (
     <>
       <Card
@@ -39,7 +38,7 @@ const CategoryCardPage = ({ category, quantity }: categoryProps) => {
                 text-(var-[--card-foreground])"
         >
           <CardContent className="w-full h-[8rem] text-center">
-            {category.category}
+            {category.category.name}
           </CardContent>
         </Link>
         <CardFooter className="w-full h-[4rem] bg-[var(--accent)] flex justify-center items-center ">
@@ -49,7 +48,7 @@ const CategoryCardPage = ({ category, quantity }: categoryProps) => {
                 leading-relaxed
                 text-zinc-300"
           >
-            {quantity} Articles that you can read and learn.
+            You can see all blogs about {category.category.name}
           </Link>
         </CardFooter>
       </Card>

@@ -1,5 +1,3 @@
-import CategoryCardPage from "@/components/category/CategoryCardPage";
-import { PostGrid } from "@/components/posts/PostGrid";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,25 +10,17 @@ import {
 import { navLinks } from "@/config/navigation.config";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
-import Loading from "./loading";
-import { auth } from "@/lib/auth/auth";
+import { auth, logout } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
 import { postsControllerGetPosts } from "../api/generated";
+import { Form } from "@base-ui/react";
 
 const Page = async () => {
-  const posts = await postsControllerGetPosts();
-
-  if (!posts?.isOk) {
-    console.log(posts?.error.message);
-    posts?.error.redirect();
-    return;
-  }
 
   /**
    * @description Now we want to protected dashboard route.
    */
-    const session = await auth();
+  const session = await auth();
 
   if (!session) {
     redirect("/signin");
@@ -44,7 +34,9 @@ const Page = async () => {
             User Dashboard
           </h2>
 
-          <p className="text-[clamp(0.9rem,2vw,1.2rem)]">Hello {"Amir"}! 👋</p>
+          <p className="text-[clamp(0.9rem,2vw,1.2rem)]">
+            Hello {session.user.name}! 👋
+          </p>
 
           <p className="text-[clamp(0.85rem,2vw,1.2rem)]">
             Welcome to your personal space on DEVLOG.
@@ -52,6 +44,17 @@ const Page = async () => {
 
           <p className="text-sm sm:text-base">
             Explore new ideas, discover articles and manage your account.
+          </p>
+          <p className="text-sm sm:text-base">
+            Would you like to visite your
+            <Link
+              href="/"
+              className="underline text-[var(--ring)] font-bold px-1"
+            >
+              {" "}
+              Main page
+            </Link>
+            for learning all things?
           </p>
         </div>
       </section>
@@ -87,7 +90,7 @@ const Page = async () => {
                       </label>
 
                       <h2 className="text-lg sm:text-xl font-semibold break-words">
-                        Amir Korouni
+                        {session.user.name}
                       </h2>
                     </div>
 
@@ -97,8 +100,16 @@ const Page = async () => {
                       </label>
 
                       <h2 className="text-base sm:text-lg font-medium break-all">
-                        Amir@gmail.com
+                        {session.user.email}
                       </h2>
+                    </div>
+
+                    <div>
+                      <Form action={logout}>
+                        <Button type="submit">
+                          Logout
+                        </Button>
+                      </Form>
                     </div>
                   </div>
                 </div>
@@ -162,9 +173,7 @@ const Page = async () => {
       <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="w-full border rounded-xl p-4 sm:p-6 space-y-5">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-            <h2 className="text-lg sm:text-xl font-semibold">
-              Latest Articles
-            </h2>
+            <h2 className="text-lg sm:text-xl font-semibold">Posts</h2>
 
             <Link
               href={navLinks[1].href}
@@ -180,9 +189,14 @@ const Page = async () => {
           </p>
 
           <div className="w-full min-w-0">
-            <Suspense fallback={<Loading />}>
-              <PostGrid posts={posts.data.posts} />
-            </Suspense>
+            {/* <Suspense fallback={<Loading />}>
+              <PostGrid posts={posts.data} />
+            </Suspense> */}
+            Would you like to learn somethings new about tech? Some platform
+            that Experienced technicians write a blog about some topics?
+          </div>
+          <div className="w-full min-w-0">
+            If you like to learn every things about tech, click and jump to it.
           </div>
         </div>
       </section>
@@ -198,29 +212,6 @@ const Page = async () => {
           <p className="text-sm sm:text-base text-muted-foreground">
             Find articles based on your interests.
           </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full min-w-0">
-            <div className="min-w-0 w-full">
-              <CategoryCardPage
-                category={{ category: "Front-end", slug: "front-end" }}
-                quantity={25}
-              />
-            </div>
-
-            <div className="min-w-0 w-full">
-              <CategoryCardPage
-                category={{ category: "Back-end", slug: "back-end" }}
-                quantity={20}
-              />
-            </div>
-
-            <div className="min-w-0 w-full">
-              <CategoryCardPage
-                category={{ category: "DevOps", slug: "devops" }}
-                quantity={18}
-              />
-            </div>
-          </div>
         </div>
       </section>
     </main>

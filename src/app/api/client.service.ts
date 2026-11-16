@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { ClientType } from "./Types/client.type";
 import { AppHttpError } from "./Error/client.error";
 
-export const apiCall = axios.create({
+export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     "Content-Type": "application/json",

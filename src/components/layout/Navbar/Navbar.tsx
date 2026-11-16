@@ -22,15 +22,25 @@ const Navbar = () => {
           <section className="w-[30vw] flex justify-between items-center">
             <NavLinks />
             <section className="flex gap-5">
-              {session && (
+              {session?.user.role === "user" && (
                 <Link
                   href="/dashboard"
                   className="w-[80px] h-[40px] duration-200 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-[10px] flex justify-center items-center"
                 >
-                  <h3>{session.user.name}</h3>
+                  <h3>{session.user.name }</h3>
                 </Link>
               )}
-              {!session && (
+
+              {session?.user.role === "admin" && (
+                <Link
+                  href="/admin"
+                  className="w-auto h-[40px] duration-200 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-[10px] flex justify-center items-center"
+                >
+                  <h3>{session.user.name}({session.user.role})</h3>
+                </Link>
+              )}
+
+              {!session?.user && (
                 <Link
                   href={signInUp.Signin.href}
                   className="w-[80px] h-[40px] duration-200 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-[10px] flex justify-center items-center"
