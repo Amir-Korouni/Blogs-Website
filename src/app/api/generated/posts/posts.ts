@@ -26,12 +26,11 @@ import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import type {
   CreatePostModels,
-  PostsControllerGetAllPostsForAdminParams,
   PostsControllerGetPostsParams,
   UpdatePostModels,
 } from "../models";
-import { Posts } from "@/Types/post.type";
 import { apiClient } from "../../client.service";
+import { Posts } from "@/Types/general.type";
 
 const withQueryKey = <T extends object, K>(
   query: T,
@@ -59,11 +58,11 @@ export const postsControllerCreatePost = (
   createPostModels: CreatePostModels,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.post(`/posts`, createPostModels, options);
+  return apiClient.post(`/posts`, createPostModels, options);
 };
 
 export const getPostsControllerCreatePostUrl = () => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -169,7 +168,7 @@ export const postsControllerGetPosts = (
 export const getPostsControllerGetPostsUrl = (
   params?: PostsControllerGetPostsParams,
 ) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -515,11 +514,11 @@ export const postsControllerUpdatePost = (
   updatePostModels: UpdatePostModels,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.patch(`/posts/${id}`, updatePostModels, options);
+  return apiClient.patch(`/posts/${id}`, updatePostModels, options);
 };
 
 export const getPostsControllerUpdatePostUrl = (id: number) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -713,19 +712,13 @@ export const usePostsControllerDeletePost = <
  * @summary Get post by ID
  */
 export const postsControllerGetAllPostsForAdmin = (
-  params?: PostsControllerGetAllPostsForAdminParams,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<Posts[]>> => {
-  return apiClient.get(`/posts/admin/all`, {
-    ...options,
-    params: { ...params, ...options?.params },
-  });
+  return apiClient.get(`/posts/admin/all`, options);
 };
 
-export const getPostsControllerGetAllPostsForAdminUrl = (
-  params?: PostsControllerGetAllPostsForAdminParams,
-) => {
-  return axios
+export const getPostsControllerGetAllPostsForAdminUrl = () => {
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -733,42 +726,35 @@ export const getPostsControllerGetAllPostsForAdminUrl = (
     .getUri({
       url: `/posts/admin/all`,
       baseURL: "",
-      params,
     });
 };
 
-export const getPostsControllerGetAllPostsForAdminQueryKey = (
-  params?: PostsControllerGetAllPostsForAdminParams,
-) => {
-  return [`/posts/admin/all`, ...(params ? [params] : [])] as const;
+export const getPostsControllerGetAllPostsForAdminQueryKey = () => {
+  return [`/posts/admin/all`] as const;
 };
 
 export const getPostsControllerGetAllPostsForAdminQueryOptions = <
   TData = Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
   TError = AxiosError<void>,
->(
-  params?: PostsControllerGetAllPostsForAdminParams,
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
-        TError,
-        TData
-      >
-    >;
-    axios?: AxiosRequestConfig;
-  },
-) => {
+>(options?: {
+  query?: Partial<
+    UseQueryOptions<
+      Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
+      TError,
+      TData
+    >
+  >;
+  axios?: AxiosRequestConfig;
+}) => {
   const { query: queryOptions, axios: axiosOptions } = options ?? {};
 
   const queryKey =
-    queryOptions?.queryKey ??
-    getPostsControllerGetAllPostsForAdminQueryKey(params);
+    queryOptions?.queryKey ?? getPostsControllerGetAllPostsForAdminQueryKey();
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>
   > = ({ signal }) =>
-    postsControllerGetAllPostsForAdmin(params, { signal, ...axiosOptions });
+    postsControllerGetAllPostsForAdmin({ signal, ...axiosOptions });
 
   return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
@@ -786,7 +772,6 @@ export function usePostsControllerGetAllPostsForAdmin<
   TData = Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
   TError = AxiosError<void>,
 >(
-  params: undefined | PostsControllerGetAllPostsForAdminParams,
   options: {
     query: Partial<
       UseQueryOptions<
@@ -813,7 +798,6 @@ export function usePostsControllerGetAllPostsForAdmin<
   TData = Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
   TError = AxiosError<void>,
 >(
-  params?: PostsControllerGetAllPostsForAdminParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -840,7 +824,6 @@ export function usePostsControllerGetAllPostsForAdmin<
   TData = Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
   TError = AxiosError<void>,
 >(
-  params?: PostsControllerGetAllPostsForAdminParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -863,7 +846,6 @@ export function usePostsControllerGetAllPostsForAdmin<
   TData = Awaited<ReturnType<typeof postsControllerGetAllPostsForAdmin>>,
   TError = AxiosError<void>,
 >(
-  params?: PostsControllerGetAllPostsForAdminParams,
   options?: {
     query?: Partial<
       UseQueryOptions<
@@ -878,10 +860,8 @@ export function usePostsControllerGetAllPostsForAdmin<
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
-  const queryOptions = getPostsControllerGetAllPostsForAdminQueryOptions(
-    params,
-    options,
-  );
+  const queryOptions =
+    getPostsControllerGetAllPostsForAdminQueryOptions(options);
 
   const query = useQuery(queryOptions, queryClient) as UseQueryResult<
     TData,

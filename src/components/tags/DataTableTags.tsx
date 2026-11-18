@@ -9,15 +9,15 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
-import { Tags } from "@/Types/tags.type";
 import Link from "next/link";
+import { Tag } from "@/Types/general.type";
 
 type TagsTableProps = {
-  data: Tags[];
+  tag: Tag[];
 };
 
-export function DataTableTags({ data: tags }: TagsTableProps) {
-  if (tags.length === 0) {
+export function DataTableTags({ tag }: TagsTableProps) {
+  if (!tag) {
     return (
       <section className="flex h-full w-full items-center justify-center">
         <p className="text-lg text-muted-foreground">No tags found.</p>
@@ -39,18 +39,18 @@ export function DataTableTags({ data: tags }: TagsTableProps) {
           </TableHeader>
 
           <TableBody>
-            {tags.map((tag) => (
-              <TableRow key={tag.id}>
+            {tag.map((item) => (
+              <TableRow key={item.id}>
                 <TableCell className="text-muted-foreground">
-                  {tag.id}
+                  {item.id}
                 </TableCell>
 
                 <TableCell className="max-w-[260px] truncate font-medium">
-                  {tag.tag}
+                  {item.name}
                 </TableCell>
 
                 <TableCell className="text-muted-foreground">
-                  {tag.slug}
+                  {item.slug}
                 </TableCell>
 
                 <TableCell>
@@ -59,7 +59,7 @@ export function DataTableTags({ data: tags }: TagsTableProps) {
                       <Button
                         variant="ghost"
                         size="icon"
-                        aria-label={`Edit ${tag.tag}`}
+                        aria-label={`Edit ${item.name}`}
                       >
                         <Pencil className="size-4" />
                       </Button>
@@ -68,7 +68,7 @@ export function DataTableTags({ data: tags }: TagsTableProps) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      aria-label={`Delete ${tag.tag}`}
+                      aria-label={`Delete ${item.name}`}
                     >
                       <Trash2 className="size-4 text-destructive" />
                     </Button>

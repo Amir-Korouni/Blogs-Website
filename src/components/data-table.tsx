@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -8,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Posts } from "@/Types/post.type";
+import { Posts } from "@/Types/general.type";
 
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -18,10 +20,12 @@ type PostTableProps = {
 };
 
 export function DataTable({ data: posts }: PostTableProps) {
+  console.log(posts);
+
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <div className="overflow-hidden rounded-lg border">
-        <Table className="min-w-[700px]">
+        <Table className="min-w-[700px] man-h-[900px]">
           <TableHeader>
             <TableRow>
               <TableHead>Id</TableHead>

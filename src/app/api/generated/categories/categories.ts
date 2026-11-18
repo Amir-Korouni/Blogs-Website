@@ -26,8 +26,7 @@ import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import type { CreateCategoryModels, UpdateCategoryModels } from "../models";
 import { apiClient } from "../../client.service";
-import { Category } from "@/Types/category.type";
-import { Posts } from "@/Types/post.type";
+import { Category } from "@/Types/general.type";
 
 const withQueryKey = <T extends object, K>(
   query: T,
@@ -53,12 +52,12 @@ const withQueryKey = <T extends object, K>(
  */
 export const categoriesControllerGetCategories = (
   options?: AxiosRequestConfig,
-): Promise<AxiosResponse<Posts[]>> => {
+): Promise<AxiosResponse<Category[]>> => {
   return apiClient.get(`/categories`, options);
 };
 
 export const getCategoriesControllerGetCategoriesUrl = () => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,

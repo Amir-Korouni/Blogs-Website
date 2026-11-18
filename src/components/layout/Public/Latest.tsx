@@ -1,7 +1,7 @@
 import PostCard from "@/components/posts/PostCard";
 import { Button } from "@/components/ui/button";
 import { navLinks } from "@/config/navigation.config";
-import { Posts } from "@/Types/post.type";
+import { Posts } from "@/Types/general.type";
 import Link from "next/link";
 
 type latestSectionprops = {

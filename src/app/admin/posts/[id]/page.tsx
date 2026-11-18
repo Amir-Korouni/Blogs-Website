@@ -6,12 +6,17 @@ export const metadata: Metadata = {
 };
 
 type EditPostsType = {
-  SearchParams: Promise<{ id: number }>;
+  params: Promise<{ id: string }>;
 };
 
-const Page = async ({ SearchParams }: EditPostsType) => {
-  const { id } = await SearchParams;
+const Page = async ({ params }: EditPostsType) => {
+  const { id } = await params;
   console.log(id);
+  const postId = Number(id);
+
+  if (Number.isNaN(postId)) {
+    return <div>Invalid post ID</div>;
+  }
 
   return (
     <>
@@ -23,7 +28,7 @@ const Page = async ({ SearchParams }: EditPostsType) => {
             </h2>
           </div>
           <div className="w-full px-10">
-            <EditPosts />
+            <EditPosts id={postId} />
           </div>
         </div>
       </div>

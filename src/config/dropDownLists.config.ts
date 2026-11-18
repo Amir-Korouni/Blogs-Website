@@ -6,4 +6,4 @@ export const CategoriesList = [
   "General",
 ];
 
-export const Status = ["Published", "UnPublished"];
+export const Status = ["published", "draft"] as const;

@@ -1,10 +1,11 @@
-import { getPostPage } from "@/app/api/posts.service";
 import { DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Pagination from "@/components/dashboard/PagePagination";
 import Link from "next/link";
 import Search from "@/components/posts/Search";
+import { postsControllerGetAllPostsForAdmin } from "@/app/api/generated";
+import { auth } from "@/lib/auth/auth";
 
 type PageProps = {
   searchParams: Promise<{
@@ -21,9 +22,16 @@ const Page = async ({ searchParams }: PageProps) => {
   const limit = 7;
   const currentPage = Math.max(1, Number(page) || 1);
 
-  const posts = await getPostPage(currentPage, limit, query, category, status);
+  let data;
 
-  if (!posts.isOk) {
+  const session = await auth();
+
+  try {
+    const response = await postsControllerGetAllPostsForAdmin({
+      headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+    });
+    data = response.data;
+  } catch {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
         <p className="text-destructive">
@@ -32,8 +40,6 @@ const Page = async ({ searchParams }: PageProps) => {
       </section>
     );
   }
-
-  const { data, pages } = posts.data;
   return (
     <>
       <div className="flex flex-1 flex-col">
@@ -53,10 +59,10 @@ const Page = async ({ searchParams }: PageProps) => {
           <div className="w-full px-5 m-auto mt-5 flex justify-between items-center">
             <Search ifAdmin={true} />
           </div>
-          <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+          <div className="w-full h-full flex flex-col gap-4 py-4 md:gap-6 md:py-6">
             <DataTable data={data} />
           </div>
-          <Pagination currentPage={currentPage} totalPages={pages} />
+          {/* <Pagination currentPage={currentPage} totalPages={pages} /> */}
         </div>
       </div>
     </>

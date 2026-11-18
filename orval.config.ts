@@ -4,6 +4,7 @@ export default defineConfig({
   devlog: {
     input: {
       target: "./public/swagger/openapi.json",
+      unsafeDisableValidation: true,
     },
     output: {
       target: "./src/app/api/generated/endpoints.ts",

@@ -34,12 +34,14 @@ export type User = {
   id: number;
   username: string;
   email: string;
+  role: "user" | "admin";
 };
 
 export type Category = {
   id: number;
   name: string;
   slug: string;
+  updatedAt: string;
 };
 
 export type Media = {
@@ -51,9 +53,12 @@ export type Media = {
 export type Tag = {
   id: number;
   name: string;
+  slug: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
-export type PostStatus = "Published" | "UnPublished" | "Draft";
+export type PostStatus = "Published" | "UnPublished" | "draft";
 
 export type Posts = {
   id: number;

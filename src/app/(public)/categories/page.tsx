@@ -16,8 +16,8 @@ const Categories = async () => {
         </section>
         <section className="w-full min-h-[100vh] mt-[10px] mb-[10px] flex flex-col justify-center items-center bg-background">
           <div className="w-[80%]  xl:w-[80%] md:w-[85%] sm:w-[100%] flex justify-center items-center gap-8 flex-wrap">
-            {categoryPosts.data?.map((item) => (
-              <CategoryCardPage key={item.id} category={item} />
+            {categoryPosts.data.map((category) => (
+              <CategoryCardPage key={category.id} category={category} />
             ))}
           </div>
         </section>

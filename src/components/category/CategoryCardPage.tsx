@@ -1,9 +1,11 @@
+"use client";
+
 import { Card, CardContent, CardFooter } from "../ui/card";
 import Link from "next/link";
-import { Posts } from "@/Types/post.type";
+import { Category } from "@/Types/category.type";
 
 type categoryProps = {
-  category: Posts;
+  category: Category;
 };
 
 const CategoryCardPage = ({ category }: categoryProps) => {
@@ -38,7 +40,7 @@ const CategoryCardPage = ({ category }: categoryProps) => {
                 text-(var-[--card-foreground])"
         >
           <CardContent className="w-full h-[8rem] text-center">
-            {category.category.name}
+            {category.slug}
           </CardContent>
         </Link>
         <CardFooter className="w-full h-[4rem] bg-[var(--accent)] flex justify-center items-center ">
@@ -48,7 +50,7 @@ const CategoryCardPage = ({ category }: categoryProps) => {
                 leading-relaxed
                 text-zinc-300"
           >
-            You can see all blogs about {category.category.name}
+            You can see all blogs about {category.name}
           </Link>
         </CardFooter>
       </Card>

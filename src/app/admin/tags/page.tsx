@@ -1,15 +1,20 @@
 import { DataTableTags } from "@/components/tags/DataTableTags";
 import { Button } from "@/components/ui/button";
-import { getTagsPosts } from "@/app/api/posts.service";
 import { Plus } from "lucide-react";
-import { Suspense } from "react";
-import Loading from "../loading";
 import Link from "next/link";
+import { tagControllerGetTags } from "@/app/api/generated";
+import { auth } from "@/lib/auth/auth";
 
 const Page = async () => {
-  const result = await getTagsPosts();
+  let data;
+  const session = await auth();
 
-  if (!result.isOk) {
+  try {
+    const response = await tagControllerGetTags({
+      headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+    });
+    data = response.data;
+  } catch {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
         <p className="text-destructive">
@@ -19,7 +24,6 @@ const Page = async () => {
     );
   }
 
-  const posts = result.data;
   return (
     <>
       <div className="flex flex-1 flex-col">
@@ -38,9 +42,7 @@ const Page = async () => {
           </div>
 
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <Suspense fallback={<Loading />}>
-              <DataTableTags data={posts} />
-            </Suspense>
+            <DataTableTags tag={data} />
           </div>
         </div>
       </div>

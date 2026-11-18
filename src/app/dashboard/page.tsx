@@ -12,18 +12,13 @@ import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { auth, logout } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
-import { postsControllerGetPosts } from "../api/generated";
 import { Form } from "@base-ui/react";
 
 const Page = async () => {
-
-  /**
-   * @description Now we want to protected dashboard route.
-   */
   const session = await auth();
 
-  if (!session) {
-    redirect("/signin");
+  if (session?.user.role !== "user") {
+    redirect("/admin");
   }
 
   return (
@@ -106,9 +101,7 @@ const Page = async () => {
 
                     <div>
                       <Form action={logout}>
-                        <Button type="submit">
-                          Logout
-                        </Button>
+                        <Button type="submit">Logout</Button>
                       </Form>
                     </div>
                   </div>

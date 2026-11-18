@@ -9,15 +9,15 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
-import { AdminCategory } from "@/Types/category.type";
 import Link from "next/link";
+import { Category } from "@/Types/general.type";
 
 type CategoryTableProps = {
-  categories: AdminCategory[];
+  categories: Category[];
 };
 
 export default function DataTableCategory({ categories }: CategoryTableProps) {
-  if (categories.length === 0) {
+  if (!categories) {
     return (
       <section className="flex h-full w-full items-center justify-center">
         <p className="text-lg text-muted-foreground">No categories found.</p>
@@ -41,7 +41,7 @@ export default function DataTableCategory({ categories }: CategoryTableProps) {
             {categories.map((category) => (
               <TableRow key={category.id}>
                 <TableCell className="max-w-[260px] truncate font-medium">
-                  {category.category}
+                  {category.name}
                 </TableCell>
 
                 <TableCell className="text-muted-foreground">
@@ -50,11 +50,11 @@ export default function DataTableCategory({ categories }: CategoryTableProps) {
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
-                    <Link href={"/admin/categories/id/edit"}>
+                    <Link href={`/admin/categories/${category.id}/edit`}>
                       <Button
                         variant="ghost"
                         size="icon"
-                        aria-label={`Edit ${category.category}`}
+                        aria-label={`Edit ${category.name}`}
                       >
                         <Pencil className="size-4" />
                       </Button>
@@ -63,7 +63,7 @@ export default function DataTableCategory({ categories }: CategoryTableProps) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      aria-label={`Delete ${category.category}`}
+                      aria-label={`Delete ${category.name}`}
                     >
                       <Trash2 className="size-4 text-destructive" />
                     </Button>

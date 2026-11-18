@@ -7,21 +7,11 @@
         "operationId": "UsersController_getUsers",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Users retrieved successfully."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Forbidden. Admin access required."
-          }
+          "200": { "description": "Users retrieved successfully." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Forbidden. Admin access required." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get all users",
         "tags": ["Users"]
       }
@@ -32,21 +22,11 @@
         "operationId": "UsersController_getMyProfile",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Profile retrieved successfully."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "User not found."
-          }
+          "200": { "description": "Profile retrieved successfully." },
+          "401": { "description": "Unauthorized." },
+          "404": { "description": "User not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get my profile",
         "tags": ["Users"]
       },
@@ -58,31 +38,17 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserModels"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdateUserModels" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Profile updated successfully."
-          },
-          "400": {
-            "description": "Invalid input data."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "404": {
-            "description": "User not found."
-          }
+          "200": { "description": "Profile updated successfully." },
+          "400": { "description": "Invalid input data." },
+          "401": { "description": "Unauthorized." },
+          "404": { "description": "User not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Update my profile",
         "tags": ["Users"]
       }
@@ -96,34 +62,17 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "User retrieved successfully."
-          },
-          "400": {
-            "description": "Invalid user ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "You can only access your own profile."
-          },
-          "404": {
-            "description": "User not found."
-          }
+          "200": { "description": "User retrieved successfully." },
+          "400": { "description": "Invalid user ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "You can only access your own profile." },
+          "404": { "description": "User not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get user by ID",
         "tags": ["Users"]
       },
@@ -135,44 +84,25 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserModels"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdateUserModels" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "User updated successfully."
-          },
-          "400": {
-            "description": "Invalid input data."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Forbidden."
-          },
-          "404": {
-            "description": "User not found."
-          }
+          "200": { "description": "User updated successfully." },
+          "400": { "description": "Invalid input data." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Forbidden." },
+          "404": { "description": "User not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Update user",
         "tags": ["Users"]
       },
@@ -184,34 +114,19 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "User deleted successfully."
-          },
-          "400": {
-            "description": "Invalid user ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
+          "200": { "description": "User deleted successfully." },
+          "400": { "description": "Invalid user ID." },
+          "401": { "description": "Unauthorized." },
           "403": {
             "description": "Forbidden. Admin access required or self-deletion is not allowed."
           },
-          "404": {
-            "description": "User not found."
-          }
+          "404": { "description": "User not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Delete user",
         "tags": ["Users"]
       }
@@ -225,22 +140,14 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserModels"
-              }
+              "schema": { "$ref": "#/components/schemas/CreateUserModels" }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "User registered successfully."
-          },
-          "400": {
-            "description": "Invalid input data."
-          },
-          "409": {
-            "description": "Email already exists."
-          }
+          "201": { "description": "User registered successfully." },
+          "400": { "description": "Invalid input data." },
+          "409": { "description": "Email already exists." }
         },
         "summary": "Register a new user",
         "tags": ["Auth"]
@@ -255,22 +162,14 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginAuthModels"
-              }
+              "schema": { "$ref": "#/components/schemas/LoginAuthModels" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Login successful."
-          },
-          "400": {
-            "description": "Invalid input data."
-          },
-          "401": {
-            "description": "Invalid email or password."
-          }
+          "200": { "description": "Login successful." },
+          "400": { "description": "Invalid input data." },
+          "401": { "description": "Invalid email or password." }
         },
         "summary": "User login",
         "tags": ["Auth"]
@@ -285,16 +184,12 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangePasswordModels"
-              }
+              "schema": { "$ref": "#/components/schemas/ChangePasswordModels" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Password changed successfully."
-          },
+          "200": { "description": "Password changed successfully." },
           "400": {
             "description": "New password must be different from current password."
           },
@@ -302,11 +197,7 @@
             "description": "Unauthorized or current password is incorrect."
           }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Change user password",
         "tags": ["Auth"]
       }
@@ -317,18 +208,10 @@
         "operationId": "AuthController_logout",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Logged out successfully."
-          },
-          "401": {
-            "description": "Unauthorized or invalid token."
-          }
+          "200": { "description": "Logged out successfully." },
+          "401": { "description": "Unauthorized or invalid token." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "User logout",
         "tags": ["Auth"]
       }
@@ -342,28 +225,16 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePostModels"
-              }
+              "schema": { "$ref": "#/components/schemas/CreatePostModels" }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Post created successfully."
-          },
-          "400": {
-            "description": "Invalid input data."
-          },
-          "401": {
-            "description": "Unauthorized."
-          }
+          "201": { "description": "Post created successfully." },
+          "400": { "description": "Invalid input data." },
+          "401": { "description": "Unauthorized." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Create a post",
         "tags": ["Posts"]
       },
@@ -387,22 +258,14 @@
             "required": false,
             "in": "query",
             "description": "Filter posts by category ID",
-            "schema": {
-              "minimum": 1,
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "minimum": 1, "example": 1, "type": "number" }
           },
           {
             "name": "authorId",
             "required": false,
             "in": "query",
             "description": "Filter posts by author ID",
-            "schema": {
-              "minimum": 1,
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "minimum": 1, "example": 1, "type": "number" }
           },
           {
             "name": "status",
@@ -436,15 +299,69 @@
               "type": "string",
               "enum": ["ASC", "DESC"]
             }
+          },
+          {
+            "description": "Search posts by title or content",
+            "required": false,
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "maxLength": 100,
+              "example": "NestJS",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter posts by category ID",
+            "required": false,
+            "name": "categoryId",
+            "in": "query",
+            "schema": { "minimum": 1, "example": 1, "type": "number" }
+          },
+          {
+            "description": "Filter posts by author ID",
+            "required": false,
+            "name": "authorId",
+            "in": "query",
+            "schema": { "minimum": 1, "example": 1, "type": "number" }
+          },
+          {
+            "description": "Filter posts by publication status",
+            "required": false,
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "example": "published",
+              "type": "string",
+              "enum": ["draft", "published"]
+            }
+          },
+          {
+            "description": "Field used to sort posts",
+            "required": false,
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "example": "createdAt",
+              "type": "string",
+              "enum": ["createdAt", "updatedAt", "title"]
+            }
+          },
+          {
+            "description": "Sorting direction",
+            "required": false,
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "example": "DESC",
+              "type": "string",
+              "enum": ["ASC", "DESC"]
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Posts retrieved successfully."
-          },
-          "400": {
-            "description": "Invalid query parameters."
-          }
+          "200": { "description": "Posts retrieved successfully." },
+          "400": { "description": "Invalid query parameters." }
         },
         "summary": "Get all published posts",
         "tags": ["Posts"]
@@ -459,22 +376,13 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Post retrieved successfully."
-          },
-          "400": {
-            "description": "Invalid post ID."
-          },
-          "404": {
-            "description": "Post not found."
-          }
+          "200": { "description": "Post retrieved successfully." },
+          "400": { "description": "Invalid post ID." },
+          "404": { "description": "Post not found." }
         },
         "summary": "Get post by ID",
         "tags": ["Posts"]
@@ -487,44 +395,25 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePostModels"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdatePostModels" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Post updated successfully."
-          },
-          "400": {
-            "description": "Invalid input data or post ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "You are not allowed to update this post."
-          },
-          "404": {
-            "description": "Post not found."
-          }
+          "200": { "description": "Post updated successfully." },
+          "400": { "description": "Invalid input data or post ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "You are not allowed to update this post." },
+          "404": { "description": "Post not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Update a post",
         "tags": ["Posts"]
       },
@@ -536,34 +425,17 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Post deleted successfully."
-          },
-          "400": {
-            "description": "Invalid post ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "You are not allowed to delete this post."
-          },
-          "404": {
-            "description": "Post not found."
-          }
+          "200": { "description": "Post deleted successfully." },
+          "400": { "description": "Invalid post ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "You are not allowed to delete this post." },
+          "404": { "description": "Post not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Delete a post",
         "tags": ["Posts"]
       }
@@ -575,23 +447,15 @@
         "parameters": [
           {
             "name": "id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "number"
-            }
+            "required": true,
+            "in": "path",
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Post retrieved successfully."
-          },
-          "400": {
-            "description": "Invalid post ID."
-          },
-          "404": {
-            "description": "Post not found."
-          }
+          "200": { "description": "Post retrieved successfully." },
+          "400": { "description": "Invalid post ID." },
+          "404": { "description": "Post not found." }
         },
         "summary": "Get post by ID",
         "tags": ["Posts"]
@@ -606,34 +470,17 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Post retrieved successfully."
-          },
-          "400": {
-            "description": "Invalid post ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Admin access required."
-          },
-          "404": {
-            "description": "Post not found."
-          }
+          "200": { "description": "Post retrieved successfully." },
+          "400": { "description": "Invalid post ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Admin access required." },
+          "404": { "description": "Post not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get post by ID for admin",
         "tags": ["Posts"]
       }
@@ -644,9 +491,7 @@
         "operationId": "CategoriesController_getCategories",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Categories retrieved successfully."
-          }
+          "200": { "description": "Categories retrieved successfully." }
         },
         "summary": "Get all categories",
         "tags": ["Categories"]
@@ -659,34 +504,18 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCategoryModels"
-              }
+              "schema": { "$ref": "#/components/schemas/CreateCategoryModels" }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Category created successfully."
-          },
-          "400": {
-            "description": "Invalid input data."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Admin access required."
-          },
-          "409": {
-            "description": "Category already exists."
-          }
+          "201": { "description": "Category created successfully." },
+          "400": { "description": "Invalid input data." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Admin access required." },
+          "409": { "description": "Category already exists." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Create a category",
         "tags": ["Categories"]
       }
@@ -700,22 +529,13 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Category retrieved successfully."
-          },
-          "400": {
-            "description": "Invalid category ID."
-          },
-          "404": {
-            "description": "Category not found."
-          }
+          "200": { "description": "Category retrieved successfully." },
+          "400": { "description": "Invalid category ID." },
+          "404": { "description": "Category not found." }
         },
         "summary": "Get category by ID",
         "tags": ["Categories"]
@@ -728,47 +548,26 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateCategoryModels"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdateCategoryModels" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Category updated successfully."
-          },
-          "400": {
-            "description": "Invalid input data or category ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Admin access required."
-          },
-          "404": {
-            "description": "Category not found."
-          },
-          "409": {
-            "description": "Category name or slug already exists."
-          }
+          "200": { "description": "Category updated successfully." },
+          "400": { "description": "Invalid input data or category ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Admin access required." },
+          "404": { "description": "Category not found." },
+          "409": { "description": "Category name or slug already exists." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Update a category",
         "tags": ["Categories"]
       },
@@ -780,34 +579,17 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Category deleted successfully."
-          },
-          "400": {
-            "description": "Invalid category ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Admin access required."
-          },
-          "404": {
-            "description": "Category not found."
-          }
+          "204": { "description": "Category deleted successfully." },
+          "400": { "description": "Invalid category ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Admin access required." },
+          "404": { "description": "Category not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Delete a category",
         "tags": ["Categories"]
       }
@@ -818,9 +600,7 @@
         "operationId": "TagController_getTags",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Tags retrieved successfully."
-          }
+          "200": { "description": "Tags retrieved successfully." }
         },
         "summary": "Get all tags",
         "tags": ["Tags"]
@@ -833,34 +613,18 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateTagModels"
-              }
+              "schema": { "$ref": "#/components/schemas/CreateTagModels" }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Tag created successfully."
-          },
-          "400": {
-            "description": "Invalid input data."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Admin access required."
-          },
-          "409": {
-            "description": "Tag already exists."
-          }
+          "201": { "description": "Tag created successfully." },
+          "400": { "description": "Invalid input data." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Admin access required." },
+          "409": { "description": "Tag already exists." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Create a tag",
         "tags": ["Tags"]
       }
@@ -874,22 +638,13 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Tag retrieved successfully."
-          },
-          "400": {
-            "description": "Invalid tag ID."
-          },
-          "404": {
-            "description": "Tag not found."
-          }
+          "200": { "description": "Tag retrieved successfully." },
+          "400": { "description": "Invalid tag ID." },
+          "404": { "description": "Tag not found." }
         },
         "summary": "Get tag by ID",
         "tags": ["Tags"]
@@ -902,47 +657,26 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTagModels"
-              }
+              "schema": { "$ref": "#/components/schemas/UpdateTagModels" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Tag updated successfully."
-          },
-          "400": {
-            "description": "Invalid input data or tag ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Admin access required."
-          },
-          "404": {
-            "description": "Tag not found."
-          },
-          "409": {
-            "description": "Tag name or slug already exists."
-          }
+          "200": { "description": "Tag updated successfully." },
+          "400": { "description": "Invalid input data or tag ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Admin access required." },
+          "404": { "description": "Tag not found." },
+          "409": { "description": "Tag name or slug already exists." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Update a tag",
         "tags": ["Tags"]
       },
@@ -954,34 +688,17 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Tag deleted successfully."
-          },
-          "400": {
-            "description": "Invalid tag ID."
-          },
-          "401": {
-            "description": "Unauthorized."
-          },
-          "403": {
-            "description": "Admin access required."
-          },
-          "404": {
-            "description": "Tag not found."
-          }
+          "204": { "description": "Tag deleted successfully." },
+          "400": { "description": "Invalid tag ID." },
+          "401": { "description": "Unauthorized." },
+          "403": { "description": "Admin access required." },
+          "404": { "description": "Tag not found." }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Delete a tag",
         "tags": ["Tags"]
       }
@@ -997,10 +714,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "file": {
-                    "type": "string",
-                    "format": "binary"
-                  }
+                  "file": { "type": "string", "format": "binary" }
                 },
                 "required": ["file"]
               }
@@ -1008,21 +722,11 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "File uploaded successfully"
-          },
-          "400": {
-            "description": "Invalid file or file size exceeds 5 MB"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
+          "201": { "description": "File uploaded successfully" },
+          "400": { "description": "Invalid file or file size exceeds 5 MB" },
+          "401": { "description": "Unauthorized" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Upload a media file",
         "tags": ["Media"]
       }
@@ -1036,10 +740,7 @@
             "required": true,
             "in": "path",
             "description": "Media ID",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
@@ -1047,25 +748,14 @@
             "description": "File retrieved successfully",
             "content": {
               "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
+                "schema": { "type": "string", "format": "binary" }
               }
             }
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Media not found"
-          }
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "Media not found" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Download a media file",
         "tags": ["Media"]
       },
@@ -1077,31 +767,16 @@
             "required": true,
             "in": "path",
             "description": "Media ID",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Media deleted successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          },
-          "404": {
-            "description": "Media not found"
-          }
+          "200": { "description": "Media deleted successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" },
+          "404": { "description": "Media not found" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Delete a media file (Admin only)",
         "tags": ["Media"]
       }
@@ -1115,28 +790,15 @@
             "required": true,
             "in": "path",
             "description": "Post ID",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "201": {
-            "description": "View registered successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Post not found"
-          }
+          "201": { "description": "View registered successfully" },
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "Post not found" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Register a post view",
         "tags": ["Analytics"]
       }
@@ -1146,21 +808,11 @@
         "operationId": "ViewController_getOverview",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "Analytics overview retrieved successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          }
+          "200": { "description": "Analytics overview retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get analytics overview (Admin only)",
         "tags": ["Analytics"]
       }
@@ -1173,37 +825,21 @@
             "name": "startDate",
             "required": false,
             "in": "query",
-            "schema": {
-              "example": "2026-11-01",
-              "type": "string"
-            }
+            "schema": { "example": "2026-11-01", "type": "string" }
           },
           {
             "name": "endDate",
             "required": false,
             "in": "query",
-            "schema": {
-              "example": "2026-11-10",
-              "type": "string"
-            }
+            "schema": { "example": "2026-11-10", "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Popular posts retrieved successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          }
+          "200": { "description": "Popular posts retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get popular posts (Admin only)",
         "tags": ["Analytics"]
       }
@@ -1217,49 +853,28 @@
             "required": true,
             "in": "path",
             "description": "Post ID",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           },
           {
             "name": "startDate",
             "required": false,
             "in": "query",
-            "schema": {
-              "example": "2026-11-01",
-              "type": "string"
-            }
+            "schema": { "example": "2026-11-01", "type": "string" }
           },
           {
             "name": "endDate",
             "required": false,
             "in": "query",
-            "schema": {
-              "example": "2026-11-10",
-              "type": "string"
-            }
+            "schema": { "example": "2026-11-10", "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Post statistics retrieved successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          },
-          "404": {
-            "description": "Post not found"
-          }
+          "200": { "description": "Post statistics retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" },
+          "404": { "description": "Post not found" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get statistics for a specific post (Admin only)",
         "tags": ["Analytics"]
       }
@@ -1272,37 +887,21 @@
             "name": "startDate",
             "required": false,
             "in": "query",
-            "schema": {
-              "example": "2026-11-01",
-              "type": "string"
-            }
+            "schema": { "example": "2026-11-01", "type": "string" }
           },
           {
             "name": "endDate",
             "required": false,
             "in": "query",
-            "schema": {
-              "example": "2026-11-10",
-              "type": "string"
-            }
+            "schema": { "example": "2026-11-10", "type": "string" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Daily views retrieved successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          }
+          "200": { "description": "Daily views retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get daily views statistics (Admin only)",
         "tags": ["Analytics"]
       }
@@ -1315,41 +914,24 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateBlockModel"
-              }
+              "schema": { "$ref": "#/components/schemas/CreateBlockModel" }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Block updated successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          },
-          "404": {
-            "description": "Block not found"
-          }
+          "200": { "description": "Block updated successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" },
+          "404": { "description": "Block not found" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Update a block (Admin only)",
         "tags": ["Blocks"]
       },
@@ -1360,31 +942,16 @@
             "name": "id",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Block deleted successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          },
-          "404": {
-            "description": "Block not found"
-          }
+          "200": { "description": "Block deleted successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" },
+          "404": { "description": "Block not found" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Delete a block (Admin only)",
         "tags": ["Blocks"]
       }
@@ -1397,41 +964,24 @@
             "name": "postId",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateBlockModel"
-              }
+              "schema": { "$ref": "#/components/schemas/CreateBlockModel" }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": "Block created successfully"
-          },
-          "400": {
-            "description": "Invalid block data"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Post not found"
-          }
+          "201": { "description": "Block created successfully" },
+          "400": { "description": "Invalid block data" },
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "Post not found" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Create a block for a post",
         "tags": ["Blocks"]
       },
@@ -1442,28 +992,15 @@
             "name": "postId",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Blocks retrieved successfully"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          }
+          "200": { "description": "Blocks retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get all blocks of a post (Admin only)",
         "tags": ["Blocks"]
       }
@@ -1476,41 +1013,23 @@
             "name": "postId",
             "required": true,
             "in": "path",
-            "schema": {
-              "example": 1,
-              "type": "number"
-            }
+            "schema": { "example": 1, "type": "number" }
           },
           {
             "name": "afterPosition",
             "required": true,
             "in": "query",
             "description": "Return blocks after this position",
-            "schema": {
-              "example": 3,
-              "type": "number"
-            }
+            "schema": { "example": 3, "type": "number" }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Next blocks retrieved successfully"
-          },
-          "400": {
-            "description": "Invalid position"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden - Admin access required"
-          }
+          "200": { "description": "Next blocks retrieved successfully" },
+          "400": { "description": "Invalid position" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden - Admin access required" }
         },
-        "security": [
-          {
-            "bearer": []
-          }
-        ],
+        "security": [{ "bearer": [] }],
         "summary": "Get next blocks of a post (Admin only)",
         "tags": ["Blocks"]
       }
@@ -1526,11 +1045,7 @@
   "servers": [],
   "components": {
     "securitySchemes": {
-      "bearer": {
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "type": "http"
-      }
+      "bearer": { "scheme": "bearer", "bearerFormat": "JWT", "type": "http" }
     },
     "schemas": {
       "UpdateUserModels": {
@@ -1670,9 +1185,7 @@
             "description": "List of tag IDs associated with the post",
             "example": [1, 2, 3],
             "type": "array",
-            "items": {
-              "type": "number"
-            }
+            "items": { "type": "number" }
           },
           "coverMediaId": {
             "type": "number",
@@ -1683,10 +1196,7 @@
         },
         "required": ["title", "content", "excerpt", "categoryId"]
       },
-      "UpdatePostModels": {
-        "type": "object",
-        "properties": {}
-      },
+      "UpdatePostModels": { "type": "object", "properties": {} },
       "CreateCategoryModels": {
         "type": "object",
         "properties": {
@@ -1699,10 +1209,7 @@
         },
         "required": ["name"]
       },
-      "UpdateCategoryModels": {
-        "type": "object",
-        "properties": {}
-      },
+      "UpdateCategoryModels": { "type": "object", "properties": {} },
       "CreateTagModels": {
         "type": "object",
         "properties": {
@@ -1715,10 +1222,7 @@
         },
         "required": ["name"]
       },
-      "UpdateTagModels": {
-        "type": "object",
-        "properties": {}
-      },
+      "UpdateTagModels": { "type": "object", "properties": {} },
       "CreateBlockModel": {
         "type": "object",
         "properties": {

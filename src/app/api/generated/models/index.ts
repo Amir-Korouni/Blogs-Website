@@ -18,7 +18,6 @@ export * from './createUserModels';
 export * from './loginAuthModels';
 export * from './mediaControllerUploadBody';
 export * from './postBlocksControllerFindNextBlocksParams';
-export * from './postsControllerGetAllPostsForAdminParams';
 export * from './postsControllerGetPostsParams';
 export * from './postsControllerGetPostsSortBy';
 export * from './postsControllerGetPostsSortOrder';

@@ -1,7 +1,8 @@
+import { usersControllerGetUsers } from "@/app/api/generated";
 import Pagination from "@/components/dashboard/PagePagination";
 import DataTableUsers from "@/components/users/DataTableUsers";
 import UeserSectionCard from "@/components/users/UserSectionCards";
-import { getUserPage } from "@/app/api/posts.service";
+import { auth } from "@/lib/auth/auth";
 import { Suspense } from "react";
 
 type PageProp = {
@@ -14,9 +15,15 @@ const Page = async ({ searchParams }: PageProp) => {
   const limit = 5;
   const currentPage = Math.max(1, Number(page) || 1);
 
-  const posts = await getUserPage(currentPage, limit);
+  let data;
+  const session = await auth();
 
-  if (!posts.isOk) {
+  try {
+    const response = await usersControllerGetUsers({
+      headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+    });
+    data = response.data;
+  } catch {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
         <p className="text-destructive">
@@ -26,7 +33,6 @@ const Page = async ({ searchParams }: PageProp) => {
     );
   }
 
-  const { data, pages } = posts.data;
   return (
     <div className="flex flex-1 flex-col">
       <div className="@container/main flex flex-col justify-center items-center gap-2">
@@ -40,13 +46,13 @@ const Page = async ({ searchParams }: PageProp) => {
         </div>
       </div>
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        <UeserSectionCard />
+        <UeserSectionCard users={data}/>
         <div>
           <Suspense>
             <DataTableUsers users={data} />
           </Suspense>
         </div>
-        <Pagination currentPage={currentPage} totalPages={pages} />
+        {/* <Pagination currentPage={currentPage} totalPages={pages} /> */}
       </div>
     </div>
   );

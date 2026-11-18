@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -7,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Posts } from "@/Types/post.type";
+import { Posts } from "@/Types/general.type";
 
 type TopPostsProp = {
   posts: Posts[];
@@ -29,9 +30,9 @@ export function TopPostsTable({ posts }: TopPostsProp) {
         {posts.map((post) => (
           <TableRow key={post.id}>
             <TableCell className="font-medium">{post.title}</TableCell>
-            <TableCell>{post.category}</TableCell>
-            <TableCell>{post.author}</TableCell>
-            <TableCell className="text-right">{post.publishedAt}</TableCell>
+            <TableCell>{post.category.name}</TableCell>
+            <TableCell>{post.author.username}</TableCell>
+            <TableCell className="text-right">{post.updatedAt}</TableCell>
           </TableRow>
         ))}
       </TableBody>

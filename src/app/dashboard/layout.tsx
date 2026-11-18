@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
+import AuthProtected from "@/lib/auth/auth-Protected";
 
 export const metadata: Metadata = {
   title: {
@@ -20,6 +21,8 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  AuthProtected();
+
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
       <div className="w-full grow p-6 overflow-hidden md:overflow-y-auto">

@@ -5,7 +5,6 @@ import { useInfinitePosts } from "@/hooks/useInfinite";
 import InfiniteScrollTrigger from "@/components/posts/InfiniteScrollTrigger";
 import { useSearchParams } from "next/navigation";
 import PostCard from "./PostCard";
-import { Posts } from "@/Types/post.type";
 
 export default function InfinitePosts() {
   const searchParams = useSearchParams();
@@ -39,7 +38,7 @@ export default function InfinitePosts() {
 
   const posts =
     data?.pages.flatMap((page) => {
-      if (!page.isOk) return [];
+      if (!page.data) return [];
 
       return page.data;
     }) ?? [];
@@ -58,7 +57,7 @@ export default function InfinitePosts() {
           justify-items-center"
       >
         {posts.map((post) => (
-          <PostCard key={post.posts.id} posts={post.posts} />
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
 

@@ -1,4 +1,4 @@
-import { Posts } from "@/Types/post.type";
+import { Posts } from "@/Types/general.type";
 
 type ArticleProps = {
   posts: Posts;

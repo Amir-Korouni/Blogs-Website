@@ -28,7 +28,8 @@ import type {
   LoginAuthModels
 } from '../models';
 import { apiClient } from '../../client.service';
-import { signinType } from '../types/auth.type';
+import { signinState } from '@/lib/validations/auth.validation';
+import { LoginResponse } from '@/lib/auth/auth.type';
 
 
 
@@ -43,7 +44,7 @@ export const authControllerRegister = (
  ): Promise<AxiosResponse<void>> => {
 
 
-    return apiClient.post(
+    return axios.post(
       `/auth/register`,
       createUserModels,options
     );
@@ -118,7 +119,7 @@ export const useAuthControllerRegister = <TError = AxiosError<void>,
  */
 export const authControllerLogin = (
     loginAuthModels: LoginAuthModels, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<signinType>> => {
+ ): Promise<AxiosResponse<LoginResponse>> => {
 
 
     return apiClient.post(
@@ -129,7 +130,7 @@ export const authControllerLogin = (
 
 export const getAuthControllerLoginUrl = () => {
 
-  return axios.create({
+  return apiClient.create({
     baseURL: '',
     params: null,
   }).getUri({

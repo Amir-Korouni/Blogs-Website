@@ -22,6 +22,8 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { postsControllerUpdatePost } from "@/app/api/generated";
 
 const formSchema = z.object({
   title: z
@@ -48,7 +50,11 @@ const formSchema = z.object({
     .max(32, "Bug tagIds must be at most 32 characters."),
 });
 
-export function EditPosts() {
+type EditPostsArg = {
+  id: number;
+};
+
+export function EditPosts({ id }: EditPostsArg) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,21 +64,23 @@ export function EditPosts() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
-    });
+  const router = useRouter();
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    try {
+      console.log("Updating data:", data);
+
+      const response = await postsControllerUpdatePost(id, data);
+
+      console.log("API response:", response);
+
+      toast.success("Post updated successfully!");
+
+      router.push("/admin/posts");
+    } catch (error) {
+      console.error("Failed to update post:", error);
+
+      toast.error("Failed to update post. Please try again.");
+    }
   }
 
   return (

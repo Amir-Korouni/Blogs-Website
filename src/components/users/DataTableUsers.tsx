@@ -9,15 +9,15 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
-import { User } from "@/Types/user.type";
 import Link from "next/link";
+import { User } from "@/Types/general.type";
 
 type UserTableProps = {
   users: User[];
 };
 
 export default function DataTableUsers({ users }: UserTableProps) {
-  if (users.length === 0) {
+  if (!users) {
     return (
       <section className="flex h-full w-full items-center justify-center">
         <p className="text-lg text-muted-foreground">No users found.</p>
@@ -41,39 +41,39 @@ export default function DataTableUsers({ users }: UserTableProps) {
 
           <TableBody>
             {users.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>{user.id}</TableCell>
+            <TableRow key={user.id}>
+              <TableCell>{user.id}</TableCell>
 
-                <TableCell className="max-w-[260px] truncate font-medium">
-                  {user.title}
-                </TableCell>
+              <TableCell className="max-w-[260px] truncate font-medium">
+                {user.username}
+              </TableCell>
 
-                <TableCell>{user.email}</TableCell>
+              <TableCell>{user.email}</TableCell>
 
-                <TableCell>{user.role}</TableCell>
+              <TableCell>{user.role}</TableCell>
 
-                <TableCell>
-                  <div className="flex justify-end gap-2">
-                    <Link href={`/admin/users/${user.id}/page`}>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        aria-label={`Edit ${user.title}`}
-                      >
-                        <Pencil className="size-4" />
-                      </Button>
-                    </Link>
-
+              <TableCell>
+                <div className="flex justify-end gap-2">
+                  <Link href={`/admin/users/${user.id}/page`}>
                     <Button
                       variant="ghost"
                       size="icon"
-                      aria-label={`Delete ${user.title}`}
+                      aria-label={`Edit ${user.username}`}
                     >
-                      <Trash2 className="size-4 text-destructive" />
+                      <Pencil className="size-4" />
                     </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
+                  </Link>
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label={`Delete ${user.username}`}
+                  >
+                    <Trash2 className="size-4 text-destructive" />
+                  </Button>
+                </div>
+              </TableCell>
+            </TableRow>
             ))}
           </TableBody>
         </Table>

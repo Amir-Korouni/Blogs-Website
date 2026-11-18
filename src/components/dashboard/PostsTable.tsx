@@ -9,7 +9,7 @@ import {
 
 import { Button } from "@/src/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
-import { Posts } from "@/Types/post.type";
+import { Posts } from "@/Types/general.type";
 
 type PostTableProps = {
   posts: Posts[];

@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { getCategoryPosts } from "@/app/api/posts.service";
 import { Plus } from "lucide-react";
 import DataTableCategory from "@/components/category/DataTableCategory";
 import Link from "next/link";
+import { categoriesControllerGetCategories } from "@/app/api/generated";
 
 const Page = async () => {
-  const result = await getCategoryPosts();
-
-  if (!result.isOk) {
+  const result = await categoriesControllerGetCategories();
+  console.log(result);
+  
+  if (!result.data) {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
         <p className="text-destructive">

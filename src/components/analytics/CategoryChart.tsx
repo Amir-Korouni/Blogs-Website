@@ -16,7 +16,15 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import { CategoryChart } from "@/Types/category.type";
+
+export const CategoryChart = [
+  { title: "Front-end", desktop: 186 },
+  { title: "Back-end", desktop: 306 },
+  { title: "AI", desktop: 400 },
+  { title: "DevOps", desktop: 75 },
+  { title: "General", desktop: 216 },
+];
+
 
 export const description = "A horizontal bar chart";
 

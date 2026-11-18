@@ -2,12 +2,15 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { CSSProperties } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { AppSidebar } from "@/components/app-sidebar";
+import AuthProtected from "@/lib/auth/auth-Protected";
 
 type AdminType = {
   children: React.ReactNode;
 };
 
 export default function AdminLayout({ children }: AdminType) {
+  AuthProtected();
+
   return (
     <SidebarProvider
       style={
