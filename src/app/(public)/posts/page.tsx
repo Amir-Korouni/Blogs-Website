@@ -1,13 +1,18 @@
 import Search from "@/components/posts/Search";
 import { Metadata } from "next";
 import InfinitePosts from "@/components/posts/InfinitePosts";
+import { postsControllerGetPosts } from "@/app/api/generated";
+import PostCard from "@/components/posts/PostCard";
 
 export const metadata: Metadata = {
   title: "Posts",
   description: "Explore all articles about modern technologies.",
 };
 
-const Page = () => {
+const Page = async () => {
+  const posts = await postsControllerGetPosts();
+  console.log(posts.data);
+
   return (
     <>
       <main>
@@ -19,15 +24,25 @@ const Page = () => {
             </p>
           </div>
           <div className="w-[60%] mt-10 flex flex-col justify-center items-center text-foreground border-t border-t-px">
-            <h2 className="mt-5 text-[clamp(1.8rem,4vw,3rem)]">
-              Search | Filter
-            </h2>
             <Search />
           </div>
         </section>
         <section className="w-full h-auto flex flex-col justify-center items-center bg-background">
           <h2 className="text-[clamp(1.8rem,4vw,3rem)]">Posts</h2>
-          <InfinitePosts />
+          <section
+            className="w-[100%]
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            xl:grid-cols-4
+            gap-6
+            xl:gap-8
+            justify-items-center"
+          >
+            {posts.data.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </section>
         </section>
       </main>
     </>

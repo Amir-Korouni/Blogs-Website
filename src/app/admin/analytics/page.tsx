@@ -14,7 +14,7 @@ const Page = async () => {
   let popularPosts;
   try {
     const response = await viewControllerGetPopularPosts(
-      { startDate: "2026-11-19", endDate: "2026-11-25" },
+      { startDate: "2026-11-19", endDate: "2026-12-29" },
       {
         headers: {
           Authorization: `Bearer ${session?.user.accessToken}`,

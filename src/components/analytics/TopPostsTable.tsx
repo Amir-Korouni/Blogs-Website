@@ -30,9 +30,13 @@ export function TopPostsTable({ posts }: TopPostsProp) {
         {posts.map((post) => (
           <TableRow key={post.id}>
             <TableCell className="font-medium">{post.title}</TableCell>
-            <TableCell>{post.category.name}</TableCell>
-            <TableCell>{post.author.username}</TableCell>
-            <TableCell className="text-right">{post.updatedAt}</TableCell>
+            <TableCell>{post.category?.name}</TableCell>
+            <TableCell>{post.author?.username}</TableCell>
+            <TableCell className="text-right">
+              <time dateTime={post.updatedAt}>
+                {new Date(post.updatedAt).toLocaleDateString()}
+              </time>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

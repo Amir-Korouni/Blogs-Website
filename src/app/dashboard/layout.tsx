@@ -25,7 +25,7 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <div className="w-full grow p-6 overflow-hidden md:overflow-y-auto">
+      <div className="w-full grow p-6 overflow-x-hidden md:overflow-y-auto">
         {children}
       </div>
     </div>

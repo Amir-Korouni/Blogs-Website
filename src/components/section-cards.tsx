@@ -18,14 +18,11 @@ export function SectionCards({ data: posts }: sessionType) {
   const totalPosts = posts.length;
 
   const publishedPosts = posts.filter(
-    (post) => post.status === "Published",
+    (post) => post.status === "published",
   ).length;
 
   const draftPosts = posts.filter((post) => post.status === "draft").length;
 
-  const unpublishedPosts = posts.filter(
-    (post) => post.status === "UnPublished",
-  ).length;
   return (
     <div className="grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4 dark:*:data-[slot=card]:bg-card">
       <Card className="@container/card">
@@ -79,17 +76,17 @@ export function SectionCards({ data: posts }: sessionType) {
       </Card>
       <Card className="@container/card">
         <CardHeader>
-          <CardDescription>Unpublished Post</CardDescription>
+          <CardDescription>Draft Posts</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            {unpublishedPosts}
+            {draftPosts}
           </CardTitle>
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <div className="line-clamp-1 flex gap-2 font-medium">
-            Posts not currently published <EyeOff className="size-4" />
+            Posts waiting for publication <FileEdit className="size-4" />
           </div>
           <div className="text-muted-foreground">
-            {unpublishedPosts} are not published
+            {draftPosts} posts is still draft status
           </div>
         </CardFooter>
       </Card>

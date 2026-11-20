@@ -22,7 +22,7 @@ const Page = async () => {
   }
 
   return (
-    <main className="w-full min-w-0">
+    <main className="w-full min-w-0  min-h-screen ">
       <section className="w-full min-h-[220px] sm:min-h-[260px] bg-[var(--latest-section)] text-zinc-100 flex flex-col justify-center items-center px-4 py-10">
         <div className="text-foreground text-center space-y-2 max-w-3xl">
           <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold">

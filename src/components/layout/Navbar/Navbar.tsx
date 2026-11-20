@@ -27,7 +27,7 @@ const Navbar = () => {
                   href="/dashboard"
                   className="w-[80px] h-[40px] duration-200 bg-[#2563EB] hover:bg-[#1D4ED8] rounded-[10px] flex justify-center items-center"
                 >
-                  <h3>{session.user.name }</h3>
+                  <h3 className="w-full text-[clamp(0.5rem,0.8vw,1rem)] text-center">{session.user.name }</h3>
                 </Link>
               )}
 

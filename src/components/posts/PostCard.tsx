@@ -8,6 +8,7 @@ import {
 } from "../ui/card";
 import type { Posts } from "@/Types/general.type";
 import { Button } from "../ui/button";
+import { Heart, LucideKey, Save, SavePenIcon } from "lucide-react";
 
 type PostCardProps = {
   post: Posts;
@@ -15,7 +16,7 @@ type PostCardProps = {
 
 const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Card className="flex flex-col max-w-[370px] min-h-[300px] bg-card text-[var(--foreground)] rounded border border-[#334155] transition-transform duration-300 hover:-translate-y-1">
+    <Card className="max-w-[370px] h-full min-h-[300px] flex flex-col bg-card text-[var(--foreground)] rounded border border-[#334155] transition-transform duration-300 hover:-translate-y-1">
       <article className="size-full flex flex-1 flex-col">
         <CardHeader>
           <CardTitle className="flex flex-col gap-2">
@@ -32,7 +33,7 @@ const PostCard = ({ post }: PostCardProps) => {
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="w-full text-left">
+        <CardContent className="w-full h-[100px] overflow-y-hidden text-left mt-8">
           <p className="text-[clamp(0.875rem,1.5vw,1rem)] leading-relaxed">
             {post.excerpt}
           </p>
@@ -51,7 +52,16 @@ const PostCard = ({ post }: PostCardProps) => {
           </div>
         </CardContent>
 
-        <CardFooter className="w-full flex flex-wrap gap-2 justify-between items-center bg-[#3B82F6] px-4 py-3 mt-auto">
+        <CardFooter className="flex gap-2">
+          <Button variant={"outline"}>
+            <Heart color="white" />
+          </Button>
+          <Button variant={"outline"}>
+            <SavePenIcon color="white" />
+          </Button>
+        </CardFooter>
+
+        <CardFooter className="w-full flex flex-wrap gap-2 justify-between items-center bg-[#3B82F6] px-4 py-3">
           <p>{post.author.username}</p>
 
           <time dateTime={post.createdAt}>

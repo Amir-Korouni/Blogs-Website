@@ -58,7 +58,7 @@ export type Tag = {
   updatedAt: string;
 };
 
-export type PostStatus = "Published" | "UnPublished" | "draft";
+export type PostStatus = "published" | "draft";
 
 export type Posts = {
   id: number;
