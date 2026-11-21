@@ -25,7 +25,6 @@ export const CategoryChart = [
   { title: "General", desktop: 216 },
 ];
 
-
 export const description = "A horizontal bar chart";
 
 const chartConfig = {

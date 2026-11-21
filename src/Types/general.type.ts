@@ -1,35 +1,3 @@
-// export type Posts = {
-//   id: number;
-
-//   title: string;
-
-//   slug: string;
-
-//   content: string;
-
-//   excerpt: string;
-
-//   status: "Published" | "UnPublished" | "Draft";
-
-//   author: string;
-
-//   category: string;
-
-//   coverMedia: string;
-
-//   tags: number[];
-
-//   createdAt: string;
-
-//   updatedAt: string;
-// };
-
-// type nextType = {
-//   next: string | null
-// }
-
-// export type PostsResponse = Posts[] & nextType;
-
 export type User = {
   id: number;
   username: string;
@@ -73,4 +41,16 @@ export type Posts = {
   tags: Tag[];
   createdAt: string;
   updatedAt: string;
+};
+
+export type analytics = {
+  postId: number;
+  title: string;
+  totalViews: number;
+  totalPosts: number;
+  totalUsers: number;
+};
+
+export type useQueryAuth = {
+  accessToken: string;
 };

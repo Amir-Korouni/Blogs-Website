@@ -26,7 +26,7 @@ import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import type { UpdateUserModels } from "../models";
 import { apiClient } from "../../client.service";
-import { Posts, User } from "@/Types/general.type";
+import { User } from "@/Types/general.type";
 
 const withQueryKey = <T extends object, K>(
   query: T,
@@ -214,12 +214,12 @@ export function useUsersControllerGetUsers<
  */
 export const usersControllerGetMyProfile = (
   options?: AxiosRequestConfig,
-): Promise<AxiosResponse<void>> => {
-  return axios.get(`/users/me`, options);
+): Promise<AxiosResponse<User>> => {
+  return apiClient.get(`/users/me`, options);
 };
 
 export const getUsersControllerGetMyProfileUrl = () => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,

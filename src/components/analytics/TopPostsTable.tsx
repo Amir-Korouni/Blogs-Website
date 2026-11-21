@@ -1,5 +1,8 @@
 "use client";
 import {
+  useViewControllerGetPopularPosts,
+} from "@/app/api/generated";
+import {
   Table,
   TableBody,
   TableCaption,
@@ -8,35 +11,56 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Posts } from "@/Types/general.type";
+import { analytics, useQueryAuth } from "@/Types/general.type";
+import { AxiosResponse } from "axios";
 
-type TopPostsProp = {
-  posts: Posts[];
-};
+export function TopPostsTable({ accessToken }: useQueryAuth) {
+  const startDate = "2026-11-19";
+  const endDate = "2026-12-29";
 
-export function TopPostsTable({ posts }: TopPostsProp) {
+  const { data, isLoading, isError, error } = useViewControllerGetPopularPosts<
+    AxiosResponse<analytics[]>
+  >(
+    { startDate, endDate },
+    {
+      axios: {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      query: {
+        enabled: !!accessToken,
+        staleTime: 5 * 60 * 1000,
+      },
+    },
+  );
+
+  if (isLoading) {
+    return <p>Loading popular posts...</p>;
+  }
+
+  if (isError) {
+    console.error("Failed to load popular posts:", error);
+    return <p>Failed to load posts. Please try again later.</p>;
+  }
+
+
   return (
     <Table>
       <TableCaption>A list of your recent Posts.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Posts</TableHead>
-          <TableHead>Category</TableHead>
-          <TableHead>author</TableHead>
-          <TableHead className="text-right">Published At</TableHead>
+          <TableHead className="text-center">Posts</TableHead>
+          <TableHead className="text-center">PostId</TableHead>
+          <TableHead className="text-center">TotalViews</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {posts.map((post) => (
-          <TableRow key={post.id}>
+        {data?.data.map((post) => (
+          <TableRow key={post.postId} className="text-center">
             <TableCell className="font-medium">{post.title}</TableCell>
-            <TableCell>{post.category?.name}</TableCell>
-            <TableCell>{post.author?.username}</TableCell>
-            <TableCell className="text-right">
-              <time dateTime={post.updatedAt}>
-                {new Date(post.updatedAt).toLocaleDateString()}
-              </time>
-            </TableCell>
+            <TableCell>{post.postId}</TableCell>
+            <TableCell>{post.totalViews}</TableCell>
           </TableRow>
         ))}
       </TableBody>

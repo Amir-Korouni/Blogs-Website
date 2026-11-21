@@ -30,7 +30,7 @@ import type {
   ViewControllerGetPostStatsParams,
 } from "../models";
 import { apiClient } from "../../client.service";
-import { Posts } from "@/Types/general.type";
+import { analytics } from "@/Types/general.type";
 
 const withQueryKey = <T extends object, K>(
   query: T,
@@ -153,12 +153,12 @@ export const useViewControllerRegisterView = <
  */
 export const viewControllerGetOverview = (
   options?: AxiosRequestConfig,
-): Promise<AxiosResponse<void>> => {
-  return axios.get(`/analytics/overview`, options);
+): Promise<AxiosResponse<analytics>> => {
+  return apiClient.get(`/analytics/overview`, options);
 };
 
 export const getViewControllerGetOverviewUrl = () => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -315,7 +315,7 @@ export function useViewControllerGetOverview<
 export const viewControllerGetPopularPosts = (
   params?: ViewControllerGetPopularPostsParams,
   options?: AxiosRequestConfig,
-): Promise<AxiosResponse<Posts[]>> => {
+): Promise<AxiosResponse<analytics[]>> => {
   return apiClient.get(`/analytics/posts/popular`, {
     ...options,
     params: { ...params, ...options?.params },
@@ -693,7 +693,7 @@ export const viewControllerGetDailyViews = (
   params?: ViewControllerGetDailyViewsParams,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.get(`/analytics/views/daily`, {
+  return apiClient.get(`/analytics/views/daily`, {
     ...options,
     params: { ...params, ...options?.params },
   });
@@ -702,7 +702,7 @@ export const viewControllerGetDailyViews = (
 export const getViewControllerGetDailyViewsUrl = (
   params?: ViewControllerGetDailyViewsParams,
 ) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,

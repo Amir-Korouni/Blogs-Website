@@ -8,7 +8,7 @@ import {
 } from "../ui/card";
 import type { Posts } from "@/Types/general.type";
 import { Button } from "../ui/button";
-import { Heart, LucideKey, Save, SavePenIcon } from "lucide-react";
+import { Heart, SavePenIcon } from "lucide-react";
 
 type PostCardProps = {
   post: Posts;

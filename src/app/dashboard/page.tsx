@@ -13,6 +13,10 @@ import Link from "next/link";
 import { auth, logout } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
 import { Form } from "@base-ui/react";
+import DashboardHeader from "@/components/dashboard/dashboardHeader";
+import EditDialog from "@/components/dashboard/EditDialog";
+import EditPass from "@/components/dashboard/EditPass";
+import { usersControllerGetMyProfile } from "../api/generated";
 
 const Page = async () => {
   const session = await auth();
@@ -21,38 +25,13 @@ const Page = async () => {
     redirect("/admin");
   }
 
+  const userInfo = await usersControllerGetMyProfile({
+    headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+  });
+
   return (
     <main className="w-full min-w-0  min-h-screen ">
-      <section className="w-full min-h-[220px] sm:min-h-[260px] bg-[var(--latest-section)] text-zinc-100 flex flex-col justify-center items-center px-4 py-10">
-        <div className="text-foreground text-center space-y-2 max-w-3xl">
-          <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold">
-            User Dashboard
-          </h2>
-
-          <p className="text-[clamp(0.9rem,2vw,1.2rem)]">
-            Hello {session.user.name}! 👋
-          </p>
-
-          <p className="text-[clamp(0.85rem,2vw,1.2rem)]">
-            Welcome to your personal space on DEVLOG.
-          </p>
-
-          <p className="text-sm sm:text-base">
-            Explore new ideas, discover articles and manage your account.
-          </p>
-          <p className="text-sm sm:text-base">
-            Would you like to visite your
-            <Link
-              href="/"
-              className="underline text-[var(--ring)] font-bold px-1"
-            >
-              {" "}
-              Main page
-            </Link>
-            for learning all things?
-          </p>
-        </div>
-      </section>
+      <DashboardHeader user={userInfo.data.username} />
 
       <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
@@ -85,7 +64,7 @@ const Page = async () => {
                       </label>
 
                       <h2 className="text-lg sm:text-xl font-semibold break-words">
-                        {session.user.name}
+                        {userInfo.data.username}
                       </h2>
                     </div>
 
@@ -95,7 +74,7 @@ const Page = async () => {
                       </label>
 
                       <h2 className="text-base sm:text-lg font-medium break-all">
-                        {session.user.email}
+                        {userInfo.data.email}
                       </h2>
                     </div>
 
@@ -113,10 +92,10 @@ const Page = async () => {
                   Manage your personal information and keep your account details
                   up to date.
                 </p>
-
-                <Button type="button" className="w-full">
-                  Edit Profile
-                </Button>
+                <EditDialog
+                  email={userInfo.data.email}
+                  username={userInfo.data.username}
+                />
               </CardFooter>
             </Card>
           </div>
@@ -154,9 +133,7 @@ const Page = async () => {
                   to date.
                 </p>
 
-                <Button type="button" className="w-full">
-                  Change Password
-                </Button>
+                <EditPass />
               </CardFooter>
             </Card>
           </div>
