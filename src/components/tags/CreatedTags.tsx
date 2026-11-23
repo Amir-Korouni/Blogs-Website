@@ -22,6 +22,11 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useQueryClient } from "@tanstack/react-query";
+import { useTagControllerCreateTag } from "@/app/api/generated";
+import { useSession } from "next-auth/react";
+import { Form } from "@base-ui/react";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   tag: z
@@ -38,21 +43,32 @@ export function CreatedTags() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
+  const { data: session } = useSession();
+  const queryClient = useQueryClient();
+
+  const { mutate: createCategory, isPending } = useTagControllerCreateTag({
+    axios: {
+      headers: {
+        Authorization: `Bearer ${session?.user.accessToken}`,
       },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
-    });
+    },
+    mutation: {
+      onSuccess: () => {
+        toast.success("You create a tag successfully.");
+        queryClient.invalidateQueries({
+          queryKey: ["/tags"],
+        });
+      },
+      onError: (error) => {
+        console.error("Failed to create post:", error);
+        toast.success("Faild to create a tag.");
+      },
+    },
+  });
+
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    createCategory({ data: { name: data.tag } });
+    redirect("/admin/tags");
   }
 
   return (
@@ -62,16 +78,14 @@ export function CreatedTags() {
         <CardDescription>Edit tags with Id.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+        <Form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="tag"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
-                    Tag
-                  </FieldLabel>
+                  <FieldLabel htmlFor="form-rhf-demo-title">Tag</FieldLabel>
                   <Input
                     {...field}
                     id="form-rhf-demo-title"
@@ -86,7 +100,7 @@ export function CreatedTags() {
               )}
             />
           </FieldGroup>
-        </form>
+        </Form>
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">

@@ -14,13 +14,48 @@ import { Posts } from "@/Types/general.type";
 
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./ui/alert-dialog";
+import { useQueryClient } from "@tanstack/react-query";
+import { usePostsControllerDeletePost } from "@/app/api/generated";
+import { useState } from "react";
 
 type PostTableProps = {
   data: Posts[];
+  accessToken: string;
 };
 
-export function DataTable({ data: posts }: PostTableProps) {
-  console.log(posts);
+export function DataTable({ data: posts, accessToken }: PostTableProps) {
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const queryClient = useQueryClient();
+
+  const { mutate: deletePost, isPending } = usePostsControllerDeletePost({
+    axios: {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+    mutation: {
+      onSuccess: () => {
+        setSelectedPostId(null)
+        queryClient.invalidateQueries({
+          queryKey: ["/posts"],
+        });
+      },
+      onError: () => {
+        console.error("Failed to delete post");
+      },
+    },
+  });
 
   return (
     <div className="flex flex-col gap-2">
@@ -28,18 +63,18 @@ export function DataTable({ data: posts }: PostTableProps) {
         <Table className="min-w-[700px] man-h-[900px]">
           <TableHeader>
             <TableRow>
-              <TableHead>Id</TableHead>
-              <TableHead className="w-[35%]">Title</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Published At</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead className="text-center">Id</TableHead>
+              <TableHead className="w-[35%] text-center">Title</TableHead>
+              <TableHead className="text-center">Category</TableHead>
+              <TableHead className="text-center">Status</TableHead>
+              <TableHead className="text-center">Published At</TableHead>
+              <TableHead className="text-right ">Actions</TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
             {posts.map((post) => (
-              <TableRow key={post.id}>
+              <TableRow key={post.id} className="text-center">
                 <TableCell>{post.id}</TableCell>
 
                 <TableCell className="max-w-[260px] truncate font-medium">
@@ -50,7 +85,11 @@ export function DataTable({ data: posts }: PostTableProps) {
 
                 <TableCell>{post.status}</TableCell>
 
-                <TableCell>{post.updatedAt}</TableCell>
+                <TableCell>
+                  <time dateTime={post.createdAt}>
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </time>
+                </TableCell>
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
@@ -64,13 +103,47 @@ export function DataTable({ data: posts }: PostTableProps) {
                       </Button>
                     </Link>
 
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      aria-label={`Delete ${post.title}`}
+                    <AlertDialog
+                      open={selectedPostId === post.id}
+                      onOpenChange={(open) => {
+                        setSelectedPostId(open ? post.id : null);
+                      }}
                     >
-                      <Trash2 className="size-4 text-destructive" />
-                    </Button>
+                      <AlertDialogTrigger
+                        render={
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            aria-label={`Delete ${post.title}`}
+                          />
+                        }
+                      >
+                        <Trash2 className="size-4 text-destructive" />
+                      </AlertDialogTrigger>
+
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete this post?</AlertDialogTitle>
+
+                          <AlertDialogDescription>
+                            Are you sure you want to delete
+                            <strong> {post.title}</strong>? This action cannot
+                            be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                          <AlertDialogAction
+                            disabled={isPending}
+                            onClick={() => deletePost({ id: Number(post.id) })}
+                          >
+                            {isPending ? "Deleting..." : "Delete"}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </TableCell>
               </TableRow>

@@ -16,7 +16,13 @@ import { Form } from "@base-ui/react";
 import DashboardHeader from "@/components/dashboard/dashboardHeader";
 import EditDialog from "@/components/dashboard/EditDialog";
 import EditPass from "@/components/dashboard/EditPass";
-import { usersControllerGetMyProfile } from "../api/generated";
+import {
+  postsControllerGetPosts,
+  usersControllerGetMyProfile,
+} from "../api/generated";
+import { Suspense } from "react";
+import { PostGrid } from "@/components/posts/PostGrid";
+import Loading from "./loading";
 
 const Page = async () => {
   const session = await auth();
@@ -29,6 +35,18 @@ const Page = async () => {
     headers: { Authorization: `Bearer ${session?.user.accessToken}` },
   });
 
+  const id = userInfo.data.id;
+
+  const usersPost = await postsControllerGetPosts(
+    {
+      authorId: id,
+    },
+    {
+      headers: { Authorization: `Bearer ${session?.user.accessToken}` },
+    },
+  );
+
+  
   return (
     <main className="w-full min-w-0  min-h-screen ">
       <DashboardHeader user={userInfo.data.username} />
@@ -146,27 +164,25 @@ const Page = async () => {
             <h2 className="text-lg sm:text-xl font-semibold">Posts</h2>
 
             <Link
-              href={navLinks[1].href}
+              href={"/dashboard/create"}
               className="flex items-center gap-2 text-sm sm:text-base hover:text-primary transition-colors w-fit"
             >
-              <span>View All</span>
+              <span>Create a Post</span>
               <MoveRightIcon size={18} />
             </Link>
           </div>
 
           <p className="text-sm sm:text-base text-muted-foreground">
             Discover whats new on DEVLOG.
+            <br />
+            {userInfo.data.username} write a {usersPost.data.length} posts and
+            other people see that.
           </p>
 
           <div className="w-full min-w-0">
-            {/* <Suspense fallback={<Loading />}>
-              <PostGrid posts={posts.data} />
-            </Suspense> */}
-            Would you like to learn somethings new about tech? Some platform
-            that Experienced technicians write a blog about some topics?
-          </div>
-          <div className="w-full min-w-0">
-            If you like to learn every things about tech, click and jump to it.
+            <Suspense fallback={<Loading />}>
+              <PostGrid posts={usersPost.data} />
+            </Suspense>
           </div>
         </div>
       </section>

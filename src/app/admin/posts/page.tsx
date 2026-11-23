@@ -19,12 +19,14 @@ type PageProps = {
 const Page = async ({ searchParams }: PageProps) => {
   const { page, query, category, status } = await searchParams;
 
+  console.log(status);
+  
   const limit = 7;
   const currentPage = Math.max(1, Number(page) || 1);
 
-  let data;
-
   const session = await auth();
+
+  let data;
 
   try {
     const response = await postsControllerGetAllPostsForAdmin({
@@ -60,7 +62,7 @@ const Page = async ({ searchParams }: PageProps) => {
             <Search ifAdmin={true} />
           </div>
           <div className="w-full h-full flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <DataTable data={data} />
+            <DataTable data={data} accessToken={session?.user.accessToken} />
           </div>
           {/* <Pagination currentPage={currentPage} totalPages={pages} /> */}
         </div>

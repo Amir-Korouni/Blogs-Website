@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -11,12 +12,52 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Tag } from "@/Types/general.type";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { useTagControllerDeleteTag } from "@/app/api/generated";
+import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 type TagsTableProps = {
   tag: Tag[];
+  accessToken: string;
 };
 
-export function DataTableTags({ tag }: TagsTableProps) {
+export function DataTableTags({ tag, accessToken }: TagsTableProps) {
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteTag, isPending } = useTagControllerDeleteTag({
+    axios: {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+    mutation: {
+      onSuccess: () => {
+        toast.success("Delete Tag was successfully");
+
+        setSelectedPostId(null);
+        queryClient.invalidateQueries({
+          queryKey: ["/tags"],
+        });
+      },
+      onError: (error) => {
+        console.error("Failed to delete tag:", error);
+        toast.error("Failed to delete tag.");
+      },
+    },
+  });
   if (!tag) {
     return (
       <section className="flex h-full w-full items-center justify-center">
@@ -55,7 +96,7 @@ export function DataTableTags({ tag }: TagsTableProps) {
 
                 <TableCell>
                   <div className="flex justify-end gap-2">
-                    <Link href={"/admin/tags/id/edit"}>
+                    <Link href={`/admin/tags/${item.id}/edit`}>
                       <Button
                         variant="ghost"
                         size="icon"
@@ -65,13 +106,47 @@ export function DataTableTags({ tag }: TagsTableProps) {
                       </Button>
                     </Link>
 
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Delete ${item.name}`}
+                    <AlertDialog
+                      open={selectedPostId === item.id}
+                      onOpenChange={(open) => {
+                        setSelectedPostId(open ? item.id : null);
+                      }}
                     >
-                      <Trash2 className="size-4 text-destructive" />
-                    </Button>
+                      <AlertDialogTrigger
+                        render={
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            aria-label={`Delete ${item.name}`}
+                          />
+                        }
+                      >
+                        <Trash2 className="size-4 text-destructive" />
+                      </AlertDialogTrigger>
+
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Delete this item?</AlertDialogTitle>
+
+                          <AlertDialogDescription>
+                            Are you sure you want to delete
+                            <strong> {item.name}</strong>? This action cannot be
+                            undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                          <AlertDialogAction
+                            disabled={isPending}
+                            onClick={() => deleteTag({ id: Number(item.id) })}
+                          >
+                            {isPending ? "Deleting..." : "Delete"}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </TableCell>
               </TableRow>

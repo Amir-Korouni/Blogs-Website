@@ -6,6 +6,7 @@ import ThemeProvider from "@/components/providers/ThemeProvider";
 import { Lora } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Provider from "@/components/providers";
+import { Toaster } from "@/components/ui/toast";
 
 const lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
 
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-background text-foreground)]">
         <ThemeProvider>
           <Provider>{children}</Provider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

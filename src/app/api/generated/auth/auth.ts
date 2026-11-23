@@ -28,7 +28,6 @@ import type {
   LoginAuthModels
 } from '../models';
 import { apiClient } from '../../client.service';
-import { signinState } from '@/lib/validations/auth.validation';
 import { LoginResponse } from '@/lib/auth/auth.type';
 
 

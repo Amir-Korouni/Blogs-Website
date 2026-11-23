@@ -128,7 +128,7 @@ const Search = ({ ifAdmin }: searchType) => {
           <div className="w-[40%]">
             <label htmlFor="search">Filter Posts</label>
             <Select
-              value={searchParam.get("category") ?? "all"}
+              value={searchParam.get("status") ?? "all"}
               onValueChange={(value) => {
                 handleFilterState(value );
               }}

@@ -22,44 +22,57 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from "../ui/input-group";
+import { Form } from "@base-ui/react";
+import { useCategoriesControllerCreateCategory } from "@/app/api/generated";
+import { useQueryClient } from "@tanstack/react-query";
+import { useQueryAuth } from "@/Types/general.type";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   name: z
     .string()
     .min(5, "Bug title must be at least 5 characters.")
     .max(32, "Bug title must be at most 32 characters."),
-
-  description: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
 });
 
-export function CreateCategory() {
+export function CreateCategory({ accessToken }: useQueryAuth) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      description: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
+  const queryClient = useQueryClient();
+
+  const {
+    mutate: CreateCategory,
+    isPending,
+    isError,
+  } = useCategoriesControllerCreateCategory({
+    axios: {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    },
+    mutation: {
+      onSuccess: () => {
+        toast.success("Category create successfully.");
+
+        queryClient.invalidateQueries({
+          queryKey: ["/categories"],
+        });
       },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
+
+      onError: (error) => {
+        console.error(error);
+        toast.error("Faild to create category");
+      },
+    },
+  });
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    CreateCategory({
+      data: data,
     });
+    redirect("/admin/categories");
   }
 
   return (
@@ -69,7 +82,11 @@ export function CreateCategory() {
         <CardDescription>Add Category</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+        <Form
+          id="form-rhf-demo"
+          onSubmit={form.handleSubmit(onSubmit)}
+          action="/admin/categories"
+        >
           <FieldGroup>
             <Controller
               name="name"
@@ -77,13 +94,13 @@ export function CreateCategory() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-title">
-                    first name
+                    category name
                   </FieldLabel>
                   <Input
                     {...field}
                     id="form-rhf-demo-title"
                     aria-invalid={fieldState.invalid}
-                    placeholder="First name ...."
+                    placeholder="Category Name...."
                     autoComplete="off"
                   />
                   {fieldState.invalid && (
@@ -92,38 +109,8 @@ export function CreateCategory() {
                 </Field>
               )}
             />
-
-            <Controller
-              name="description"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
-                    Description
-                  </FieldLabel>
-                  <InputGroup>
-                    <InputGroupTextarea
-                      {...field}
-                      id="form-rhf-demo-description"
-                      placeholder="I'm having an issue with the login button on mobile."
-                      rows={6}
-                      className="min-h-24 resize-none"
-                      aria-invalid={fieldState.invalid}
-                    />
-                    <InputGroupAddon align="block-end">
-                      <InputGroupText className="tabular-nums">
-                        {field.value.length}/100 characters
-                      </InputGroupText>
-                    </InputGroupAddon>
-                  </InputGroup>
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
           </FieldGroup>
-        </form>
+        </Form>
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">
@@ -131,7 +118,7 @@ export function CreateCategory() {
             Reset
           </Button>
           <Button type="submit" form="form-rhf-demo">
-            update user
+            Craete Category
           </Button>
         </Field>
       </CardFooter>

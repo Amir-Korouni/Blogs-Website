@@ -1,6 +1,9 @@
 import { CreateCategory } from "@/components/category/CreateCategory";
+import { auth } from "@/lib/auth/auth";
 
-const Page = () => {
+const Page = async () => {
+  const session = await auth();
+
   return (
     <>
       <div className="flex flex-1 flex-col">
@@ -9,7 +12,7 @@ const Page = () => {
             <h2 className="text-[clamp(1.4rem,4vw,2.4rem)]">Create Category</h2>
           </div>
           <div>
-            <CreateCategory />
+            <CreateCategory accessToken={session?.user.accessToken}/>
           </div>
         </div>
       </div>

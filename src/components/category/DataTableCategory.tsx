@@ -1,3 +1,4 @@
+"use client";
 import {
   Table,
   TableBody,
@@ -11,19 +12,56 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Category } from "@/Types/general.type";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useCategoriesControllerDeleteCategory } from "@/app/api/generated";
+import { toast } from "sonner";
 
 type CategoryTableProps = {
   categories: Category[];
+  accessToken: string;
 };
 
-export default function DataTableCategory({ categories }: CategoryTableProps) {
-  if (!categories) {
-    return (
-      <section className="flex h-full w-full items-center justify-center">
-        <p className="text-lg text-muted-foreground">No categories found.</p>
-      </section>
-    );
-  }
+export default function DataTableCategory({
+  categories,
+  accessToken,
+}: CategoryTableProps) {
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteCategory, isPending } =
+    useCategoriesControllerDeleteCategory({
+      axios: {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      mutation: {
+        onSuccess: () => {
+          toast.success("Delete Category was successfully");
+
+          setSelectedPostId(null);
+          queryClient.invalidateQueries({
+            queryKey: ["/categories"],
+          });
+        },
+        onError: (error) => {
+          console.error("Failed to delete post:", error);
+          toast.error("Failed to delete category.");
+        },
+      },
+    });
 
   return (
     <div className="w-full overflow-hidden rounded-lg border">
@@ -60,13 +98,51 @@ export default function DataTableCategory({ categories }: CategoryTableProps) {
                       </Button>
                     </Link>
 
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      aria-label={`Delete ${category.name}`}
+                    <AlertDialog
+                      open={selectedPostId === category.id}
+                      onOpenChange={(open) => {
+                        setSelectedPostId(open ? category.id : null);
+                      }}
                     >
-                      <Trash2 className="size-4 text-destructive" />
-                    </Button>
+                      <AlertDialogTrigger
+                        render={
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            aria-label={`Delete ${category.name}`}
+                          />
+                        }
+                      >
+                        <Trash2 className="size-4 text-destructive" />
+                      </AlertDialogTrigger>
+
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Delete this category?
+                          </AlertDialogTitle>
+
+                          <AlertDialogDescription>
+                            Are you sure you want to delete
+                            <strong> {category.name}</strong>? This action
+                            cannot be undone.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                          <AlertDialogAction
+                            disabled={isPending}
+                            onClick={() =>
+                              deleteCategory({ id: Number(category.id) })
+                            }
+                          >
+                            {isPending ? "Deleting..." : "Delete"}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </TableCell>
               </TableRow>

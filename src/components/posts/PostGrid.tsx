@@ -29,7 +29,7 @@ export const PostGrid = ({ posts }: postGrid) => {
         "
       >
         {posts.map((item) => (
-          <PostCard key={item.id} posts={item} />
+          <PostCard key={item.id} post={item} />
         ))}
       </div>
     </section>

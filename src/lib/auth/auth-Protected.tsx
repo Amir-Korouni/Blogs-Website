@@ -7,7 +7,7 @@ import { auth } from "./auth";
  */
 const AuthProtected = async () => {
   const session = await auth();
-
+  
   if (!session?.user) {
     redirect("/signin");
   }

@@ -3,12 +3,16 @@ import { Plus } from "lucide-react";
 import DataTableCategory from "@/components/category/DataTableCategory";
 import Link from "next/link";
 import { categoriesControllerGetCategories } from "@/app/api/generated";
+import { auth } from "@/lib/auth/auth";
 
 const Page = async () => {
-  const result = await categoriesControllerGetCategories();
-  console.log(result);
-  
-  if (!result.data) {
+  const session = await auth();
+
+  let posts;
+  try {
+    const result = await categoriesControllerGetCategories();
+    posts = result.data;
+  } catch (error) {
     return (
       <section className="flex flex-1 items-center justify-center p-6">
         <p className="text-destructive">
@@ -18,7 +22,6 @@ const Page = async () => {
     );
   }
 
-  const posts = result.data;
   return (
     <>
       <div className="flex flex-1 flex-col">
@@ -37,7 +40,10 @@ const Page = async () => {
           </div>
 
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <DataTableCategory categories={posts} />
+            <DataTableCategory
+              categories={posts}
+              accessToken={session?.user.accessToken}
+            />
           </div>
         </div>
       </div>

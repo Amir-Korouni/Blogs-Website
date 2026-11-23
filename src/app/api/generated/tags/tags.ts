@@ -215,11 +215,11 @@ export const tagControllerCreateTag = (
   createTagModels: CreateTagModels,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.post(`/tags`, createTagModels, options);
+  return apiClient.post(`/tags`, createTagModels, options);
 };
 
 export const getTagControllerCreateTagUrl = () => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -489,11 +489,11 @@ export const tagControllerUpdateTag = (
   updateTagModels: UpdateTagModels,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.patch(`/tags/${id}`, updateTagModels, options);
+  return apiClient.patch(`/tags/${id}`, updateTagModels, options);
 };
 
 export const getTagControllerUpdateTagUrl = (id: number) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -591,11 +591,11 @@ export const tagControllerDeleteTag = (
   id: number,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.delete(`/tags/${id}`, options);
+  return apiClient.delete(`/tags/${id}`, options);
 };
 
 export const getTagControllerDeleteTagUrl = (id: number) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,

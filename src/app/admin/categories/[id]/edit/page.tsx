@@ -1,6 +1,13 @@
 import { EditCategory } from "@/components/category/EditForm";
+import { auth } from "@/lib/auth/auth";
 
-const EditPage = () => {
+type EditCategoryPage = {
+  params: Promise<{ id: number }>;
+};
+
+const EditPage = async ({ params }: EditCategoryPage) => {
+  const { id } = await params;
+  const session = await auth();
   return (
     <>
       <div className="w-full flex flex-1 flex-col">
@@ -11,7 +18,11 @@ const EditPage = () => {
             </h2>
           </div>
           <div className="w-full px-10">
-            <EditCategory />
+            <EditCategory
+              accessToken={session?.user.accessToken}
+              categoryId={id}
+              initialName={"category"}
+            />
           </div>
         </div>
       </div>

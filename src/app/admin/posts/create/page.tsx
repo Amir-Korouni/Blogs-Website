@@ -1,4 +1,4 @@
-import { CreatePosts } from "@/components/posts/CreatedForm";
+import EditorClient from "@/components/admin/posts/EditorClient.tsx";
 import { auth } from "@/lib/auth/auth";
 import { Metadata } from "next";
 
@@ -6,11 +6,10 @@ export const metadata: Metadata = {
   title: "Create Post",
 };
 
-const Page = async() => {
+const Page = async () => {
   const session = await auth();
 
   console.log("Session:", session);
-  console.log("Access Token:", session?.user?.accessToken);
 
   return (
     <>
@@ -20,7 +19,7 @@ const Page = async() => {
             <h2 className="text-[clamp(1.4rem,4vw,2.4rem)]">Create Posts</h2>
           </div>
           <div>
-            <CreatePosts />
+            <EditorClient />
           </div>
         </div>
       </div>

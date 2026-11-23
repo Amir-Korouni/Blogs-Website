@@ -22,100 +22,95 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from "../ui/input-group";
+
+import { useCategoriesControllerUpdateCategory } from "@/app/api/generated";
+import { useQueryClient } from "@tanstack/react-query";
 
 const formSchema = z.object({
   name: z
     .string()
-    .min(5, "Bug title must be at least 5 characters.")
-    .max(32, "Bug title must be at most 32 characters."),
-
-  description: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
+    .min(5, "Category name must be at least 5 characters.")
+    .max(32, "Category name must be at most 32 characters."),
 });
 
-export function EditCategory() {
+type EditCategoryProps = {
+  accessToken: string;
+  categoryId: number;
+  initialName: string;
+};
+
+export function EditCategory({
+  accessToken,
+  categoryId,
+  initialName,
+}: EditCategoryProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      description: "",
+      name: initialName,
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
+  React.useEffect(() => {
+    form.reset({ name: initialName });
+  }, [initialName, form]);
+  const queryClient = useQueryClient();
+  const { mutate: updateCategory, isPending } =
+    useCategoriesControllerUpdateCategory( {
+      axios: {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
+      mutation: {
+        onSuccess: () => {
+          toast.success("Category updated successfully.");
+
+          queryClient.invalidateQueries({
+            queryKey: ["/categories"],
+          });
+        },
+        onError: (error) => {
+          console.error(error);
+          toast.error("Failed to update category.");
+        },
+      },
+    });
+
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    updateCategory({
+      id: categoryId,
+      data: {
+        name: data.name,
+      },
     });
   }
 
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Add Category</CardTitle>
-        <CardDescription>Add Category</CardDescription>
+        <CardTitle>Edit Category</CardTitle>
+        <CardDescription>Update the category information.</CardDescription>
       </CardHeader>
+
       <CardContent>
-        <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="edit-category-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="name"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">
-                    first name
-                  </FieldLabel>
+                  <FieldLabel htmlFor="category-name">Category Name</FieldLabel>
+
                   <Input
                     {...field}
-                    id="form-rhf-demo-title"
-                    aria-invalid={fieldState.invalid}
-                    placeholder="First name ...."
+                    id="category-name"
+                    placeholder="Category name..."
                     autoComplete="off"
+                    aria-invalid={fieldState.invalid}
                   />
-                  {fieldState.invalid && (
-                    <FieldError errors={[fieldState.error]} />
-                  )}
-                </Field>
-              )}
-            />
 
-            <Controller
-              name="description"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
-                    Description
-                  </FieldLabel>
-                  <InputGroup>
-                    <InputGroupTextarea
-                      {...field}
-                      id="form-rhf-demo-description"
-                      placeholder="I'm having an issue with the login button on mobile."
-                      rows={6}
-                      className="min-h-24 resize-none"
-                      aria-invalid={fieldState.invalid}
-                    />
-                    <InputGroupAddon align="block-end">
-                      <InputGroupText className="tabular-nums">
-                        {field.value.length}/100 characters
-                      </InputGroupText>
-                    </InputGroupAddon>
-                  </InputGroup>
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -125,15 +120,19 @@ export function EditCategory() {
           </FieldGroup>
         </form>
       </CardContent>
-      <CardFooter>
-        <Field orientation="horizontal">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
-            Reset
-          </Button>
-          <Button type="submit" form="form-rhf-demo">
-            update user
-          </Button>
-        </Field>
+
+      <CardFooter className="flex justify-end gap-2">
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => form.reset({ name: initialName })}
+        >
+          Reset
+        </Button>
+
+        <Button type="submit" form="edit-category-form" disabled={isPending}>
+          {isPending ? "Updating..." : "Update Category"}
+        </Button>
       </CardFooter>
     </Card>
   );

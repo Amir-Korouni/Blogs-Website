@@ -20,6 +20,7 @@ import { useActionState, useState } from "react";
 import { signInUp } from "@/config/navigation.config";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { toast } from "./ui/toast";
 
 export function LoginForm({
   className,
@@ -58,6 +59,9 @@ export function LoginForm({
       });
       console.log(response);
 
+      /**
+       * Test api
+       */
       if (response?.error) {
         const ErrObj = {
           message: `Authentication failed. Error: ${response.error}.`,

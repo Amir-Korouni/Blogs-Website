@@ -42,7 +42,7 @@ const Page = async () => {
           </div>
 
           <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-            <DataTableTags tag={data} />
+            <DataTableTags tag={data} accessToken={session?.user.accessToken} />
           </div>
         </div>
       </div>

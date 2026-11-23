@@ -56,7 +56,7 @@ const Page = async ({ searchParams }: PageProps) => {
             <h2 className="text-[clamp(1.4rem,4vw,2.4rem)] px-5">Overview</h2>
             <SectionCards data={data} />
             <div className="w-full h-full flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <DataTable data={data} />
+              <DataTable data={data} accessToken={session?.user.accessToken} />
             </div>
           </div>
           {/* <Pagination

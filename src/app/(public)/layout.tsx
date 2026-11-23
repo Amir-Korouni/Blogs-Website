@@ -1,6 +1,7 @@
 import Footer from "@/components/layout/Footer/Footer";
 import Navbar from "@/components/layout/Navbar/Navbar";
 import QueryProvider from "@/components/providers/QueryProvider";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "next-themes";
 
 export default function PublicLayout({
@@ -16,6 +17,7 @@ export default function PublicLayout({
           <main>{children}</main>
           <Footer />
         </ThemeProvider>
+        <Toaster />
       </QueryProvider>
     </>
   );

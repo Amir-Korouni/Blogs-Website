@@ -218,11 +218,11 @@ export const categoriesControllerCreateCategory = (
   createCategoryModels: CreateCategoryModels,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.post(`/categories`, createCategoryModels, options);
+  return apiClient.post(`/categories`, createCategoryModels, options);
 };
 
 export const getCategoriesControllerCreateCategoryUrl = () => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -312,6 +312,7 @@ export const useCategoriesControllerCreateCategory = <
     queryClient,
   );
 };
+
 /**
  * Retrieves a category by its ID.
  * @summary Get category by ID
@@ -500,11 +501,11 @@ export const categoriesControllerUpdateCategory = (
   updateCategoryModels: UpdateCategoryModels,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.patch(`/categories/${id}`, updateCategoryModels, options);
+  return apiClient.patch(`/categories/${id}`, updateCategoryModels, options);
 };
 
 export const getCategoriesControllerUpdateCategoryUrl = (id: number) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -603,7 +604,7 @@ export const categoriesControllerDeleteCategory = (
   id: number,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.delete(`/categories/${id}`, options);
+  return apiClient.delete(`/categories/${id}`, options);
 };
 
 export const getCategoriesControllerDeleteCategoryUrl = (id: number) => {

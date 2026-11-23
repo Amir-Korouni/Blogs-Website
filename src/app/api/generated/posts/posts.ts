@@ -616,11 +616,11 @@ export const postsControllerDeletePost = (
   id: number,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.delete(`/posts/${id}`, options);
+  return apiClient.delete(`/posts/${id}`, options);
 };
 
 export const getPostsControllerDeletePostUrl = (id: number) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
