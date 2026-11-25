@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
 import AuthProtected from "@/lib/auth/auth-Protected";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -24,10 +25,12 @@ export default function DashboardLayout({
   AuthProtected();
 
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
-      <div className="w-full grow p-6 overflow-x-hidden md:overflow-y-auto">
-        {children}
+    <QueryProvider>
+      <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+        <div className="w-full grow p-6 overflow-x-hidden md:overflow-y-auto">
+          {children}
+        </div>
       </div>
-    </div>
+    </QueryProvider>
   );
 }

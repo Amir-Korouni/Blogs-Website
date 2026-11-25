@@ -1,6 +1,5 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { logout } from "@/lib/auth/auth";
 import { Form } from "@base-ui/react";
 

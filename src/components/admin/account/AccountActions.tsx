@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { logout } from "@/lib/auth/auth";
+import { Form } from "@base-ui/react";
 
 const AccountActions = () => {
   return (
@@ -10,9 +12,12 @@ const AccountActions = () => {
         </h3>
       </div>
       <div className="w-full h-[50%] flex justify-center">
-        <Button variant={"outline"} className="w-[20vw] cursor-pointer">
+        <Form>
+
+        <Button formAction={logout} variant={"outline"} className="w-[20vw] cursor-pointer" type="submit">
           Logout
         </Button>
+        </Form>
       </div>
     </div>
   );

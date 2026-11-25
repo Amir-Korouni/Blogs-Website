@@ -1,8 +1,10 @@
 import AccountActions from "@/components/admin/account/AccountActions";
 import { ChangePass } from "@/components/admin/account/ChangePassword";
 import { ProfileInformation } from "@/components/admin/account/Profile-Information";
+import { auth } from "@/lib/auth/auth";
 
-const page = () => {
+const page = async() => {
+  const session = await auth();
   return (
     <>
       <div className="w-full flex flex-1 flex-col">
@@ -14,7 +16,7 @@ const page = () => {
             </h3>
           </div>
           <div className="w-full flex justify-center items-center p-10 border-b-5 text-[var-[--foreground]]">
-            <ProfileInformation />
+            <ProfileInformation accessToken={session?.user.accessToken} userId={session?.user.id} />
           </div>
           <div className="w-full flex justify-center items-center p-10 border-b-5 text-[var-[--foreground]]">
             <ChangePass />

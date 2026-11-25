@@ -10,8 +10,8 @@ export interface LoginAuthModels {
   /** User email address */
   email: string;
   /**
-     * User password
-     * @minLength 1
-     */
+   * User password
+   * @minLength 1
+   */
   password: string;
 }

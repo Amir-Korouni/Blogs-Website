@@ -17,149 +17,115 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
-} from "@/components/ui/input-group";
+import { useQueryClient } from "@tanstack/react-query";
+import { useUsersControllerUpdateUser } from "@/app/api/generated";
+import { Form } from "@base-ui/react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  Firstname: z
+  username: z
     .string()
-    .min(5, "Bug title must be at least 5 characters.")
-    .max(32, "Bug title must be at most 32 characters."),
-  Lastname: z
+    .min(3, "Bug title must be at least 3 characters.")
+    .max(50, "Bug title must be at most 50 characters."),
+
+  email: z
     .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
-  Display_Name: z
+    .email()
+    .max(255, "Bug title must be at most 255 characters."),
+
+  password: z
     .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
-  Email: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
-  Phone: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
-  Website: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
-  Bio: z
-    .string()
-    .min(20, "Description must be at least 20 characters.")
-    .max(100, "Description must be at most 100 characters."),
+    .min(8, "Bug title must be at least 8 characters.")
+    .max(255, "Bug title must be at most 255 characters.")
+    .or(z.literal("")),
+
+  avatarMediaId: z.coerce
+    .number()
+    .int()
+    .min(1, "Avatar Media ID must be at least 1."),
 });
 
-export function ProfileInformation() {
-  const form = useForm<z.infer<typeof formSchema>>({
+type editUserType = {
+  userId: number;
+  accessToken: string;
+};
+
+type FormInput = z.input<typeof formSchema>;
+type FormOutput = z.output<typeof formSchema>;
+
+export function ProfileInformation({ userId, accessToken }: editUserType) {
+  const form = useForm<FormInput, undefined, FormOutput>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Firstname: "",
-      Lastname: "",
-      Display_Name: "",
-      Email: "",
-      Phone: "",
-      Website: "",
-      Bio: "",
+      username: "",
+      email: "",
+      password: "",
+      avatarMediaId: 0,
+    },
+  });
+
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const { mutate: editUsers, isPending } = useUsersControllerUpdateUser({
+    axios: {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    },
+    mutation: {
+      onSuccess() {
+        toast.success("Edit users was successfully");
+        console.log("Edit users was successfully");
+        queryClient.invalidateQueries({
+          queryKey: ["/users"],
+        });
+        router.push("/admin/users");
+      },
+
+      onError() {
+        toast.error("Faild to add users.");
+        console.log("Faild to add users.");
+      },
     },
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
+    if (!Number.isInteger(userId) || userId <= 0) {
+      toast.error("Invalid User ID");
+      return;
+    }
+    editUsers({
+      id: userId,
+      data: data,
     });
   }
 
   return (
-    <Card className="w-full ">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle>Profile Information</CardTitle>
-        <CardDescription>Manage your personal information</CardDescription>
+        <CardTitle>Edit User</CardTitle>
+        <CardDescription>Edit User with {userId}.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+        <Form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
-            <FieldGroup className="w-full flex flex-row justify-between items-center">
-              <Controller
-                name="Firstname"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">
-                      First Name
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id="form-rhf-demo-title"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="first name ..."
-                      autoComplete="off"
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-
-              <Controller
-                name="Firstname"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">
-                      Last Name
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id="form-rhf-demo-title"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="last name ..."
-                      autoComplete="off"
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-            </FieldGroup>
-
             <Controller
-              name="Display_Name"
+              name="username"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-title">
-                    Display Name
+                    username
                   </FieldLabel>
                   <Input
                     {...field}
                     id="form-rhf-demo-title"
                     aria-invalid={fieldState.invalid}
-                    placeholder="Display Name ..."
+                    placeholder="username ...."
                     autoComplete="off"
                   />
                   {fieldState.invalid && (
@@ -170,16 +136,16 @@ export function ProfileInformation() {
             />
 
             <Controller
-              name="Email"
+              name="email"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-title">Email</FieldLabel>
+                  <FieldLabel htmlFor="form-rhf-demo-title">email</FieldLabel>
                   <Input
                     {...field}
                     id="form-rhf-demo-title"
                     aria-invalid={fieldState.invalid}
-                    placeholder="Email ..."
+                    placeholder="email...."
                     autoComplete="off"
                   />
                   {fieldState.invalid && (
@@ -189,77 +155,46 @@ export function ProfileInformation() {
               )}
             />
 
-            <FieldGroup className="w-full flex flex-row justify-between items-center">
-              <Controller
-                name="Phone"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">Phone</FieldLabel>
-                    <Input
-                      {...field}
-                      id="form-rhf-demo-title"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="Phone ..."
-                      autoComplete="off"
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-
-              <Controller
-                name="Website"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">
-                      Website
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id="form-rhf-demo-title"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="Your Website ...."
-                      autoComplete="off"
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-            </FieldGroup>
-
             <Controller
-              name="Bio"
+              name="password"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-description">
-                    Bio
+                  <FieldLabel htmlFor="form-rhf-demo-title">
+                    password
                   </FieldLabel>
-                  <InputGroup>
-                    <InputGroupTextarea
-                      {...field}
-                      id="form-rhf-demo-description"
-                      placeholder="Your Bio ..."
-                      rows={6}
-                      className="min-h-24 resize-none"
-                      aria-invalid={fieldState.invalid}
-                    />
-                    <InputGroupAddon align="block-end">
-                      <InputGroupText className="tabular-nums">
-                        {field.value.length}/100 characters
-                      </InputGroupText>
-                    </InputGroupAddon>
-                  </InputGroup>
-                  <FieldDescription>
-                    Include steps to reproduce, expected behavior, and what
-                    actually happened.
-                  </FieldDescription>
+                  <Input
+                    {...field}
+                    id="form-rhf-demo-title"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="pasword...."
+                    autoComplete="off"
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+
+            <Controller
+              name="avatarMediaId"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="form-rhf-demo-title">
+                    avatar Media Id
+                  </FieldLabel>
+                  <Input
+                    type="number"
+                    name={field.name}
+                    ref={field.ref}
+                    onBlur={field.onBlur}
+                    // value={field.value}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    id="avatarMediaId"
+                    aria-invalid={fieldState.invalid}
+                  />
                   {fieldState.invalid && (
                     <FieldError errors={[fieldState.error]} />
                   )}
@@ -267,7 +202,7 @@ export function ProfileInformation() {
               )}
             />
           </FieldGroup>
-        </form>
+        </Form>
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">
@@ -275,7 +210,7 @@ export function ProfileInformation() {
             Reset
           </Button>
           <Button type="submit" form="form-rhf-demo">
-            Save Changes
+            update user
           </Button>
         </Field>
       </CardFooter>

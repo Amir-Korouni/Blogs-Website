@@ -8,25 +8,25 @@
 
 export interface UpdateUserModels {
   /**
-     * New username
-     * @minLength 3
-     * @maxLength 50
-     */
+   * New username
+   * @minLength 3
+   * @maxLength 50
+   */
   username?: string;
   /**
-     * New email address
-     * @maxLength 255
-     */
+   * New email address
+   * @maxLength 255
+   */
   email?: string;
   /**
-     * New password
-     * @minLength 8
-     * @maxLength 255
-     */
+   * New password
+   * @minLength 8
+   * @maxLength 255
+   */
   password?: string;
   /**
-     * ID of the new avatar media
-     * @minimum 1
-     */
+   * ID of the new avatar media
+   * @minimum 1
+   */
   avatarMediaId?: number;
 }

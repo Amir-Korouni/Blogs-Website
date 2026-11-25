@@ -655,11 +655,11 @@ export const usersControllerUpdateUser = (
   updateUserModels: UpdateUserModels,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.patch(`/users/${id}`, updateUserModels, options);
+  return apiClient.patch(`/users/${id}`, updateUserModels, options);
 };
 
 export const getUsersControllerUpdateUserUrl = (id: number) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,
@@ -757,11 +757,11 @@ export const usersControllerDeleteUser = (
   id: number,
   options?: AxiosRequestConfig,
 ): Promise<AxiosResponse<void>> => {
-  return axios.delete(`/users/${id}`, options);
+  return apiClient.delete(`/users/${id}`, options);
 };
 
 export const getUsersControllerDeleteUserUrl = (id: number) => {
-  return axios
+  return apiClient
     .create({
       baseURL: "",
       params: null,

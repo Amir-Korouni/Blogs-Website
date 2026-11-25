@@ -3,7 +3,7 @@
 import { useTagControllerUpdateTag } from "@/app/api/generated";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
@@ -53,6 +53,7 @@ export function EditTags({ tagId }: EditTagsType) {
         queryClient.invalidateQueries({
           queryKey: ["/tags"],
         });
+        router.push("/admin/tags");
       },
       onError: (error) => {
         console.error("Failed to update post:", error);
@@ -72,7 +73,6 @@ export function EditTags({ tagId }: EditTagsType) {
         name: data.tag,
       },
     });
-    router.push("/admin/tags");
   }
 
   return (

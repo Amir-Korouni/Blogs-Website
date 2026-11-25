@@ -22,17 +22,18 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Form } from "@base-ui/react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import { useAuthControllerChangePassword } from "@/app/api/generated";
 
 const formSchema = z.object({
-  Current_Password: z
+  currentPassword: z.string().min(1, "Password must be at least 1 characters."),
+  newPassword: z
     .string()
-    .min(5, "Password must be at least 5 characters.")
-    .max(32, "Password must be at most 32 characters."),
-  New_Password: z
-    .string()
-    .min(5, "Password must be at least 5 characters.")
-    .max(32, "Password must be at most 32 characters."),
-  Confirm_Password: z
+    .min(8, "Password must be at least 8 characters.")
+    .max(255, "Password must be at most 255 characters."),
+  confirmPassword: z
     .string()
     .min(5, "Password must be at least 5 characters.")
     .max(32, "Password must be at most 32 characters."),
@@ -42,26 +43,38 @@ export function ChangePass() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Current_Password: "",
-      New_Password: "",
-      Confirm_Password: "",
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
+
+  const { data: session } = useSession();
+  const queryClient = useQueryClient();
+
+  const { mutate: updatePass, isPending } = useAuthControllerChangePassword({
+    axios: {
+      headers: {
+        Authorization: `Bearer ${session?.user.accessToken}`,
+      },
+    },
+    mutation: {
+      onSuccess: () => {
+        toast.success("update a password successfully.");
+        queryClient.invalidateQueries({
+          queryKey: ["/tags"],
+        });
+      },
+      onError: (error) => {
+        console.error("Failed to update password:", error);
+        toast.error("Failed to update password.");
+      },
     },
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    toast("You submitted the following values:", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius)  + 4px)",
-      } as React.CSSProperties,
+    updatePass({
+      data: data,
     });
   }
 
@@ -74,10 +87,10 @@ export function ChangePass() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form id="form-rhf-ChangePass" onSubmit={form.handleSubmit(onSubmit)}>
+        <Form id="form-rhf-ChangePass" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
-              name="Current_Password"
+              name="currentPassword"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -99,7 +112,7 @@ export function ChangePass() {
             />
 
             <Controller
-              name="New_Password"
+              name="newPassword"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -121,7 +134,7 @@ export function ChangePass() {
             />
 
             <Controller
-              name="Confirm_Password"
+              name="confirmPassword"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -142,7 +155,7 @@ export function ChangePass() {
               )}
             />
           </FieldGroup>
-        </form>
+        </Form>
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">
@@ -150,7 +163,7 @@ export function ChangePass() {
             Reset
           </Button>
           <Button type="submit" form="form-rhf-ChangePass">
-            Update Password
+            {isPending ? "Updating" : "Update Password"}
           </Button>
         </Field>
       </CardFooter>

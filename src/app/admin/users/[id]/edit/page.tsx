@@ -1,13 +1,14 @@
-import { EditUser } from "@/components/users/EditForm";
+import { EditUser } from "@/components/users/EditUser";
+import { auth } from "@/lib/auth/auth";
 
 type EditType = {
-  SearchParams: Promise<{ id: number }>;
+  params: Promise<{ id: string }>;
 };
 
-const Edit = async ({ SearchParams }: EditType) => {
-  const { id } = await SearchParams;
-  console.log(id);
-
+const Edit = async ({ params }: EditType) => {
+  const { id } = await params;
+  const session = await auth();
+  
   return (
     <div className="w-full flex flex-1 flex-col">
       <div className="@container/main flex flex-col justify-center items-center gap-10">
@@ -17,7 +18,10 @@ const Edit = async ({ SearchParams }: EditType) => {
           </h2>
         </div>
         <div className="w-full px-10">
-          <EditUser />
+          <EditUser
+            userId={Number(id)}
+            accessToken={session?.user.accessToken}
+          />
         </div>
       </div>
     </div>

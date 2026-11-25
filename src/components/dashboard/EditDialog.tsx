@@ -1,3 +1,4 @@
+"use client";
 import { Form } from "@base-ui/react";
 import {
   Dialog,
@@ -9,19 +10,100 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-import { Field } from "../ui/field";
 import { Input } from "../ui/input";
 
-type EditType = {
-  id?: number;
-  username: string;
-  email: string;
-  role?: string;
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
+import { useQueryClient } from "@tanstack/react-query";
+import { useUsersControllerUpdateUser } from "@/app/api/generated";
+import z from "zod";
+import { useRouter } from "next/navigation";
+
+const formSchema = z.object({
+  username: z
+    .string()
+    .min(3, "Bug title must be at least 3 characters.")
+    .max(50, "Bug title must be at most 50 characters."),
+
+  email: z
+    .string()
+    .email()
+    .max(255, "Bug title must be at most 255 characters."),
+
+  password: z
+    .string()
+    .min(8, "Bug title must be at least 8 characters.")
+    .max(255, "Bug title must be at most 255 characters.")
+    .or(z.literal("")),
+
+  avatarMediaId: z.coerce
+    .number()
+    .int()
+    .min(1, "Avatar Media ID must be at least 1."),
+});
+
+type FormInput = z.input<typeof formSchema>;
+type FormOutput = z.output<typeof formSchema>;
+
+type editUserType = {
+  userId: number;
+  accessToken: string;
 };
 
-const EditDialog = ({ email, username }: EditType) => {
+const EditDialog = ({ userId, accessToken }: editUserType) => {
+  const form = useForm<FormInput, undefined, FormOutput>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      avatarMediaId: 0,
+    },
+  });
+
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const { mutate: editUsers, isPending } = useUsersControllerUpdateUser({
+    axios: {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    },
+    mutation: {
+      onSuccess() {
+        toast.success("Edit users was successfully");
+        console.log("Edit users was successfully");
+        queryClient.invalidateQueries({
+          queryKey: ["/users"],
+        });
+        router.push("/admin/users");
+      },
+
+      onError() {
+        toast.error("Faild to add users.");
+        console.log("Faild to add users.");
+      },
+    },
+  });
+
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    if (!Number.isInteger(userId) || userId <= 0) {
+      toast.error("Invalid User ID");
+      return;
+    }
+    editUsers({
+      id: userId,
+      data: data,
+    });
+  }
   return (
     <Dialog>
       <Form>
@@ -40,31 +122,114 @@ const EditDialog = ({ email, username }: EditType) => {
               done.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col gap-5">
-            <Field>
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue={username} />
-            </Field>
-            <Field>
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" defaultValue={email} />
-            </Field>
-            <Field>
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" name="password" placeholder="Password123" />
-            </Field>
-            <Field>
-              <Label htmlFor="avatarMedia">AvatarMedia</Label>
-              <Input
-                id="avatarMedia"
-                name="avatarMedia"
-                placeholder="avatarMedia1"
+          <Form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+            <FieldGroup>
+              <Controller
+                name="username"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="form-rhf-demo-title">
+                      username
+                    </FieldLabel>
+                    <Input
+                      {...field}
+                      id="form-rhf-demo-title"
+                      aria-invalid={fieldState.invalid}
+                      placeholder="Amir_K"
+                      autoComplete="off"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
               />
-            </Field>
-          </div>
+
+              <Controller
+                name="email"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="form-rhf-demo-title">email</FieldLabel>
+                    <Input
+                      {...field}
+                      id="form-rhf-demo-title"
+                      aria-invalid={fieldState.invalid}
+                      autoComplete="off"
+                      placeholder="example@gmail.com"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+              <Controller
+                name="password"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="form-rhf-demo-title">
+                      password
+                    </FieldLabel>
+                    <Input
+                      {...field}
+                      id="form-rhf-demo-title"
+                      aria-invalid={fieldState.invalid}
+                      autoComplete="off"
+                      placeholder="password..."
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+              <Controller
+                name="avatarMediaId"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="form-rhf-demo-title">
+                      avatar Media Id
+                    </FieldLabel>
+                    <Input
+                      type="number"
+                      name={field.name}
+                      ref={field.ref}
+                      onBlur={field.onBlur}
+                      // value={field.value}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                      id="avatarMediaId"
+                      aria-invalid={fieldState.invalid}
+                      placeholder="avatar media..."
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+            </FieldGroup>
+          </Form>
           <DialogFooter>
-            <DialogClose render={<Button variant="outline">Cancel</Button>} />
-            <Button type="submit">Save changes</Button>
+            <DialogClose
+              render={
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => form.reset()}
+                >
+                  Cancel
+                </Button>
+              }
+            />
+            <Button type="submit" form="form-rhf-demo">
+              {isPending ? "Updating" : "Save Changes"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Form>

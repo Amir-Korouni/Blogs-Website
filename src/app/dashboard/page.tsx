@@ -7,14 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { navLinks } from "@/config/navigation.config";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { auth, logout } from "@/lib/auth/auth";
 import { redirect } from "next/navigation";
 import { Form } from "@base-ui/react";
 import DashboardHeader from "@/components/dashboard/dashboardHeader";
-import EditDialog from "@/components/dashboard/EditDialog";
 import EditPass from "@/components/dashboard/EditPass";
 import {
   postsControllerGetPosts,
@@ -23,6 +21,7 @@ import {
 import { Suspense } from "react";
 import { PostGrid } from "@/components/posts/PostGrid";
 import Loading from "./loading";
+import EditDialog from "@/components/dashboard/EditDialog";
 
 const Page = async () => {
   const session = await auth();
@@ -46,7 +45,6 @@ const Page = async () => {
     },
   );
 
-  
   return (
     <main className="w-full min-w-0  min-h-screen ">
       <DashboardHeader user={userInfo.data.username} />
@@ -111,8 +109,8 @@ const Page = async () => {
                   up to date.
                 </p>
                 <EditDialog
-                  email={userInfo.data.email}
-                  username={userInfo.data.username}
+                  userId={userInfo.data.id}
+                  accessToken={session.user.accessToken}
                 />
               </CardFooter>
             </Card>

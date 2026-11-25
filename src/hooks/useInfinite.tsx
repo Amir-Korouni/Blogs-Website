@@ -1,9 +1,7 @@
 "use client";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
-import {
-  postsControllerGetPosts,
-} from "@/app/api/generated";
+import { postsControllerGetPosts } from "@/app/api/generated";
 
 /**
  * @version 1.0.0
@@ -22,29 +20,28 @@ export function useInfinitePosts(search?: string, category?: string) {
     initialPageParam: "1",
 
     getNextPageParam: (lastPage) => {
-
       return lastPage.data?.next ?? undefined;
     },
   });
 }
 
-export function useInfiniteCategory(categoryId: number | undefined) {
-  return useInfiniteQuery({
-    queryKey: ["posts", "infinite", "category", categoryId],
+// export function useInfiniteCategory(categoryId: number | undefined) {
+//   return useInfiniteQuery({
+//     queryKey: ["posts", "infinite", "category", categoryId],
 
-    queryFn: () =>
-      postsControllerGetPosts({
-        categoryId,
-      }),
+//     queryFn: () =>
+//       postsControllerGetPosts({
+//         categoryId,
+//       }),
 
-    initialPageParam: 1,
+//     initialPageParam: 1,
 
-    getNextPageParam: (lastPage) => {
-      
-      return lastPage.data?.next ?? undefined;
-    },
-  });
-}
+//     getNextPageParam: (lastPage) => {
+
+//       return lastPage.data?.next ?? undefined;
+//     },
+//   });
+// }
 
 // export function useInfiniteTags(slug: string) {
 //   return useInfiniteQuery({

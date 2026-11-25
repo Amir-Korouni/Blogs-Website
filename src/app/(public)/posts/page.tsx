@@ -29,7 +29,7 @@ const Page = async () => {
         </section>
         <section className="w-full h-auto flex flex-col justify-center items-center bg-background">
           <h2 className="text-[clamp(1.8rem,4vw,3rem)]">Posts</h2>
-          <section
+          {/* <section
             className="w-[100%]
             grid
             grid-cols-1
@@ -41,8 +41,9 @@ const Page = async () => {
           >
             {posts.data.map((post) => (
               <PostCard key={post.id} post={post} />
-            ))}
-          </section>
+            ))} */}
+          {/* </section> */}
+            <InfinitePosts />
         </section>
       </main>
     </>

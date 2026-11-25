@@ -46,10 +46,13 @@ const Page = async ({ searchParams }: PageProp) => {
         </div>
       </div>
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        <UeserSectionCard users={data}/>
+        <UeserSectionCard users={data} />
         <div>
           <Suspense>
-            <DataTableUsers users={data} />
+            <DataTableUsers
+              users={data}
+              accessToken={session?.user.accessToken}
+            />
           </Suspense>
         </div>
         {/* <Pagination currentPage={currentPage} totalPages={pages} /> */}
