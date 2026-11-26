@@ -1,5 +1,5 @@
-import { EditCategory } from "@/components/category/EditForm";
-import { auth } from "@/lib/auth/auth";
+import { EditCategory } from "@/features/admin/category/EditForm";
+import { auth } from "@/shared/lib/auth/auth";
 
 type EditCategoryPage = {
   params: Promise<{ id: number }>;

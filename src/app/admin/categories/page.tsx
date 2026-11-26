@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { Plus } from "lucide-react";
-import DataTableCategory from "@/components/category/DataTableCategory";
+import DataTableCategory from "@/features/admin/category/DataTableCategory";
 import Link from "next/link";
-import { categoriesControllerGetCategories } from "@/app/api/generated";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/shared/lib/auth/auth";
+import { categoriesControllerGetCategories } from "@/shared/api/generated";
 
 const Page = async () => {
   const session = await auth();

@@ -1,10 +1,10 @@
-import { ChartPieLabelList } from "@/components/analytics/ContentDistribution";
-import { ChartBarHorizontal } from "@/components/analytics/CategoryChart";
-import { OverviewCardAnalytics } from "@/components/analytics/OverviewCards";
+import { ChartPieLabelList } from "@/features/admin/analytics/ContentDistribution";
+import { ChartBarHorizontal } from "@/features/admin/analytics/CategoryChart";
+import { OverviewCardAnalytics } from "@/features/admin/analytics/OverviewCards";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { TopPostsTable } from "@/components/analytics/TopPostsTable";
-import RecentActivity from "@/components/analytics/RecentActivity";
-import { auth } from "@/lib/auth/auth";
+import { TopPostsTable } from "@/features/admin/analytics/TopPostsTable";
+import RecentActivity from "@/features/admin/analytics/RecentActivity";
+import { auth } from "@/shared/lib/auth/auth";
 
 const Page = async () => {
   const session = await auth();

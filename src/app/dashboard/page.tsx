@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import {
   Card,
   CardContent,
@@ -6,22 +6,23 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/shared/ui/card";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
-import { auth, logout } from "@/lib/auth/auth";
+import { auth, logout } from "@/shared/lib/auth/auth";
 import { redirect } from "next/navigation";
 import { Form } from "@base-ui/react";
 import DashboardHeader from "@/components/dashboard/dashboardHeader";
-import EditPass from "@/components/dashboard/EditPass";
-import {
-  postsControllerGetPosts,
-  usersControllerGetMyProfile,
-} from "../api/generated";
+import EditPass from "@/features/dashboard/EditPass";
+
 import { Suspense } from "react";
 import { PostGrid } from "@/components/posts/PostGrid";
 import Loading from "./loading";
-import EditDialog from "@/components/dashboard/EditDialog";
+import EditDialog from "@/features/dashboard/EditDialog";
+import {
+  postsControllerGetPosts,
+  usersControllerGetMyProfile,
+} from "@/shared/api/generated";
 
 const Page = async () => {
   const session = await auth();

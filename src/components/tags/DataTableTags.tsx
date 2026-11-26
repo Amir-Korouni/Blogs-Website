@@ -6,12 +6,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/shared/ui/table";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { Tag } from "@/Types/general.type";
+import { Tag } from "@/shared/Types/general.type";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,11 +22,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/alert-dialog";
-import { useTagControllerDeleteTag } from "@/app/api/generated";
+} from "../../shared/ui/alert-dialog";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTagControllerDeleteTag } from "@/shared/api/generated";
 
 type TagsTableProps = {
   tag: Tag[];

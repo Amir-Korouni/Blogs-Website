@@ -1,5 +1,5 @@
 import { Category } from "@/Types/category.type";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent } from "../../shared/ui/card";
 
 const CategoryCard = ({ category }: Category) => {
   return (

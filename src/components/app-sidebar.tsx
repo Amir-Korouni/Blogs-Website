@@ -12,14 +12,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/widgets/admin-sidebar/sidebar";
 import { CommandIcon } from "lucide-react";
 import Link from "next/link";
-import { navSec } from "@/Types/admin.type";
+import { navSec } from "@/shared/Types/admin.type";
 import { NavUser } from "./nav-user";
-import { dataNavAdmin } from "@/config/adminLinks.config";
-import AdminNav from "./layout/Navbar/AdminLinks";
-import { auth } from "@/lib/auth/auth";
+import { dataNavAdmin } from "@/shared/config/adminLinks.config";
+import AdminNav from "../widgets/Navbar/AdminLinks";
+import { auth } from "@/shared/lib/auth/auth";
 import { useSession } from "next-auth/react";
 
 const data = {
@@ -30,9 +30,8 @@ const data = {
   },
 };
 
-
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-    const session = useSession();
+  const session = useSession();
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>

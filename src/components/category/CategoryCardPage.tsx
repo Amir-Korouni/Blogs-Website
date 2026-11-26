@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, CardContent, CardFooter } from "../ui/card";
+import { Category } from "@/shared/Types/general.type";
+import { Card, CardContent, CardFooter } from "../../shared/ui/card";
 import Link from "next/link";
-import { Category } from "@/Types/category.type";
 
 type categoryProps = {
   category: Category;

@@ -1,7 +1,7 @@
-import Footer from "@/components/layout/Footer/Footer";
-import Navbar from "@/components/layout/Navbar/Navbar";
+import Footer from "@/widgets/Footer/Footer";
+import Navbar from "@/widgets/Navbar/Navbar";
 import QueryProvider from "@/components/providers/QueryProvider";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/shared/ui/sonner";
 import { ThemeProvider } from "next-themes";
 
 export default function PublicLayout({

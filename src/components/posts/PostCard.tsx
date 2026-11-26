@@ -5,9 +5,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import type { Posts } from "@/Types/general.type";
-import { Button } from "../ui/button";
+} from "../../shared/ui/card";
+import type { Posts } from "@/shared/Types/general.type";
+import { Button } from "../../shared/ui/button";
 import { Heart, SavePenIcon } from "lucide-react";
 
 type PostCardProps = {
@@ -16,7 +16,7 @@ type PostCardProps = {
 
 const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Card className="w-[370px] h-full min-h-[300px] flex flex-col bg-card text-[var(--foreground)] rounded border border-[#334155] transition-transform duration-300 hover:-translate-y-1">
+    <Card className="max-w-[370px] h-full min-h-[300px] flex flex-col bg-card text-[var(--foreground)] rounded border border-[#334155] transition-transform duration-300 hover:-translate-y-1">
       <article className="size-full flex flex-1 flex-col">
         <CardHeader>
           <CardTitle className="flex flex-col gap-2">

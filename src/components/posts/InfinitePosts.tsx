@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback } from "react";
-import { useInfinitePosts } from "@/hooks/useInfinite";
 import InfiniteScrollTrigger from "@/components/posts/InfiniteScrollTrigger";
 import { useSearchParams } from "next/navigation";
 import PostCard from "./PostCard";
+import { useInfinitePosts } from "@/shared/hooks/useInfinite";
 
 export default function InfinitePosts() {
   const searchParams = useSearchParams();

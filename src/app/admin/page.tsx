@@ -1,10 +1,10 @@
 import { SectionCards } from "@/components/section-cards";
 import { DataTable } from "@/components/data-table";
 import Pagination from "@/components/dashboard/PagePagination";
-import { postsControllerGetAllPostsForAdmin } from "../api/generated";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/shared/lib/auth/auth";
 import { redirect } from "next/navigation";
-import AuthProtected from "@/lib/auth/auth-Protected";
+import AuthProtected from "@/shared/lib/auth/auth-Protected";
+import { postsControllerGetAllPostsForAdmin } from "@/shared/api/generated";
 
 type PageProps = {
   searchParams: Promise<{ page?: string }>;

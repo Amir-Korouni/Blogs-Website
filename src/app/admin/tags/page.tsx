@@ -1,9 +1,9 @@
 import { DataTableTags } from "@/components/tags/DataTableTags";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { Plus } from "lucide-react";
 import Link from "next/link";
-import { tagControllerGetTags } from "@/app/api/generated";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/shared/lib/auth/auth";
+import { tagControllerGetTags } from "@/shared/api/generated";
 
 const Page = async () => {
   let data;

@@ -1,11 +1,11 @@
 "use client";
-import { CategoriesList, Status } from "@/config/dropDownLists.config";
-import { Input } from "../ui/input";
+import { CategoriesList, Status } from "@/shared/config/dropDownLists.config";
+import { Input } from "../../shared/ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useTransition } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "../../shared/ui/button";
 import { Plus } from "lucide-react";
 
 const ToolBar = () => {

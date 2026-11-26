@@ -1,4 +1,4 @@
-import { navLinks, signInUp } from "@/config/navigation.config";
+import { navLinks, signInUp } from "@/shared/config/navigation.config";
 import Link from "next/link";
 
 const notFound = () => {

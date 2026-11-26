@@ -1,5 +1,10 @@
-import { User } from "@/Types/general.type";
-import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { User } from "@/shared/Types/general.type";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../shared/ui/card";
 
 type UserSecType = {
   users: User[];

@@ -1,10 +1,10 @@
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/widgets/admin-sidebar/sidebar";
 import { CSSProperties } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { AppSidebar } from "@/components/app-sidebar";
-import AuthProtected from "@/lib/auth/auth-Protected";
+import AuthProtected from "@/shared/lib/auth/auth-Protected";
 import QueryProvider from "@/components/providers/QueryProvider";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/shared/ui/sonner";
 
 type AdminType = {
   children: React.ReactNode;

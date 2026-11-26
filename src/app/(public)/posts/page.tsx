@@ -1,8 +1,7 @@
-import Search from "@/components/posts/Search";
+import Search from "@/features/public/Search";
 import { Metadata } from "next";
 import InfinitePosts from "@/components/posts/InfinitePosts";
-import { postsControllerGetPosts } from "@/app/api/generated";
-import PostCard from "@/components/posts/PostCard";
+import { postsControllerGetPosts } from "@/shared/api/generated";
 
 export const metadata: Metadata = {
   title: "Posts",
@@ -43,7 +42,7 @@ const Page = async () => {
               <PostCard key={post.id} post={post} />
             ))} */}
           {/* </section> */}
-            <InfinitePosts />
+          <InfinitePosts />
         </section>
       </main>
     </>

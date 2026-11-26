@@ -1,7 +1,7 @@
 "use client";
 
 import { clsx } from "cn";
-import { Button } from "../ui/button";
+import { Button } from "../../shared/ui/button";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 type PaginationTypes = {

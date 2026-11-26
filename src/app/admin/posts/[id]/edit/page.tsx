@@ -1,4 +1,4 @@
-import { EditPosts } from "@/components/posts/EditForm";
+import { EditPosts } from "@/features/public/EditForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,8 +1,8 @@
-import { usersControllerGetUsers } from "@/app/api/generated";
 import Pagination from "@/components/dashboard/PagePagination";
 import DataTableUsers from "@/components/users/DataTableUsers";
 import UeserSectionCard from "@/components/users/UserSectionCards";
-import { auth } from "@/lib/auth/auth";
+import { auth } from "@/shared/lib/auth/auth";
+import { usersControllerGetUsers } from "@/shared/api/generated";
 import { Suspense } from "react";
 
 type PageProp = {

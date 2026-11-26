@@ -6,8 +6,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Posts } from "@/Types/general.type";
+} from "@/shared/ui/card";
+import { Posts } from "@/shared/Types/general.type";
 import { FileEdit, CheckCircle2, FileText, EyeOff } from "lucide-react";
 
 type sessionType = {

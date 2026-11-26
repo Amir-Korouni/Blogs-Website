@@ -1,5 +1,5 @@
-import { categoriesControllerGetCategories } from "@/app/api/generated";
 import CategoryCardPage from "@/components/category/CategoryCardPage";
+import { categoriesControllerGetCategories } from "@/shared/api/generated";
 
 const Categories = async () => {
   const categoryPosts = await categoriesControllerGetCategories();

@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import {
   Card,
   CardContent,
@@ -14,14 +14,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
-import { Status } from "@/config/dropDownLists.config";
+} from "@/shared/ui/card";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/shared/ui/field";
+import { Status } from "@/shared/config/dropDownLists.config";
 
 import {
   Select,
@@ -29,9 +24,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../shared/ui/select";
 import { postsControllerCreatePost } from "@/app/api/generated";
-import { Input } from "../ui/input";
+import { Input } from "../../shared/ui/input";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 

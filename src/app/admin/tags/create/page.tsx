@@ -1,4 +1,4 @@
-import { CreatedTags } from "@/components/tags/CreatedTags";
+import { CreatedTags } from "@/features/admin/tags/CreatedTags";
 
 const Page = () => {
   return (

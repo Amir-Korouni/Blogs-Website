@@ -1,5 +1,5 @@
-import { EditUser } from "@/components/users/EditUser";
-import { auth } from "@/lib/auth/auth";
+import { EditUser } from "@/features/admin/users/EditUser";
+import { auth } from "@/shared/lib/auth/auth";
 
 type EditType = {
   params: Promise<{ id: string }>;
@@ -8,7 +8,7 @@ type EditType = {
 const Edit = async ({ params }: EditType) => {
   const { id } = await params;
   const session = await auth();
-  
+
   return (
     <div className="w-full flex flex-1 flex-col">
       <div className="@container/main flex flex-col justify-center items-center gap-10">

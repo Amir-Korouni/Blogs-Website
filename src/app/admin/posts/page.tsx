@@ -1,11 +1,11 @@
 import { DataTable } from "@/components/data-table";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { Plus } from "lucide-react";
 import Pagination from "@/components/dashboard/PagePagination";
 import Link from "next/link";
-import Search from "@/components/posts/Search";
-import { postsControllerGetAllPostsForAdmin } from "@/app/api/generated";
-import { auth } from "@/lib/auth/auth";
+import Search from "@/features/public/Search";
+import { auth } from "@/shared/lib/auth/auth";
+import { postsControllerGetAllPostsForAdmin } from "@/shared/api/generated";
 
 type PageProps = {
   searchParams: Promise<{
@@ -20,7 +20,7 @@ const Page = async ({ searchParams }: PageProps) => {
   const { page, query, category, status } = await searchParams;
 
   console.log(status);
-  
+
   const limit = 7;
   const currentPage = Math.max(1, Number(page) || 1);
 

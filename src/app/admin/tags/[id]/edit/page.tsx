@@ -1,4 +1,4 @@
-import { EditTags } from "@/components/tags/EditTag";
+import { EditTags } from "@/features/admin/tags/EditTag";
 
 type EditPageType = {
   params: Promise<{ id: string }>;

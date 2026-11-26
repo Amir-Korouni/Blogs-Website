@@ -1,8 +1,8 @@
 import notFound from "@/app/not-found";
 import InfiniteCategory from "@/components/posts/InfiniteCategory";
+import { categoriesControllerGetCategories } from "@/shared/api/generated";
 import { Metadata } from "next";
 import { cache } from "react";
-import { categoriesControllerGetCategories } from "@/app/api/generated";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -21,7 +21,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${category.title} | DEVLOG`,
+    title: `${category.name} | DEVLOG`,
     description: `Explore articles about ${category.slug}.`,
   };
 }
@@ -29,20 +29,17 @@ export async function generateMetadata({
 const getCategoryBySlug = cache(async (slug: string) => {
   const response = await categoriesControllerGetCategories();
 
-  return response.data.find(
-    (category) => category.slug === slug
-  ) ?? null;
+  return response.data.find((category) => category.slug === slug) ?? null;
 });
 
 const Page = async ({ params }: PageProps) => {
-    const { slug } = await params;
+  const { slug } = await params;
 
   const category = await getCategoryBySlug(slug);
 
   if (!category) {
     notFound();
   }
-  
 
   const CategoryName = slug
     .split("-")

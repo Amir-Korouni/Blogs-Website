@@ -10,15 +10,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/shared/ui/card";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/components/ui/chart";
-import { useViewControllerGetDailyViews } from "@/app/api/generated";
-import { useQueryAuth } from "@/Types/general.type";
+} from "@/shared/ui/chart";
+import { useQueryAuth } from "@/shared/Types/general.type";
+import { useViewControllerGetDailyViews } from "@/shared/api/generated";
 
 export interface DailyView {
   date: string;

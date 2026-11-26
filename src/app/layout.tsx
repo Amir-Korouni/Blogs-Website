@@ -4,9 +4,9 @@ import "swagger-ui-react/swagger-ui.css";
 import { roboto } from "@/font/font";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { Lora } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import Provider from "@/components/providers";
-import { Toaster } from "@/components/ui/toast";
+import { Toaster } from "@/shared/ui/toast";
 
 const lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
 

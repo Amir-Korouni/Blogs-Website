@@ -1,4 +1,4 @@
-import EditorClient from "@/components/admin/posts/EditorClient.tsx";
+import EditorClient from "@/features/admin/posts/EditorClient.tsx";
 
 const CreatePost = () => {
   return (

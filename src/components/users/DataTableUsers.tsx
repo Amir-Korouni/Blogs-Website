@@ -6,13 +6,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/shared/ui/table";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { User } from "@/Types/general.type";
-import { useUsersControllerDeleteUser } from "@/app/api/generated";
+import { User } from "@/shared/Types/general.type";
 import { toast } from "sonner";
 import {
   AlertDialog,
@@ -24,9 +23,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/alert-dialog";
+} from "../../shared/ui/alert-dialog";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useUsersControllerDeleteUser } from "@/shared/api/generated";
 
 type UserTableProps = {
   users: User[];

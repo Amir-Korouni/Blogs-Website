@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import {
   Table,
   TableBody,
@@ -8,9 +8,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/shared/ui/table";
 
-import { Posts } from "@/Types/general.type";
+import { Posts } from "@/shared/Types/general.type";
 
 import { Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -24,10 +24,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./ui/alert-dialog";
+} from "../shared/ui/alert-dialog";
 import { useQueryClient } from "@tanstack/react-query";
-import { usePostsControllerDeletePost } from "@/app/api/generated";
 import { useState } from "react";
+import { usePostsControllerDeletePost } from "@/shared/api/generated";
 
 type PostTableProps = {
   data: Posts[];
@@ -46,7 +46,7 @@ export function DataTable({ data: posts, accessToken }: PostTableProps) {
     },
     mutation: {
       onSuccess: () => {
-        setSelectedPostId(null)
+        setSelectedPostId(null);
         queryClient.invalidateQueries({
           queryKey: ["/posts"],
         });

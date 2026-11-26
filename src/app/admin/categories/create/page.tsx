@@ -1,5 +1,5 @@
-import { CreateCategory } from "@/components/category/CreateCategory";
-import { auth } from "@/lib/auth/auth";
+import { CreateCategory } from "@/features/admin/category/CreateCategory";
+import { auth } from "@/shared/lib/auth/auth";
 
 const Page = async () => {
   const session = await auth();
@@ -12,7 +12,7 @@ const Page = async () => {
             <h2 className="text-[clamp(1.4rem,4vw,2.4rem)]">Create Category</h2>
           </div>
           <div>
-            <CreateCategory accessToken={session?.user.accessToken}/>
+            <CreateCategory accessToken={session?.user.accessToken} />
           </div>
         </div>
       </div>

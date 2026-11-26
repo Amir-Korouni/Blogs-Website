@@ -1,6 +1,6 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { logout } from "@/lib/auth/auth";
+import { Badge } from "@/shared/ui/badge";
+import { Button } from "@/shared/ui/button";
+import { logout } from "@/shared/lib/auth/auth";
 import { Form } from "@base-ui/react";
 
 const Logout = () => {

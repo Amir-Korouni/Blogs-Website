@@ -1,5 +1,5 @@
-import EditorClient from "@/components/admin/posts/EditorClient.tsx";
-import { auth } from "@/lib/auth/auth";
+import EditorClient from "@/features/admin/posts/EditorClient.tsx";
+import { auth } from "@/shared/lib/auth/auth";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

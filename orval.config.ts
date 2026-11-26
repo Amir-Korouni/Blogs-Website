@@ -7,8 +7,8 @@ export default defineConfig({
       unsafeDisableValidation: true,
     },
     output: {
-      target: "./src/app/api/generated/endpoints.ts",
-      schemas: "./src/app/api/generated/models",
+      target: "./src/shared/generated/endpoints.ts",
+      schemas: "./src/shared/generated/models",
       mode: "tags-split",
       client: "react-query",
       httpClient: "axios",

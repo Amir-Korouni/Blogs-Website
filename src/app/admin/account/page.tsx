@@ -1,9 +1,9 @@
-import AccountActions from "@/components/admin/account/AccountActions";
-import { ChangePass } from "@/components/admin/account/ChangePassword";
-import { ProfileInformation } from "@/components/admin/account/Profile-Information";
-import { auth } from "@/lib/auth/auth";
+import AccountActions from "@/features/admin/account/AccountActions";
+import { ChangePass } from "@/features/admin/account/ChangePassword";
+import { ProfileInformation } from "@/features/admin/account/Profile-Information";
+import { auth } from "@/shared/lib/auth/auth";
 
-const page = async() => {
+const page = async () => {
   const session = await auth();
   return (
     <>
@@ -16,7 +16,10 @@ const page = async() => {
             </h3>
           </div>
           <div className="w-full flex justify-center items-center p-10 border-b-5 text-[var-[--foreground]]">
-            <ProfileInformation accessToken={session?.user.accessToken} userId={session?.user.id} />
+            <ProfileInformation
+              accessToken={session?.user.accessToken}
+              userId={session?.user.id}
+            />
           </div>
           <div className="w-full flex justify-center items-center p-10 border-b-5 text-[var-[--foreground]]">
             <ChangePass />
